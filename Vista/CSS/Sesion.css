@@ -1,0 +1,332 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'PT Sans', sans-serif;
+}
+
+.img{
+    width: 25px;
+}
+
+a{
+    text-decoration: none;
+}
+
+a h4{
+    color: black;
+}
+
+.menu{
+    color: black;
+    height: 70px;
+}
+
+.menu__container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.menu__links{
+    height: 50%;
+    transition: transform .5s;
+    display: flex;
+    color: black;
+}
+
+.active{
+    border-bottom: 3px solid rgb(165, 98, 196);
+    border-radius: 7px;
+}
+
+.fa-magnifying-glass{
+    margin-left: 25px;
+}
+
+.menu__item{
+    list-style: none;
+    position: relative;
+    height: 100%;
+    /* Muestra el elemento */
+    /* --clip: polygon(0 0, 100% 0, 100% 100%, 0% 100%);  */
+    /* esconde el elemento */
+    --clip: polygon(0 0, 100% 0, 100% 0, 0 0);
+    /* rotación imagen */
+    --transform: rotate(-90deg);
+}
+
+.menu__item:hover{
+    --clip: polygon(0 0, 100% 0, 100% 100%, 0% 100%);  
+    /* rotación imagen */
+    --transform: rotate(0);
+}
+
+.menu__link{
+    color: black;
+    text-decoration: none;
+    padding: 0 15px;
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.menu__link:hover{
+    /* background-color: #5e7094; */
+    border-bottom: 3px solid rgb(165, 98, 196);
+    border-radius: 7px;
+}
+
+/* rotación imagen */
+.menu__arrow{
+    transform: var(--transform);
+    transition: transform .3s ;
+    display: block;
+    margin-left: 3px;
+}
+
+/* 
+Para ocultar los elementos */
+.menu__nesting{
+    list-style: none;
+    transition: clip-path .3s;
+    clip-path: var(--clip);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: max-content;
+    transform: translateY(100%);
+    background-color: rgba(228, 196, 243, 0.781);
+}
+
+.menu__link--inside{
+    padding: 30px 100px 30px 20px;
+    transition: 0.2s linear;
+}
+
+.menu__link--inside:hover{
+    font-size: 18px;
+    
+}
+
+.menu__link--inside i{
+    color: rgb(78, 3, 112);
+    margin-left: 7px;
+}
+
+
+/*FORMULARIO*/
+.contenedor{
+    display: flex;
+    /* position: relative; */
+    justify-content: center;
+    margin-top: 50px;
+    width: 1200px;
+    height: 550px;
+    margin-left: 70px;
+}
+
+/*FORMULARIO IZQUIERDO*/
+.form-left{
+    width: 500px;
+}
+
+.form-left video {
+    height: 100%;
+    width: 100%;
+}
+
+/*FORMULARIO DERECHO*/
+.form-right{
+width: 400px;
+padding: 2rem;
+color: rgb(0, 0, 0);
+text-align: center;
+}
+
+
+.form-right img{
+    position: relative;
+    width: 50px;
+    margin-bottom: 20px;
+}
+
+.title {
+text-align: center;
+font-size: 1.5rem;
+line-height: 2rem;
+font-weight: 700;
+}
+
+.form {
+margin-top: 1.5rem;
+}
+
+.input-group {
+margin-top: 0.25rem;
+font-size: 0.875rem;
+line-height: 1.25rem;
+}
+
+.input-group i{
+    position: absolute;
+    left: 1030px;
+    top: 365px;
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+
+.input-group i:hover{
+    color: rgb(78, 3, 112);
+}
+
+.input-group label {
+display: block;
+margin-bottom: 4px;
+}
+
+.input-group input {
+width: 285px;
+border-radius: 30px;
+border: 1px solid rgb(133, 133, 133);
+outline: 0;
+padding: 0.75rem 1rem;
+color: black;
+}
+
+
+.input-group input:focus {
+border-color: rgba(167, 139, 250);
+}
+
+.forgot {
+display: flex;
+justify-content: flex-end;
+font-size: 0.75rem;
+line-height: 1rem;
+color: rgba(156, 163, 175,1);
+margin: 8px 0 14px 0;
+}
+
+.forgot a,.signup a {
+margin: 10px;
+color:  rgb(165, 98, 196);
+text-decoration: none;
+font-size: 14px;
+}
+
+.forgot a:hover, .signup a:hover {
+    color: rgb(167, 5, 199);
+}
+
+.sign {
+display: block;
+width: 100%;
+background-color: rgb(217, 173, 238);
+padding: 0.75rem;
+text-align: center;
+color: rgba(17, 24, 39, 1);
+border: none;
+border-radius: 20px;
+font-weight: 600;
+cursor: pointer;
+}
+
+.sign:hover{
+    background-color: rgb(165, 98, 196);
+    color: white;
+}
+
+.sign{
+    transition: 0.5s linear 0.1s;
+}
+
+.social-message {
+display: flex;
+align-items: center;
+padding-top: 1rem;
+}
+
+.line {
+height: 1px;
+flex: 1 1 0%;
+background-color: black;
+}
+
+.social-message .message {
+padding-left: 0.75rem;
+padding-right: 0.75rem;
+font-size: 0.875rem;
+line-height: 1.25rem;
+color: black;
+}
+
+.social-icons {
+display: flex;
+justify-content: center;
+}
+
+.social-icons .icon {
+border-radius: 0.125rem;
+padding: 0.75rem;
+border: none;
+background-color: transparent;
+margin-left: 8px;
+cursor: pointer;
+}
+
+.social-icons .icon svg {
+height: 1.25rem;
+width: 1.25rem;
+fill: black;
+transition: 0.4s linear;
+}
+
+.icon svg:hover{
+    width: 50px;
+    fill: rgb(194, 88, 243);
+}
+
+.signup {
+text-align: center;
+font-size: 0.75rem;
+line-height: 1rem;
+color: black;
+}
+
+.signup a{
+    color: rgb(193, 107, 219);
+}
+
+/* FOOTER */
+footer{
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    color: white;
+    justify-content: center;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.footer__network, .footer__logo, .footer__policy, .footer__copyright{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.footer__logo, .footer__policy{
+    gap: 20px;
+}
+
+.footer__logo img{
+    width: 30px;
+}

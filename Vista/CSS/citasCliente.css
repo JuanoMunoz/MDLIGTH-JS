@@ -1,0 +1,128 @@
+nav{
+    /* border-bottom: 1px solid rgb(217, 173, 238); */
+    margin-bottom: 20px;
+}
+
+.body{
+    display: flex;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+h1, p{
+    text-align: center;
+}
+
+.form p{
+    width: 350px;
+    margin-left: 230px;
+}
+
+.datos{
+    justify-content: center;
+    display: flex;
+    margin-top: 60px;
+}
+
+.left, .right{
+    display: flex;
+    flex-direction: column;
+}
+
+.right{
+    gap: 40px;
+}
+
+input:not(input[type="file"]), .objetivo, select{
+    margin: 5px;
+    margin-right: 20px;
+    border-radius: 10px;
+    border: 1px solid rgb(172, 170, 170);
+}
+
+.objetivo{
+    width: 250px;
+    height: 170px;
+    padding: 10px;
+}
+
+.input_file{
+    width: 135px;
+    margin: 5px;
+}
+
+.section_img img{
+    width: 450px;
+    height: 400px;
+}
+
+.button_referencia{
+    background-color: #fff;
+    border-radius: 10px;
+    padding-left: 12px;
+    border: 1px solid rgb(172, 170, 170);
+}
+
+.button_agendar{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-left: 260px;
+    width: 300px;
+}
+
+
+.button_agendar {
+    display: block;
+    background-color: rgb(217, 173, 238);
+    padding: 0.75rem;
+    text-align: center;
+    color: rgba(17, 24, 39, 1);
+    border: none;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+ }
+    
+.button_agendar:hover{
+    background-color: rgb(165, 98, 196);
+    color: white;
+}
+    
+.button_agendar{
+    transition: 0.5s linear 0.1s;
+}
+
+/* FOOTER */
+
+footer{
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    color: white;
+    justify-content: center;
+    text-align: center;
+    margin-top: 100px;
+}
+
+
+.footer__network, .footer__logo, .footer__policy, .footer__copyright{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.footer__logo, .footer__policy{
+    gap: 20px;
+}
+
+.footer__logo img{
+    width: 30px;
+}
+  
