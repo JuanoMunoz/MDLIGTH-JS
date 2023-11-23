@@ -4,7 +4,7 @@ let imgSelecionada = document.getElementById("img");
 let modeloSelecionado = document.getElementById("modelo")
 let descripSelecionado = document.getElementById("descripcion");
 let precioSelecionado = document.getElementById("precio");
-var filtros = document.getElementById("filtros");
+let filaMostrador = document.getElementById("filaMostrador");
 
 function cargar(item) {
     quitarBordes();
@@ -21,13 +21,14 @@ function cargar(item) {
 
     precioSelecionado.innerHTML = item.getElementsByTagName("span")[0].innerHTML;
 
+    filaMostrador.style.gridTemplateColumns="repeat(2,1fr)";
+
 }
 
 function quitarBordes() {
     var items = document.getElementsByClassName("item");
     for(i=0; i < items.length; i++){
         items[i].style.background="none";
-        items[i].style.border="none"
     }
 }
 
@@ -35,6 +36,8 @@ function cerrar() {
     mostrador.style.width = "100%";
     seleccion.style.width = "0";
     seleccion.style.opacity = "0";
+    filaMostrador.style.gridTemplateColumns="repeat(4,1fr)";
     quitarBordes();
 
 }
+
