@@ -4,7 +4,7 @@ const boton = document.getElementById("registro");
 
 boton.addEventListener("click", validar);
 
-function validar(e){
+function validar(e) {
     const nombre = document.getElementById("nombre").value;
     const apellido = document.getElementById("apellido").value;
     const celular = document.getElementById("celular").value;
@@ -12,7 +12,7 @@ function validar(e){
     const password = document.getElementById("password").value;
 
     //NOMBRE
-    if(nombre == ""){
+    if (nombre == "") {
         e.preventDefault();
         Swal.fire({
             icon: 'error',
@@ -22,7 +22,7 @@ function validar(e){
     }
 
     //APELLIDO
-    if(apellido == ""){
+    if (apellido == "") {
         e.preventDefault();
         Swal.fire({
             icon: 'error',
@@ -32,7 +32,7 @@ function validar(e){
     }
 
     //CELULAR
-    if(celular == ""){
+    if (celular == "") {
         e.preventDefault();
         Swal.fire({
             icon: 'error',
@@ -52,7 +52,7 @@ function validar(e){
             title: 'Oops...',
             text: 'El campo Correo no puede ir vacio!',
         })
-    }else if(emailOK == false){
+    } else if (emailOK == false) {
         e.preventDefault();
         Swal.fire({
             icon: 'error',
@@ -62,23 +62,22 @@ function validar(e){
     }
 
     //CONTRASEÑA
-    const exppass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
+    const exppass = /^.{8,15}$/;
     let passOK = exppass.test(password);
 
-    if(password == ""){
+    if (password == "") {
         e.preventDefault();
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'El campo Contraseña no puede ir vacio!',
         })
-    }else if(passOK == false){
+    } else if (passOK == false) {
         e.preventDefault();
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'La Contraseña no es valida! ',
-            footer: 'Minimo 8 caracteres - Maximo 18  -  1 Letra Mayúscula y Minuscula  -  No espacios en Blanco  -  1 Caracter Especial '
+            text: 'El limite de caracteres esta entre 8 y 18, intenta de nuevo! '
         })
     }
 
