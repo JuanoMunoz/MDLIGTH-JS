@@ -92,30 +92,31 @@
 
     <!--FORMULARIO-->
     <div class="body">
-        <section class="form">
+        <section class="form" id="form">
             <div>
                 <h1>Citas</h1> <br>
                 <p>Agenda una cita para hacer una prenda personalizada y al perfecto ajuste de tus medidas</p>
             </div>
             <div class="datos">
+                <input type="hidden" name="id_cita" id="id_cita">
                 <section class="left">
-                    <textarea name="" class="objetivo" id="" cols="30" rows="10" placeholder="Objetivo"></textarea>
+                    <textarea name="" class="objetivo" id="objetivo" cols="30" rows="10" placeholder="Objetivo"></textarea>
                 </section>
                 <section class="right">
                     <div>
-                        <input type="date">
-                        <input type="time">
+                        <input type="datetime-local" id="fecha">
+                        <!-- <input type="time" id="hora"> -->
                     </div>
-                    <button class="button_referencia">Referencia fotografica<input class="input_file" type="file" src="" alt=""></button>
-                    <select name="select">
-                        <option value="value1" disabled selected>Talla:</option>
-                        <option value="value2">S</option>
-                        <option value="value3">L</option>
-                        <option value="value4">M</option>
+                    <button class="button_referencia">Referencia fotografica<input class="input_file" type="file" id="imagen" accept="image/*"></button>
+                    <select name="select" id="talla">
+                        <option value="escogerTalla" disabled selected>Talla:</option>
+                        <option value="s">S</option>
+                        <option value="m">M</option>
+                        <option value="l">L</option>
                     </select>
                 </section>
             </div>
-            <button class="button_agendar">Agendar Cita</button>
+            <button class="button_agendar" id="agendarCitaCliente">Agendar Cita</button>
         </section>
         <section class="section_img">
             <img src="../MEDIA/IMG/calendar.jpg" alt="">
@@ -158,6 +159,8 @@
 <!--LOADER-->
 <script src="../JS/loader.js"></script>
 
+<!-- AGREGAR CITA -->
+<script src="../JS/localStorage/citasCliente.js"></script>
 </body>
 
 </html>

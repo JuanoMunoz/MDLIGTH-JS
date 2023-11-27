@@ -1,86 +1,39 @@
-//VALIDAR FORM
+let btnRegistro = document.getElementById('registro');
+btnRegistro.addEventListener("click", function validar(e) {
+    let nombre = document.getElementById("nombre").value;
+    let apellido = document.getElementById("apellido").value;
+    let celular = document.getElementById("celular").value;
+    let correo = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
 
-const boton = document.getElementById("registro");
-
-boton.addEventListener("click", validar);
-
-function validar(e) {
-    const nombre = document.getElementById("nombre").value;
-    const apellido = document.getElementById("apellido").value;
-    const celular = document.getElementById("celular").value;
-    const correo = document.getElementById("correo").value;
-    const password = document.getElementById("password").value;
-
-    //NOMBRE
-    if (nombre == "") {
+    if (nombre == "" || apellido == "" || celular == "" || correo == "" || password == "") {
         e.preventDefault();
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'El campo Nombre no puede ir vacio!',
+            text: '¡Asegurate de llenar todos los campos!',
         })
+    } else {
+        const example_correo = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+        let confirmacion_e = example_correo.test(correo);
+        if (confirmacion_e == false) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '¡El Correo no es valido!',
+            })
+        } else {
+            const example_pass = /^.{4,30}$/;
+            let confirmacion_pass = example_pass.test(password);
+            if (confirmacion_pass == false) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '¡El limite de caracteres de 4 a 30, intenta de nuevo!',
+                })
+            }
+        }
     }
-
-    //APELLIDO
-    if (apellido == "") {
-        e.preventDefault();
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'El campo Apellido no puede ir vacio!',
-        })
-    }
-
-    //CELULAR
-    if (celular == "") {
-        e.preventDefault();
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'El campo Celular no puede ir vacio!',
-        })
-    }
-
-    //CORREO
-    const expcorreo = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
-    let emailOK = expcorreo.test(correo);
-
-    if (correo == "") {
-        e.preventDefault();
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'El campo Correo no puede ir vacio!',
-        })
-    } else if (emailOK == false) {
-        e.preventDefault();
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'El Correo no es valido!',
-        })
-    }
-
-    //CONTRASEÑA
-    const exppass = /^.{8,15}$/;
-    let passOK = exppass.test(password);
-
-    if (password == "") {
-        e.preventDefault();
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'El campo Contraseña no puede ir vacio!',
-        })
-    } else if (passOK == false) {
-        e.preventDefault();
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'El limite de caracteres esta entre 8 y 18, intenta de nuevo! '
-        })
-    }
-
-
-
-}
+})
