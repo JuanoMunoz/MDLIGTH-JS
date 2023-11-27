@@ -28,7 +28,5 @@ btnRegister.addEventListener('click', function registro(event) {
     }
 
     localStorage.setItem('usuarios', JSON.stringify(listaUsuarios));
-    alert("Funcionó");
-    console.log(localStorage.getItem('usuarios'));
     document.getElementById('form').reset();
 });
