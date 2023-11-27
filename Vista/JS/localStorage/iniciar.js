@@ -10,7 +10,7 @@ btnIniciar.addEventListener('click', function iniciar(evento) {
     });
 
     if (encontrado) {
-        alert("Usuario encontrado");
+        //Poner sweetAlert
         setTimeout(function () {
             window.location.href = "bienvenido.html";
         }, 1);

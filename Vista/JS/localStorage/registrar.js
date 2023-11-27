@@ -3,7 +3,8 @@ btnRegister.addEventListener('click', function registro(event) {
     event.preventDefault();
 
     let listaUsuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
-    let id = listaUsuarios.length > 0 ? listaUsuarios[listaUsuarios.length - 1].id : 0;
+    let id = listaUsuarios[listaUsuarios.length]
+
     let nuevoUsuario = {
         id: id + 1,
         nombre: document.getElementById('nombre').value,
@@ -13,7 +14,6 @@ btnRegister.addEventListener('click', function registro(event) {
         password: document.getElementById('password').value
     }
     listaUsuarios.push(nuevoUsuario);
-
     localStorage.setItem('usuarios', JSON.stringify(listaUsuarios));
     document.getElementById('form').reset();
 });
