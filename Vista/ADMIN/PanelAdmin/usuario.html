@@ -94,9 +94,6 @@
                         <a href="Perfil.html" class="menu__link menu__link--inside">Perfil <i class="fa-solid fa-user"></i></a>
                 </li>
                     <li class="menu__inside">
-                        <a href="" class="menu__link menu__link--inside">Mis Citas <i class="fa-regular fa-calendar-days"></i></a>
-                    </li>
-                    <li class="menu__inside">
                         <a href="../../InicioSesion.html" class="menu__link menu__link--inside">Cerrar Sesion <i class="fa-solid fa-right-from-bracket"></i></a>
                 </li>
                 </ul>
@@ -229,12 +226,19 @@
                     </a>
                 </li>
 
-                <!-- <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-cog"></i></span>
-                        <span class="item">Settings</span>
+                <li>
+                    <a href="productos.html">
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <span class="item">Productos</span>
                     </a>
-                </li> -->
+                </li>
+
+                <li>
+                    <a href="categorias.html">
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <span class="item">Categorias</span>
+                    </a>
+                </li>
             </ul>
         </div>
         
@@ -278,61 +282,6 @@
 
 <!--LOADER-->
 <script src="../../JS/loader.js"></script>
-
-<!--CERRAR SESION-->
-<script>
-    const salir = document.getElementById("cerrarSesion");
-
-    salir.addEventListener("click", modal);
-
-    function modal(){
-        Swal.fire({
-        title: 'Cerrar?',
-        text: "¿Estas seguro de cerrar Sesion?!",
-        icon: 'info',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, cerrar!'
-        }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = "salir";
-        }
-        })
-
-    }
-</script>
-
-<!--EDITAR USUARIO-->
-<script>
-    
-    const valor = window.location.search;
-    
-    const urlParams = new URLSearchParams(valor);
-    var res = urlParams.get('respuesta');
-    
-    
-    if(res == "10"){
-        Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'El Usuario se Actualizó Exitosamente.',
-        showConfirmButton: false,
-        timer: 3600
-        
-        });
-        
-    }else if(res == "12"){
-        Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'El Usuario se Eliminó Exitosamente.',
-        showConfirmButton: false,
-        timer: 3600
-        
-        });    
-    }
-</script>
 
 </body>
 </html>

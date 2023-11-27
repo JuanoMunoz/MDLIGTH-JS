@@ -196,7 +196,6 @@ h1{
 table img{
     width: 20px;
     position: relative;
-    left: 17px;
 }
 
 .descripcion{
@@ -473,6 +472,10 @@ video{
     margin-left: 15px;
     left: 460px;
     top: 290px;
+}
+
+.tabla__productos{
+    width: 1000px;
 }
 
 /* FOOTER */
