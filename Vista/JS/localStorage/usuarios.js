@@ -1,5 +1,5 @@
-let btnRegister = document.getElementById('registro');
-btnRegister.addEventListener('click', function registro(event) {
+let btnAgregar = document.getElementById('btnAddUser')
+btnAgregar.addEventListener('click', function agregar(event) {
     event.preventDefault();
     if (validacion()) {
         let listaUsuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
@@ -15,25 +15,10 @@ btnRegister.addEventListener('click', function registro(event) {
         }
         listaUsuarios.push(nuevoUsuario);
         localStorage.setItem('usuarios', JSON.stringify(listaUsuarios));
-        alerta();
         document.getElementById('form').reset();
     }
 });
-
-
 function validacion() {
-    const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-        }
-    });
-
     let nombre = document.getElementById("nombre").value;
     let apellido = document.getElementById("apellido").value;
     let celular = document.getElementById("celular").value;
@@ -41,33 +26,22 @@ function validacion() {
     let password = document.getElementById("password").value;
 
     if (nombre == "" || apellido == "" || celular == "" || correo == "" || password == "") {
-        event.preventDefault(); // Corrected to event.preventDefault();
-        Toast.fire({
-            icon: "error",
-            title: "¡Asegúrate de llenar todos los campos!"
-        });
+        alert("Asegurate de llenar todos los campos")
         return false;
     } else {
         const example_correo = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
         let confirmacion_e = example_correo.test(correo);
 
         if (confirmacion_e == false) {
-            event.preventDefault(); // Corrected to event.preventDefault();
-            Toast.fire({
-                icon: "error",
-                title: "¡Correo electrónico no válido!"
-            });
+            alert("Correo no valido")
+
             return false;
         } else {
             const example_pass = /^.{4,30}$/;
             let confirmacion_pass = example_pass.test(password);
 
             if (confirmacion_pass == false) {
-                event.preventDefault(); // Corrected to event.preventDefault();
-                Toast.fire({
-                    icon: "error",
-                    title: "¡El límite de caracteres es de 4 a 30, inténtelo de nuevo!"
-                });
+                alert("El limite de caracteres de la contraseña es de 4 a 30 caracteres")
                 return false;
             } else {
                 let listaUsuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
@@ -85,43 +59,15 @@ function validacion() {
                 }
 
                 if (telefonoRegistrado) {
-                    Toast.fire({
-                        icon: "error",
-                        title: "¡Este número de teléfono ya se encuentra registrado!"
-                    });
+                    alert("El número de teléfono ya se encuentra registrado")
+
                     return false;
                 } else if (correoRegistrado) {
-                    Toast.fire({
-                        icon: "error",
-                        title: "¡Este correo electrónico ya se encuentra registrado!"
-                    });
+                    alert("El correo electrónico ya se encuentra registrado")
                     return false;
                 }
             }
         }
     }
     return true;
-}
-
-
-function alerta() {
-    const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-        }
-
-    });
-    Toast.fire({
-        icon: "success",
-        title: "Usuario registrado \n¡Por favor iniciar sesión!"
-    });
-    setTimeout(function () {
-        window.location.href = "InicioSesion.html";
-    }, 2001);
 }
