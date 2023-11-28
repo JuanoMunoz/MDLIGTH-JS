@@ -32,3 +32,27 @@
     color: #fff;
     width: 100%;
 }
+
+#imagenP{
+    display: none;
+}
+.labelImagen{
+    cursor: pointer;
+    border: 1px solid #707070;
+    width: 290px;
+    height: 40px;
+    border-radius: 20px;
+    margin-left: 25px;
+    color: #707070;
+}
+
+.visor{
+    position: absolute;
+    right: 180px;
+    bottom: 20px;
+    border: 1px solid #707070;
+}
+
+textarea{
+    resize: none;
+}
