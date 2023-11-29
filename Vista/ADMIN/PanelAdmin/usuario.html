@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../../CSS/panel.css">
     <link rel="shortcut icon" href="../media/IMG/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../CSS/Registro.css">
+    <link rel="stylesheet" href="../../CSS/modalUsuario.css">
 
 
     <!-- AOS -->
@@ -79,12 +80,12 @@
                     .then(data => {
                         document.getElementById('navbar-container').innerHTML = data
                     })
-                    .catch(error => console.error('Error al cargar el sidebar'))
+                    .catch(error => console.error('Error al cargar el navbar'))
             </script>
 
             <div class="container">
-                <a href="agregarUsuario.html">Agregar</a>
                 <h1>USUARIOS</h1> <br>
+                <button class="btn-agregar" id="btn-abrir-modal-agregar">Agregar</a></button>
                 <table id="Tabla" class="table table__usuarios">
                     <thead>
                         <tr>
@@ -111,8 +112,8 @@
                                             <td>${usuario.celular}</td>
                                             <td>${usuario.email}</td>
                                             <td>Aún no hay roles</td>
-                                            <td><a href=""><img class="table_img" src="../../MEDIA/IMG/editar.png" alt=""></a></td>
-                                            <td><a href=""><img class="table_img" src="../../MEDIA/IMG/basura.png" alt=""></a></td>
+                                            <td id="btn-abrir-modal-editar"><img class="table_img" src="../../MEDIA/IMG/editar.png" alt=""></td>
+                                            <td id="btn-abrir-modal-eliminar"><img class="table_img" src="../../MEDIA/IMG/basura.png" alt=""></td>
                                         </tr>
                                     `;
                                 });
@@ -129,6 +130,68 @@
                     <button id="nextButton">Siguiente</button>
                 </div>
             </div>
+
+            <dialog class="modal" id="modal-agregar">
+                <h3 class="title-modal-agregar">AGREGAR USUARIO</h3>
+                <form class="formulario" id="form">
+                    <div>
+                        <label for="">Nombre</label>
+                        <input type="text" name="nombre" id="nombre">
+                    </div>
+                    <div> <br>
+                        <label for="">Apellido</label>
+                        <input type="text" name="apellido" id="apellido">
+                    </div>
+                    <div> <br>
+                        <label for="">Celular</label>
+                        <input type="text" name="celular" id="celular">
+                    </div>
+                    <div> <br>
+                        <label for="">Email</label>
+                        <input type="text" name="email" id="email">
+                    </div>
+                    <div> <br>
+                        <label for="">Contraseña</label>
+                        <input type="text" name="password" id="password">
+                    </div>
+                </form>
+                <button class="btn-modal" id="btn-cerrar-modal-agregar">Volver</button>
+                <button  id="btnAddUser">Registrar usuario</button>
+            </dialog>
+
+            <dialog class="modal" id="modal-editar">
+                <h3 class="title-modal-editar">EDITAR USUARIO</h3>
+                <form class="formulario" id="form">
+                    <div>
+                        <label for="">Nombre</label>
+                        <input type="text" name="nombre" id="nombre">
+                    </div>
+                    <div> <br>
+                        <label for="">Apellido</label>
+                        <input type="text" name="apellido" id="apellido">
+                    </div>
+                    <div> <br>
+                        <label for="">Celular</label>
+                        <input type="text" name="celular" id="celular">
+                    </div>
+                    <div> <br>
+                        <label for="">Email</label>
+                        <input type="text" name="email" id="email">
+                    </div>
+                    <div> <br>
+                        <label for="">Contraseña</label>
+                        <input type="text" name="password" id="password">
+                    </div>
+                </form>
+                <button class="btn-modal" id="btn-cerrar-modal-editar">Volver</button>
+                <button id="btnAddUser">Registrar usuario</button>
+            </dialog>
+
+            <dialog class="modal-eliminar" id="modal-eliminar">
+                <h3>¿Estás seguro que deseas eliminar este usuario?</h3><br>
+                <button>Eliminar usuario</button>
+                <button id="btn-cerrar-modal-eliminar">Volver</button>
+            </dialog>
 
         </div>
         <div id="sidebar-container">
@@ -174,6 +237,8 @@
     <script src="../../JS/sidbar.js"></script>
     <script src="../../JS/tablas.js"></script>
     <script src="../../JS/localStorage/usuarios.js"></script>
+    <script src="../../JS/modalUsuarios.js"></script>
+    
 
     <!-- AOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
