@@ -39,8 +39,9 @@ function validacion() {
     let celular = document.getElementById("celular").value;
     let correo = document.getElementById("email").value;
     let password = document.getElementById("password").value;
+    let password_c = document.getElementById("password_c").value;
 
-    if (nombre == "" || apellido == "" || celular == "" || correo == "" || password == "") {
+    if (nombre == "" || apellido == "" || celular == "" || correo == "" || password == "" || password_c == "") {
         event.preventDefault(); // Corrected to event.preventDefault();
         Toast.fire({
             icon: "error",
@@ -66,37 +67,48 @@ function validacion() {
                 event.preventDefault(); // Corrected to event.preventDefault();
                 Toast.fire({
                     icon: "error",
-                    title: "¡El límite de caracteres es de 4 a 30, inténtelo de nuevo!"
+                    title: "¡El límite de caracteres en la contraseña es de 4 a 30, inténtelo de nuevo!"
                 });
                 return false;
             } else {
-                let listaUsuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
-                let telefonoRegistrado = false;
-                let correoRegistrado = false;
+                if (password != password_c) {
+                    event.preventDefault(); // Corrected to event.preventDefault();
+                    Toast.fire({
+                        icon: "error",
+                        title: "¡Las contraseñas no coinciden, intenta de nuevo!"
 
-                for (let i = 0; i < listaUsuarios.length; i++) {
-                    if (document.getElementById('celular').value == listaUsuarios[i].celular) {
-                        telefonoRegistrado = true;
-                        break;
-                    } else if (document.getElementById('email').value == listaUsuarios[i].email) {
-                        correoRegistrado = true;
-                        break;
+                    });
+                    return false
+                } else {
+                    let listaUsuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+                    let telefonoRegistrado = false;
+                    let correoRegistrado = false;
+
+                    for (let i = 0; i < listaUsuarios.length; i++) {
+                        if (document.getElementById('celular').value == listaUsuarios[i].celular) {
+                            telefonoRegistrado = true;
+                            break;
+                        } else if (document.getElementById('email').value == listaUsuarios[i].email) {
+                            correoRegistrado = true;
+                            break;
+                        }
+                    }
+
+                    if (telefonoRegistrado) {
+                        Toast.fire({
+                            icon: "error",
+                            title: "¡Este número de teléfono ya se encuentra registrado!"
+                        });
+                        return false;
+                    } else if (correoRegistrado) {
+                        Toast.fire({
+                            icon: "error",
+                            title: "¡Este correo electrónico ya se encuentra registrado!"
+                        });
+                        return false;
                     }
                 }
 
-                if (telefonoRegistrado) {
-                    Toast.fire({
-                        icon: "error",
-                        title: "¡Este número de teléfono ya se encuentra registrado!"
-                    });
-                    return false;
-                } else if (correoRegistrado) {
-                    Toast.fire({
-                        icon: "error",
-                        title: "¡Este correo electrónico ya se encuentra registrado!"
-                    });
-                    return false;
-                }
             }
         }
     }

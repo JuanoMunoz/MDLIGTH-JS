@@ -12,10 +12,10 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!--CSS-->
-    <link rel="stylesheet" href="./CSS/Registro.css">
-    <link rel="stylesheet" href="CSS/loader.css">
-    <link rel="stylesheet" href="CSS/Bienvenido.css">
-    <link rel="shortcut icon" href="media/IMG/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../CSS/Registro.css">
+    <link rel="stylesheet" href="../CSS/loader.css">
+    <link rel="stylesheet" href="../CSS/Bienvenido.css">
+    <link rel="shortcut icon" href="../media/IMG/icon.png" type="image/x-icon">
 
     <!-- AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -30,63 +30,19 @@
     <section class="banner">
         <!--NAV-->
         <div id="navbar-container"></div>
-        <nav class="menu">
-            <section class="menu__container">
-                <a href="Index.html">
-                    <h4><img src="./MEDIA/IMG/icon.png" class="img"> MODISTERIA D.L</h4>
-                </a>
-
-                <ul class="menu__links">
-                    <li class="menu__item">
-                        <a href="ADMIN/citasAdmi.html" class="menu__link">CITAS ADMIN</a>
-                    </li>
-
-                    <li class="menu__item">
-                        <a href="CLIENT/citasCliente.html" class="menu__link">CITAS</a>
-                    </li>
-
-                    <li class="menu__item">
-                        <a href="catalogo.html" class="menu__link">CATÁLOGO</a>
-                    </li>
-
-                    <li class="menu__item">
-                        <a href="ADMIN/PanelAdmin/usuario.html" class="menu__link">PANEL DE CONTROL</a>
-                    </li>
-
-                    <li class="menu__item">
-                        <a href="" class="menu__link"><i class="fa-solid fa-magnifying-glass"></i></a>
-                    </li>
-
-                    <li class="menu__item">
-                        <a href="" class="menu__link"><i class="fa-solid fa-cart-shopping"></i></a>
-                    </li>
-
-                    <li class="menu__item menu__item--show">
-                        <a href="" class="menu__link"><i class="fa-regular fa-user"></i><img
-                                src="./MEDIA/ICONOS/1-arrow.svg" class="menu__arrow"></a>
-                        <ul class="menu__nesting">
-                            <li class="menu__inside">
-                                <a href="Perfil.html" class="menu__link menu__link--inside">Perfil <i
-                                        class="fa-solid fa-user"></i></a>
-                            </li>
-                            <li class="menu__inside">
-                                <a href="" class="menu__link menu__link--inside">Mis Citas <i
-                                        class="fa-regular fa-calendar-days"></i></a>
-                            </li>
-                            <li class="menu__inside">
-                                <a href="InicioSesion.html" class="menu__link menu__link--inside">Cerrar Sesion <i
-                                        class="fa-solid fa-right-from-bracket"></i></a>
-                            </li>
-                        </ul>
-                    </li>
+        <script>
+            fetch('static/navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar-container').innerHTML = data
+                })
+                .catch(error => console.error('Error al cargar el navbar'))
+        </script>
 
 
-                </ul>
-            </section>
-        </nav>
         <h1>Bienvenido</h1>
         <p>¿Deseas tener un trabajo personalizado?<br>¡Agenda una Cita!</p>
-        <a href="ADMIN/citasAdmi.html" class="botonCitas">Citas</a>
+        <a href="../ADMIN/citasAdmi.html" class="botonCitas">Citas</a>
         </div>
     </section>
 
@@ -122,9 +78,7 @@
     <!--JS-->
     <script>
         const salir = document.getElementById("cerrarSesion");
-
         salir.addEventListener("click", modal);
-
         function modal() {
             Swal.fire({
                 title: 'Cerrar?',
@@ -153,7 +107,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js"></script>
 
     <!--LOADER-->
-    <script src="JS/loader.js"></script>
+    <script src="../JS/loader.js"></script>
 
 </body>
 
