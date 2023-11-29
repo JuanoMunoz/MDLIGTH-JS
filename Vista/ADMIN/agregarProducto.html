@@ -105,8 +105,9 @@
             <div class="form-right" id="form">
             <img src="../MEDIA/IMG/producto.png" alt="">
             <p class="title">Nuevo Producto</p>
-            <form class="form">
+            <form class="form" id="formP">
                 <div class="input-group">
+                    <input type="hidden" name="id" id="id">
                     <input type="text" name="nombre" id="nombreP" placeholder="Nombre Producto:">
                 </div><br>
                 <div class="input-group">
@@ -164,6 +165,8 @@
 <!--LOADER-->
 <script src="../JS/loader.js"></script>
 <script src="../JS/catalogo.js"></script>
+<script src="../JS/localStorage/catalogoL.js"></script>
+
 
 <!-- AOS -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
