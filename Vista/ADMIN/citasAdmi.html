@@ -49,15 +49,55 @@
     </div>
 
     <!--NAV-->
-    <div id="navbar-container"></div>
-    <script>
-        fetch('PanelAdmin/static/navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar-container').innerHTML = data
-            })
-            .catch(error => console.error('Error al cargar el sidebar'))
-    </script>
+    <nav class="menu">
+        <section class="menu__container">
+            <a href="../Bienvenido.html">
+                <h4><img src="../MEDIA/IMG/icon.png" class="img"> MODISTERIA D.L</h2>
+            </a>
+
+            <ul class="menu__links">
+                <li class="menu__item">
+                    <a href="#" class="menu__link active">CITAS ADMIN</a>
+                </li>
+
+                <li class="menu__item">
+                    <a href="../CLIENT/citasCliente.html" class="menu__link">CITAS</a>
+                </li>
+
+                <li class="menu__item">
+                    <a href="../Catalogo.html" class="menu__link">CATÁLOGO</a>
+                </li>
+
+                <li class="menu__item">
+                    <a href="PanelAdmin/usuario.html" class="menu__link">PANEL DE CONTROL</a>
+                </li>
+
+                <li class="menu__item">
+                    <a href="" class="menu__link"><i class="fa-solid fa-magnifying-glass"></i></a>
+                </li>
+
+                <li class="menu__item">
+                    <a href="" class="menu__link"><i class="fa-solid fa-cart-shopping"></i></a>
+                </li>
+
+                <li class="menu__item menu__item--show">
+                    <a href="" class="menu__link"><i class="fa-regular fa-user"></i><img
+                            src="../MEDIA/ICONOS/1-arrow.svg" class="menu__arrow"></a>
+                    <ul class="menu__nesting">
+                        <li class="menu__inside">
+                            <a href="" class="menu__link menu__link--inside">Perfil <i class="fa-solid fa-user"></i></a>
+                        </li>
+                        <li class="menu__inside">
+                            <a href="../InicioSesion.html" class="menu__link menu__link--inside">Cerrar Sesion <i
+                                    class="fa-solid fa-right-from-bracket"></i></a>
+                        </li>
+                    </ul>
+                </li>
+
+
+            </ul>
+        </section>
+    </nav>
 
     <!-- Body -->
     <div class="body">
@@ -121,6 +161,7 @@
         </button> -->
                 </div>
         </section>
+        
         <section class="section_dates">
             <h1>Mis Citas</h1>
             <div class="faq-container">
@@ -152,8 +193,9 @@
 
             </div>
         </section>
-
+        <a href="../CLIENT/citasCliente.html">Agendar Cita</a>
     </div>
+    
 
     <footer>
         <div class="footer__network">
