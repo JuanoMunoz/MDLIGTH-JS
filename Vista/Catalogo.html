@@ -119,85 +119,51 @@
                 <div class="fila" id="filaMostrador">
 
                     <!-- PRODUCTOS-->
-                    <!-- <div class="item" onclick="cargar(this)">
-                        <div class="contenedor-foto">
-                            <img src="media/IMG/Productos/buzo negro.jpg" alt="">
-                            <p class="descripcion">Buzo Negro Lana 1</p>
-                            <span class="precio">$ 10.000</span>
-                        </div>
-                    </div>
 
-                    <div class="item" onclick="cargar(this)">
-                        <div class="contenedor-foto">
-                            <img src="media/IMG/Productos/buzo negro.jpg" alt="">
-                            <p class="descripcion">Buzo Negro Lana 1</p>
-                            <span class="precio">$ 10.000</span>
-                        </div>
-                    </div>
+                    <script>
+                        function mostrarProductos(){
+                            let mostrador = document.getElementById("filaMostrador");
+                            mostrador.innerHTML=``;
+                            
+                            let listaProductos = JSON.parse(localStorage.getItem('productos')) || [];
+                            listaProductos.forEach(function (producto){
 
-                    <div class="item" onclick="cargar(this)">
-                        <div class="contenedor-foto">
-                            <img src="media/IMG/Productos/buzo negro.jpg" alt="">
-                            <p class="descripcion">Buzo Negro Lana 2</p>
-                            <span class="precio">$ 10.000</span>
-                        </div>
-                    </div>
+                            mostrador.innerHTML+=`
+                            <div class="item">
+                                <div class="contenedor-foto">
+                                    <img src="${producto.imagen}" alt="">
+                                    <p class="descripcion">${producto.nombreProducto}</p>
+                                    <p class="descripcionProducto">${producto.descripcion}</p>
+                                    <span class="precio">$${producto.precio}</span>
+                                    <div class="fila">
+                                        <div class="size">
+                                            <select name="" id="">
+                                                <option value="XS">XS</option>
+                                                <option value="S">S</option>
+                                                <option value="M">M</option>
+                                                <option value="L">L</option>
+                                                <option value="XL">XL</option>
+                                                <option value="2XL">2XL</option>
+                                            </select>
+                                        </div>
+                                        <button><i class="fa-solid fa-cart-shopping"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            `;
+                            })
+                        }
+                    </script>
 
-                    <div class="item" onclick="cargar(this)">
-                        <div class="contenedor-foto">
-                            <img src="media/IMG/Productos/buzo negro.jpg" alt="">
-                            <p class="descripcion">Buzo Negro Lana 3</p>
-                            <span class="precio">$ 10.000</span>
-                        </div>
-                    </div>
-
-                    <div class="item" onclick="cargar(this)">
-                        <div class="contenedor-foto">
-                            <img src="media/IMG/Productos/buzo negro.jpg" alt="">
-                            <p class="descripcion">Buzo Negro Lana 4</p>
-                            <span class="precio">$ 10.000</span>
-                        </div>
-                    </div> -->
 
 
                 </div>
             </div>
 
-            <!--DESCRIPCION-->
-            <div class="seleccion" id="seleccion">
-                <div class="cerrar" onclick="cerrar()">
-                    &#x2715
-                </div>
-                <div class="info" id="descripcion">
-                    <!-- <img src="media/IMG/Productos/buzo negro.jpg" alt="" id="img">
-                    <h2 id="modelo">Buzo Negro Lana</h2>
-                    <p id="descripcion">Descripcion del Buzo Negro Lana 1</p>
-
-                    <span class="precio" id="precio">$10.000</span>
-                    <div class="fila">
-                        <div class="size">
-                            <label for="">Talla</label>
-                            <select name="" id="">
-                                <option value="">S</option>
-                                <option value="">M</option>
-                                <option value="">L</option>
-                                <option value="">XL</option>
-                            </select>
-                        </div>
-                        <div class="quantity">
-                            <label for="">Cantidad</label>
-                            <input type="number" id="" value="1" min="1" max="100" step="1">
-                        </div>
-                        <button>Agregar al Carrito</button>
-                    </div> -->
-                </div>
-            </div>
         </section>
 
         <!--JS-->
-        <script src="JS/carrito_productos.js"></script>
-        <script src="JS/localStorage/catalogoL.js"></script>
-        <script src="JS/catalogo.js"></script>
+        <!-- <script src="JS/carrito_productos.js"></script> -->
         <script>
             mostrarProductos();
         </script>

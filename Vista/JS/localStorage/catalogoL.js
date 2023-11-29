@@ -18,6 +18,8 @@ btnAgregar.addEventListener('click', function añadirProducto(e) {
     e.preventDefault();
 
     if (validarProducto(e)) {
+        //Capturar ruta de la imagen
+        let inputImg = document.getElementById('fotoP').value;
         let listaProductos = JSON.parse(localStorage.getItem('productos')) || [];
         let idProducto
         listaProductos.length != 0 ? listaProductos.findLast((producto) => idProducto = producto.idProducto) : idProducto = 0
@@ -28,7 +30,7 @@ btnAgregar.addEventListener('click', function añadirProducto(e) {
             descripcion: document.getElementById('descripcionP').value,
             precio: document.getElementById('precioP').value,
             categoria: document.getElementById('categoriaP').value,
-            imagen: document.getElementById('imagenP').value
+            imagen: inputImg
         }
         listaProductos.push(nuevoProducto);
         localStorage.setItem('productos', JSON.stringify(listaProductos));
@@ -46,7 +48,7 @@ function validarProducto(e) {
     var descripcionProducto = document.getElementById("descripcionP").value;
     var precioProducto = document.getElementById("precioP").value;
     var categoriaProducto = document.getElementById("categoriaP").value;
-    var imagenProducto = document.getElementById("imagenP").value;
+    var imagenProducto = document.getElementById("fotoP").value;
 
     //Alerta
     const Toast = swal.mixin({
@@ -102,52 +104,19 @@ function validarProducto(e) {
             return false;
         }
 
-        
+        //Imagen
+        const ultimosTres = imagenProducto.slice(-4);
+        const ultimosCuatro = imagenProducto.slice(-4);
+        let extPermitidas = /(.jpg|.JPG|.png|.PNG|.jpeg|.JPEG|.jfif|.JFIF)$/i;
+
+        if (!extPermitidas.exec(ultimosCuatro) || !extPermitidas.exec(ultimosTres)) {
+            Toast.fire({
+                icon: "error",
+                title: "¡La imagen del producto no cumple con las validaciones!\n (Solo JPG y PNG)"
+            });
+            return false;
+        }
     }
 
     return true;
-}
-
-//Validar imagen
-function validararchivo() {
-
-    const Toast = swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-        }
-    });
-    
-    let archivoInput = document.getElementById("imagenP");
-    let archivoRuta = archivoInput.value;
-    let extPermitidas = /(.jpg|.JPG|.png|.PNG|.jpeg|.JPEG|.jfif|.JFIF)$/i;
-
-    if (!extPermitidas.exec(archivoRuta)) {
-        Toast.fire({
-            icon: "error",
-            title: "¡La imagen del producto no cumple con las validaciones!\n (Solo JPG y PNG)"
-        });
-        archivoInput.value = "";
-        document.getElementById("visorarchivo").innerHTML = ``;
-        return false;
-
-    } else {
-
-        if (archivoInput.files && archivoInput.files[0]) {
-
-            let visor = new FileReader();
-            visor.onload = function (e) {
-                document.getElementById("visorarchivo").innerHTML =
-                    `<embed src='${e.target.result}' width = "70px" height = "70px">`;
-            };
-            visor.readAsDataURL(archivoInput.files[0]);
-
-        }
-
-    }
 }
