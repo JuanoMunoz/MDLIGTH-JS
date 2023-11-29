@@ -11,10 +11,10 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!--CSS-->
-    <link rel="stylesheet" href="../CSS/Registro.css">
-    <link rel="stylesheet" href="../CSS/loader.css">
-    <link rel="stylesheet" href="../CSS/Producto.css">
-    <link rel="shortcut icon" href="../media/IMG/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../CSS/Registro.css">
+    <link rel="stylesheet" href="../../CSS/loader.css">
+    <link rel="stylesheet" href="../../CSS/Producto.css">
+    <link rel="shortcut icon" href="../../media/IMG/icon.png" type="image/x-icon">
 
     <!-- AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -55,59 +55,15 @@
     </div>
 
     <!--NAV-->
-    <nav class="menu">
-        <section class="menu__container">
-            <a href="../Index.html">
-                <h4><img src="../MEDIA/IMG/icon.png" class="img"> MODISTERIA D.L</h4>
-            </a>
-
-            <ul class="menu__links">
-                <li class="menu__item">
-                    <a href="citasAdmi.html" class="menu__link">CITAS ADMIN</a>
-                </li>
-
-                <li class="menu__item">
-                    <a href="../CLIENT/citasCliente.html" class="menu__link">CITAS</a>
-                </li>
-
-                <li class="menu__item">
-                    <a href="../catalogo.html" class="menu__link active">CATÁLOGO</a>
-                </li>
-
-                <li class="menu__item">
-                    <a href="../ADMIN/PanelAdmin/usuario.html" class="menu__link">PANEL DE CONTROL</a>
-                </li>
-
-                <li class="menu__item">
-                    <a href="" class="menu__link"><i class="fa-solid fa-magnifying-glass"></i></a>
-                </li>
-
-                <li class="menu__item">
-                    <a href="" class="menu__link"><i class="fa-solid fa-cart-shopping"></i></a>
-                </li>
-
-                <li class="menu__item menu__item--show">
-                    <a href="" class="menu__link"><i class="fa-regular fa-user"></i><img
-                            src="../MEDIA/ICONOS/1-arrow.svg" class="menu__arrow"></a>
-                    <ul class="menu__nesting">
-                        <li class="menu__inside">
-                            <a href="../Perfil.html" class="menu__link menu__link--inside">Perfil <i
-                                    class="fa-solid fa-user"></i></a>
-                        </li>
-                        <li class="menu__inside">
-                            <a href="" class="menu__link menu__link--inside">Mis Citas <i
-                                    class="fa-regular fa-calendar-days"></i></a>
-                        </li>
-                        <li class="menu__inside">
-                            <a href="../InicioSesion.html" class="menu__link menu__link--inside">Cerrar Sesion <i
-                                    class="fa-solid fa-right-from-bracket"></i></a>
-                        </li>
-                    </ul>
-                </li>
-
-
-            </ul>
-    </nav>
+    <div id="navbar-container"></div>
+    <script>
+        fetch('static/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data
+            })
+            .catch(error => console.error('Error al cargar el navbar'))
+    </script>
 
     <div class="btnAgregar">
         <a href="../Catalogo.html"><i class="fa-solid fa-arrow-left"></i></a>
@@ -118,11 +74,11 @@
 
         <!--LADO IZQUIERDO-->
         <div class="form-left">
-            <video src="../MEDIA/VIDEO/productos.mp4" autoplay muted loop></video>
+            <video src="../../MEDIA/VIDEO/productos.mp4" autoplay muted loop></video>
         </div>
         <!--LADO DERECHO-->
         <div class="form-right" id="form">
-            <img src="../MEDIA/IMG/producto.png" alt="">
+            <img src="../../MEDIA/IMG/producto.png" alt="">
             <p class="title">Nuevo Producto</p>
             <form class="form" id="formP">
                 <div class="input-group">
@@ -156,12 +112,12 @@
     <!--FOOTER-->
     <footer>
         <div class="footer__network">
-            <img src="../MEDIA/IMG/facebook-square-logo-24.png" alt="">
-            <img src="../MEDIA/IMG/pinterest-logo-24.png" alt="">
-            <img src="../MEDIA/IMG/whatsapp-logo-24.png" alt="">
+            <img src="../../MEDIA/IMG/facebook-square-logo-24.png" alt="">
+            <img src="../../MEDIA/IMG/pinterest-logo-24.png" alt="">
+            <img src="../../MEDIA/IMG/whatsapp-logo-24.png" alt="">
         </div>
         <div class="footer__logo">
-            <img src="../MEDIA/IMG/icon.png" alt="">
+            <img src="../../MEDIA/IMG/icon.png" alt="">
             <h1>Modisteria Doña Luz</h1>
         </div>
         <div class="footer__policy">
@@ -171,16 +127,16 @@
             <p>Iniciar Sesion</p>
         </div>
         <div class="footer__copyright">
-            <img src="../MEDIA/IMG/copyright-solid-24.png" alt="">
+            <img src="../../MEDIA/IMG/copyright-solid-24.png" alt="">
             <p>2023 Copyright ModisteriaDoñaLuz.com</p>
         </div>
     </footer>
 
     <!--JS-->
     <!--LOADER-->
-    <script src="../JS/loader.js"></script>
-    <script src="../JS/catalogo.js"></script>
-    <script src="../JS/localStorage/catalogoL.js"></script>
+    <script src="../../JS/loader.js"></script>
+    <script src="../../JS/catalogo.js"></script>
+    <script src="../../JS/localStorage/catalogoL.js"></script>
 
 
     <!-- AOS -->

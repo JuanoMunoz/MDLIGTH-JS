@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../CSS/citasAdmi.css" />
-    <link rel="stylesheet" href="../CSS/Sesion.css">
-    <link rel="stylesheet" href="../CSS/loader.css">
-    <link rel="shortcut icon" href="../media/IMG/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../CSS/citasAdmi.css" />
+    <link rel="stylesheet" href="../../CSS/Sesion.css">
+    <link rel="stylesheet" href="../../CSS/loader.css">
+    <link rel="shortcut icon" href="../../media/IMG/icon.png" type="image/x-icon">
     <title>MODISTERIA D.L || MIS CITAS</title>
 </head>
 
@@ -49,55 +49,15 @@
     </div>
 
     <!--NAV-->
-    <nav class="menu">
-        <section class="menu__container">
-            <a href="../Bienvenido.html">
-                <h4><img src="../MEDIA/IMG/icon.png" class="img"> MODISTERIA D.L</h2>
-            </a>
-
-            <ul class="menu__links">
-                <li class="menu__item">
-                    <a href="#" class="menu__link active">CITAS ADMIN</a>
-                </li>
-
-                <li class="menu__item">
-                    <a href="../CLIENT/citasCliente.html" class="menu__link">CITAS</a>
-                </li>
-
-                <li class="menu__item">
-                    <a href="../Catalogo.html" class="menu__link">CATÁLOGO</a>
-                </li>
-
-                <li class="menu__item">
-                    <a href="PanelAdmin/usuario.html" class="menu__link">PANEL DE CONTROL</a>
-                </li>
-
-                <li class="menu__item">
-                    <a href="" class="menu__link"><i class="fa-solid fa-magnifying-glass"></i></a>
-                </li>
-
-                <li class="menu__item">
-                    <a href="" class="menu__link"><i class="fa-solid fa-cart-shopping"></i></a>
-                </li>
-
-                <li class="menu__item menu__item--show">
-                    <a href="" class="menu__link"><i class="fa-regular fa-user"></i><img
-                            src="../MEDIA/ICONOS/1-arrow.svg" class="menu__arrow"></a>
-                    <ul class="menu__nesting">
-                        <li class="menu__inside">
-                            <a href="" class="menu__link menu__link--inside">Perfil <i class="fa-solid fa-user"></i></a>
-                        </li>
-                        <li class="menu__inside">
-                            <a href="../InicioSesion.html" class="menu__link menu__link--inside">Cerrar Sesion <i
-                                    class="fa-solid fa-right-from-bracket"></i></a>
-                        </li>
-                    </ul>
-                </li>
-
-
-            </ul>
-        </section>
-    </nav>
+    <div id="navbar-container"></div>
+    <script>
+        fetch('static/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data
+            })
+            .catch(error => console.error('Error al cargar el navbar'))
+    </script>
 
     <!-- Body -->
     <div class="body">
@@ -193,18 +153,18 @@
 
             </div>
         </section>
-        <a href="../CLIENT/citasCliente.html">Agendar Cita</a>
+        <a href="../../CLIENT/citasCliente.html">Agendar Cita</a>
     </div>
     
 
     <footer>
         <div class="footer__network">
-            <img src="../MEDIA/IMG/facebook-square-logo-24.png" alt="">
-            <img src="../MEDIA/IMG/pinterest-logo-24.png" alt="">
-            <img src="../MEDIA/IMG/whatsapp-logo-24.png" alt="">
+            <img src="../../MEDIA/IMG/facebook-square-logo-24.png" alt="">
+            <img src="../../MEDIA/IMG/pinterest-logo-24.png" alt="">
+            <img src="../../MEDIA/IMG/whatsapp-logo-24.png" alt="">
         </div>
         <div class="footer__logo">
-            <img class="img_footer" src="../MEDIA/IMG/icon.png" alt="">
+            <img class="img_footer" src="../../MEDIA/IMG/icon.png" alt="">
             <h1>Modisteria Doña Luz</h1>
         </div>
         <div class="footer__policy">
@@ -217,15 +177,15 @@
 
         </div>
         <div class="footer__copyright">
-            <img src="../MEDIA/IMG/copyright-solid-24.png" alt="">
+            <img src="../../MEDIA/IMG/copyright-solid-24.png" alt="">
             <p>2023 Copyright ModisteriaDoñaLuz.com</p>
         </div>
     </footer>
 
 
-    <script src="../JS/calendario.js"></script>
-    <script src="../JS/citas_direccion.js"></script>
-    <script src="../JS/loader.js"></script>
+    <script src="../../JS/calendario.js"></script>
+    <script src="../../JS/citas_direccion.js"></script>
+    <script src="../../JS/loader.js"></script>
 </body>
 
 </html>
