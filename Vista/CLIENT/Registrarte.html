@@ -4,16 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MODISTERIA D.L || INICIAR SESION</title>
+    <title>MODISTERIA D.L || REGISTRO</title>
     <!--Font Awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/'-awesome/4.7.0/css/font-awesome.min.css">
 
     <!--CSS-->
-    <link rel="stylesheet" href="CSS/Sesion.css">
-    <link rel="stylesheet" href="CSS/loader.css">
-    <link rel="shortcut icon" href="media/IMG/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../CSS/Registro.css">
+    <link rel="stylesheet" href="../CSS/loader.css">
+    <link rel="shortcut icon" href="../media/IMG/icon.png" type="image/x-icon">
 
     <!-- AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -56,18 +57,18 @@
     <!--NAV-->
     <nav class="menu">
         <section class="menu__container">
-            <a href="Index.html">
-                <h4><img src="./MEDIA/IMG/icon.png" class="img"> MODISTERIA D.L</h4>
+            <a href="#">
+                <h4><img src="../MEDIA/IMG/icon.png" class="img"> MODISTERIA D.L</h2>
             </a>
 
             <ul class="menu__links">
 
                 <li class="menu__item">
-                    <a href="Registrarte.html" class="menu__link">REGISTRARTE</a>
+                    <a href="Registrarte.html" class="menu__link active">REGISTRARTE</a>
                 </li>
 
                 <li class="menu__item">
-                    <a href="InicioSesion.html" class="menu__link active">INICIAR SESIÓN</a>
+                    <a href="InicioSesion.html" class="menu__link">INICIAR SESIÓN</a>
                 </li>
 
 
@@ -80,61 +81,54 @@
 
         <!--LADO IZQUIERDO-->
         <div class="form-left">
-            <video src="MEDIA/VIDEO/sesion.mp4" autoplay muted loop></video>
+            <video src="../MEDIA/VIDEO/registro.mp4" autoplay muted loop></video>
         </div>
         <!--LADO DERECHO-->
         <div class="form-right">
-            <img src="./MEDIA/IMG/user.png" alt="">
-            <p class="title">Inicia Sesion</p>
-            <form class="form">
+            <img src="../MEDIA/IMG/user.png" alt="">
+            <p class="title">Registrate</p>
+            <form class="form" id="form">
+                <input type="hidden" name="id" id="id">
+                <div class="input-group">
+                    <input type="text" name="nombre" id="nombre" placeholder="Nombre:">
+                </div><br>
+                <div class="input-group">
+                    <input type="text" name="apellido" id="apellido" placeholder="Apellidos:">
+                </div><br>
+                <div class="input-group">
+                    <input type="number" name="celular" id="celular" placeholder="Celular:">
+                </div><br>
                 <div class="input-group">
                     <input type="text" name="email" id="email" placeholder="Correo:">
                 </div><br>
                 <div class="input-group">
                     <input type="password" name="password" id="password" placeholder="Contraseña:">
                     <span id="visible"><i class="fa-solid fa-eye" id="icono"></i></span>
-                    <div class="forgot">
-                        <br><a rel="" href="#">Olvidaste Contraseña ?</a>
-                    </div>
-                </div>
-                <button class="sign" id="ingresar">Ingresar</button>
+                </div><br>
+                <div class="input-group">
+                    <input type="password" name="password_c" id="password_c" placeholder="Confirmar contraseña:">
+                    <span id="visible"><i class="fa-solid fa-eye" id="icono"></i></span>
+                </div><br>
+                <button class="sign" id="registro" type="submit">Registrarme</button>
             </form>
             <div class="social-message">
                 <div class="line"></div>
-                <p class="message">Ingresa con Redes Sociales</p>
+                <p class="message">Ya tienes cuenta?</p>
                 <div class="line"></div>
             </div>
-            <div class="social-icons">
-                <button aria-label="Log in with Google" class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-5 h-5 fill-current">
-                        <path
-                            d="M16.318 13.714v5.484h9.078c-0.37 2.354-2.745 6.901-9.078 6.901-5.458 0-9.917-4.521-9.917-10.099s4.458-10.099 9.917-10.099c3.109 0 5.193 1.318 6.38 2.464l4.339-4.182c-2.786-2.599-6.396-4.182-10.719-4.182-8.844 0-16 7.151-16 16s7.156 16 16 16c9.234 0 15.365-6.49 15.365-15.635 0-1.052-0.115-1.854-0.255-2.651z">
-                        </path>
-                    </svg>
-                </button>
-                <button aria-label="Log in with Twitter" class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-5 h-5 fill-current">
-                        <path
-                            d="M31.937 6.093c-1.177 0.516-2.437 0.871-3.765 1.032 1.355-0.813 2.391-2.099 2.885-3.631-1.271 0.74-2.677 1.276-4.172 1.579-1.192-1.276-2.896-2.079-4.787-2.079-3.625 0-6.563 2.937-6.563 6.557 0 0.521 0.063 1.021 0.172 1.495-5.453-0.255-10.287-2.875-13.52-6.833-0.568 0.964-0.891 2.084-0.891 3.303 0 2.281 1.161 4.281 2.916 5.457-1.073-0.031-2.083-0.328-2.968-0.817v0.079c0 3.181 2.26 5.833 5.26 6.437-0.547 0.145-1.131 0.229-1.724 0.229-0.421 0-0.823-0.041-1.224-0.115 0.844 2.604 3.26 4.5 6.14 4.557-2.239 1.755-5.077 2.801-8.135 2.801-0.521 0-1.041-0.025-1.563-0.088 2.917 1.86 6.36 2.948 10.079 2.948 12.067 0 18.661-9.995 18.661-18.651 0-0.276 0-0.557-0.021-0.839 1.287-0.917 2.401-2.079 3.281-3.396z">
-                        </path>
-                    </svg>
-                </button>
-            </div>
-            <p class="signup">Aún no tienes Cuenta?
-                <a rel="r" href="Registrarte.html" class="">Registrate</a>
-            </p>
+            <a rel="r" href="InicioSesion.html" class="signup">Inicia Sesion</a>
         </div>
     </div>
 
     <!--FOOTER-->
     <footer>
         <div class="footer__network">
-            <img src="./MEDIA/IMG/facebook-square-logo-24.png" alt="">
-            <img src="./MEDIA/IMG/pinterest-logo-24.png" alt="">
-            <img src="./MEDIA/IMG/whatsapp-logo-24.png" alt="">
+            <img src="../MEDIA/IMG/facebook-square-logo-24.png" alt="">
+            <img src="../MEDIA/IMG/pinterest-logo-24.png" alt="">
+            <img src="../MEDIA/IMG/whatsapp-logo-24.png" alt="">
         </div>
         <div class="footer__logo">
-            <img src="./MEDIA/IMG/icon.png" alt="">
+            <img src="../MEDIA/IMG/icon.png" alt="">
             <h1>Modisteria Doña Luz</h1>
         </div>
         <div class="footer__policy">
@@ -144,14 +138,17 @@
             <p>Iniciar Sesion</p>
         </div>
         <div class="footer__copyright">
-            <img src="./MEDIA/IMG/copyright-solid-24.png" alt="">
+            <img src="../MEDIA/IMG/copyright-solid-24.png" alt="">
             <p>2023 Copyright ModisteriaDoñaLuz.com</p>
         </div>
     </footer>
 
     <!--JS-->
-    <script src="JS/verPass.js"></script>
-    <script src="JS/localStorage/iniciar.js"></script>
+    <script src="../JS/verPass.js"></script>
+    <script src="../JS/LocalStorage/registrar.js"></script>
+
+    <!--LOADER-->
+    <script src="../JS/loader.js"></script>
 
     <!-- AOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -161,9 +158,6 @@
 
     <!--SWEETALERT-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js"></script>
-
-    <!--LOADER-->
-    <script src="JS/loader.js"></script>
 
 </body>
 
