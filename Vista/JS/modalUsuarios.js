@@ -1,42 +1,42 @@
-//Modal agregar
-
+// Modal agregar
 const btnAbrirModalAgregar = document.querySelector("#btn-abrir-modal-agregar");
 const btnCerrarModalAgregar = document.querySelector('#btn-cerrar-modal-agregar');
 const modalAgregar = document.querySelector("#modal-agregar");
 
-
-btnAbrirModalAgregar.addEventListener("click", ()=>{
+btnAbrirModalAgregar.addEventListener("click", () => {
     modalAgregar.showModal();
-})
+});
 
-btnCerrarModalAgregar.addEventListener("click", ()=>{
+btnCerrarModalAgregar.addEventListener("click", () => {
     modalAgregar.close();
-})
+});
 
-//Modal editar
-
-const btnAbrirModalEditar = document.querySelector("#btn-abrir-modal-editar");
+// Modal editar
+const btnAbrirModalesEditar = document.querySelectorAll(".btn-abrir-modal-editar");
 const btnCerrarModalEditar = document.querySelector('#btn-cerrar-modal-editar');
 const modalEditar = document.querySelector("#modal-editar");
 
-btnAbrirModalEditar.addEventListener("click", ()=>{
-    modalEditar.showModal();
-})
+btnAbrirModalesEditar.forEach(btn => {
+    btn.addEventListener("click", () => {
+        modalEditar.showModal();
+    });
+});
 
-btnCerrarModalEditar.addEventListener("click", ()=>{
-    modalEditar.close();
-})
+function cerrarModalEditar() {
+    document.getElementById('modal-editar').close();
+}
 
-//Modal eliminar
-
-const btnAbrirModalEliminar = document.querySelector("#btn-abrir-modal-eliminar");
+// Modal eliminar
+const btnAbrirModalesEliminar = document.querySelectorAll(".btn-abrir-modal-eliminar");
 const btnCerrarModalEliminar = document.querySelector('#btn-cerrar-modal-eliminar');
 const modalEliminar = document.querySelector("#modal-eliminar");
 
-btnAbrirModalEliminar.addEventListener("click", ()=>{
-    modalEliminar.showModal();
-})
+btnAbrirModalesEliminar.forEach(btn => {
+    btn.addEventListener("click", () => {
+        modalEliminar.showModal();
+    });
+});
 
-btnCerrarModalEliminar.addEventListener("click", ()=>{
+btnCerrarModalEliminar.addEventListener("click", () => {
     modalEliminar.close();
-})
+});
