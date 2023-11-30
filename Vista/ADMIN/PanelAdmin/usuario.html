@@ -188,8 +188,8 @@
                                     <input type="text" name="email" id="email_editar" disabled value="${usuario.email}">
                                 </div>
                             </form>
-                            <button class="btn-modal" id="btn-cerrar-modal-editar" onclick="cerrarModalEditar()">Volver</button>
-                            <button id="btnEditarUser" onclick="editarU(${usuario.id})">Editar usuario</button>
+                            <button class="btn-modal" id="btn-cerrar-modal-editar" onclick="cerrarModalEditar()"><i class="fa-solid fa-x"></i></button>
+                            <button class="btn-editar-modal" id="btnEditarUser" onclick="editarU(${usuario.id})">Editar usuario</button>
                         `;
                     }
                 </script>
@@ -201,9 +201,10 @@
                         let usuario = listaUsuarios.find(u => u.id == id);
                         let modalEditar = document.getElementById('modal-eliminar')
                         modalEditar.innerHTML = `
-                        <h3>¿Estás seguro que deseas eliminar este usuario?</h3><br>
+                        <img src="../../MEDIA/IMG/alerta.png" alt="" class="alertaimg">
+                        <h3>¿Estás seguro que deseas eliminar a ${usuario.nombre}?</h3><br>
                         <button onclick="eliminar(${usuario.id})">Eliminar usuario</button>
-                        <button id="btn-cerrar-modal-eliminar">Volver</button>`
+                        <button id="btn-cerrar-modal-eliminar" onclick="cerrarModalEliminar()"><i class="fa-solid fa-x"></i></button>`
                     }
                 </script>
             </dialog>

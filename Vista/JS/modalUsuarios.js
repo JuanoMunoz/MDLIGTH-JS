@@ -37,6 +37,6 @@ btnAbrirModalesEliminar.forEach(btn => {
     });
 });
 
-btnCerrarModalEliminar.addEventListener("click", () => {
-    modalEliminar.close();
-});
+function cerrarModalEliminar() {
+    document.getElementById("modal-eliminar").close()
+}

@@ -18,6 +18,7 @@
     <link rel="shortcut icon" href="../../media/IMG/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../CSS/Registro.css">
     <link rel="stylesheet" href="../../CSS/modalProducto.css">
+    <link rel="stylesheet" href="../../CSS/modalUsuario.css">
 
 
 
@@ -172,8 +173,8 @@
                                     <input type="text" id="fotoEditar" value="${producto.imagen}">
                                 </div>
                             </form>
-                            <button class="btn-modal" id="btn-cerrar-modal-editar" onclick="cerrarModalEditar()">Volver</button>
-                            <button id="btnEditarUser" onclick="editarProducto(${producto.idProducto})">Editar usuario</button>
+                            <button class="btn-modal" id="btn-cerrar-modal-editar" onclick="cerrarModalEditar()"><i class="fa-solid fa-x"></i></button>
+                            <button class="btn-editar-modal"id="btnEditarUser" onclick="editarProducto(${producto.idProducto})">Editar producto</button>
                     `;
                     }
                 </script>
@@ -186,9 +187,10 @@
                         let producto = listaProductos.find(producto => producto.idProducto == idProducto);
                         let ModalEliminar = document.getElementById('modal-eliminar')
                         ModalEliminar.innerHTML = `
+                        <img src="../../MEDIA/IMG/alerta.png" alt="" class="alertaimg">
                         <h3>¿Estás seguro que deseas eliminar ${producto.nombreProducto}?</h3><br>
                         <button onclick="eliminarProducto(${producto.idProducto})">Eliminar producto</button>
-                        <button id="btn-cerrar-modal-eliminar" onclick="cerrarModalEliminar()">Volver</button>`
+                        <button id="btn-cerrar-modal-eliminar" onclick="cerrarModalEliminar()"><i class="fa-solid fa-x"></i></button>`
                     }
                 </script>
             </dialog>
@@ -199,6 +201,7 @@
         <div id="sidebar-container">
 
         </div>
+
         <script>
             fetch('static/sidebar.html')
                 .then(response => response.text())
@@ -245,6 +248,8 @@
         mostrarProductosT();
     </script>
     <script src="../../JS/localStorage/catalogoL.js"></script>
+    <script src="../../JS/modalProductos.js"></script>
+
 
     <!-- AOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -257,7 +262,6 @@
 
     <!--LOADER-->
     <script src="../../JS/loader.js"></script>
-    <script src="../../JS/modalProductos.js"></script>
 
     <!--CERRAR SESION-->
 
