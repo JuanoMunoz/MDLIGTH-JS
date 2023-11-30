@@ -94,11 +94,17 @@
                 <div class="input-group">
                     <select name="" id="categoriaP">
                         <option value="0" selected>Escoja una Categoría</option>
-                        <option value="Gala">Gala</option>
-                        <option value="Deportivos">Deportivos</option>
-                        <option value="Uniformes">Uniformes</option>
-                        <option value="Formales">Formales</option>
-                        <option value="Informales">Informales</option>
+                        <script>
+                            function mostrarCategorias(){
+                                let table = document.getElementById('categoriaP');
+                                let listaCategorias = JSON.parse(localStorage.getItem('categorias')) || [];
+                                listaCategorias.forEach(function (categoria) {
+                                    table.innerHTML += `
+                                    <option value="${categoria.nombreCategoria}">${categoria.nombreCategoria}</option>                                    `;  
+                                });
+    
+                            }
+                        </script>
                     </select>
                 </div><br>
                 <div class="input-group">
@@ -137,6 +143,9 @@
     <script src="../../JS/loader.js"></script>
     <script src="../../JS/catalogo.js"></script>
     <script src="../../JS/localStorage/catalogoL.js"></script>
+    <script>
+        mostrarCategorias();
+    </script>
 
 
     <!-- AOS -->

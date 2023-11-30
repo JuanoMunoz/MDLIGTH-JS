@@ -79,13 +79,20 @@
                             class="fa-solid fa-sliders"></i>&nbsp;Filtros</span></label>
                 <input type="checkbox" id="touch">
 
-                <ul class="slide">
+                <ul class="slide" id="slide">
                     <button id="todos" class="boton-categoria">Todos</button>
-                    <button id="gala" class="boton-categoria">Gala</button>
-                    <button id="deportivos" class="boton-categoria">Deportivos</button>
-                    <button id="uniformes" class="boton-categoria">Uniformes</button>
-                    <button id="vestidos" class="boton-categoria">Vestidos</button>
-                    <button id="chaquetas" class="boton-categoria">Chaquetas</button>
+                    <script>
+                        function mostrarCategorias(){
+                            let table = document.getElementById('slide');
+                            let listaCategorias = JSON.parse(localStorage.getItem('categorias')) || [];
+                            listaCategorias.forEach(function (categoria) {
+                                table.innerHTML += `
+                                    <button id="${categoria.nombreCategoria}" class="boton-categoria">${categoria.nombreCategoria}</button>
+                                `;  
+                            });
+
+                        }
+                    </script>
                 </ul>
 
             </nav>
@@ -143,6 +150,7 @@
     <!-- <script src="JS/carrito_productos.js"></script> -->
     <script>
         mostrarProductos();
+        mostrarCategorias()
     </script>
 
     <!-- AOS -->

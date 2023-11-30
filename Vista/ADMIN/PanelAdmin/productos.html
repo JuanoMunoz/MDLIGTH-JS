@@ -142,6 +142,8 @@
                         let producto = listaProductos.find(producto => producto.idProducto == id);
                         let modalEditar = document.getElementById('modal-editar')
 
+                        let listaCategorias =
+
                         modalEditar.innerHTML = `
                             <h3 class="title-modal-editar">EDITAR PRODUCTO</h3>
                             <form class="formulario" id="form">
@@ -157,17 +159,8 @@
                                 <div> <br>
                                     <label for="">Precio</label>
                                     <input type="number" name="celular" id="precioEditar" value="${producto.precio}">
-                                </div>
-                                <div> <br>
-                                    <select name="" id="categoriaEditar" class="categoriaE">
-                                        <option value="0" selected>Escoja una Categoría</option>
-                                        <option value="Gala">Gala</option>
-                                        <option value="Deportivos">Deportivos</option>
-                                        <option value="Uniformes">Uniformes</option>
-                                        <option value="Formales">Formales</option>
-                                        <option value="Informales">Informales</option>
-                                    </select>
-                                </div>
+                                </div> <br>
+
                                 <div> <br>
                                     <label for="">URL imagen</label>
                                     <input type="text" id="fotoEditar" value="${producto.imagen}">

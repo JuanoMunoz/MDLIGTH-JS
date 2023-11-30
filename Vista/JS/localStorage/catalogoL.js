@@ -64,7 +64,6 @@ function editarProducto(idProducto, e) {
                 producto.nombreProducto = document.getElementById('productoEditar').value;
                 producto.descripcion = document.getElementById('descripcionEditar').value;
                 producto.precio = document.getElementById('precioEditar').value;
-                producto.categoria = document.getElementById('categoriaEditar').value;
                 producto.imagen = document.getElementById('fotoEditar').value;
 
                 localStorage.setItem('productos', JSON.stringify(listaProductos));
@@ -190,7 +189,6 @@ function validarProductoEditar(e) {
     var nombreProducto = document.getElementById("productoEditar").value;
     var descripcionProducto = document.getElementById("descripcionEditar").value;
     var precioProducto = document.getElementById("precioEditar").value;
-    var categoriaProducto = document.getElementById("categoriaEditar").value;
     var imagenProducto = document.getElementById("fotoEditar").value;
 
     //Alerta
@@ -207,7 +205,7 @@ function validarProductoEditar(e) {
     });
 
     //Validaciones
-    if (nombreProducto == "" || descripcionProducto == "" || precioProducto == "" || categoriaProducto == 0 || imagenProducto == "") {
+    if (nombreProducto == "" || descripcionProducto == "" || precioProducto == "" || imagenProducto == "") {
 
         Toast.fire({
             icon: "error",
