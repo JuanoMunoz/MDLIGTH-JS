@@ -42,28 +42,6 @@ function alerta() {
     }, 2001);
 }
 
-// function crearTablaHTML() {
-//     let html = "";
-
-//     listaCitas.forEach(function (item, index) {
-//         html += "<tr>";
-//         html += "<td>" + item.id_cita + "</td>";
-//         html += "<td>" + item.nombrePrenda + "</td>";
-//         html += "<td>" + item.objetivo + "</td>";
-//         html += "<td>" + item.fecha + "</td>";
-//         // html += "<td>" + item.imagen + "</td>";
-//         html += "<td>" + item.talla + "</td>";
-//         html += "<td>" + item.metodoPago + "</td>";
-//         html += '<td><button onclick="deleteData(' + (index) + ')">Eliminar</button></td>';
-//         html += '<td><button onclick="editData(' + (index) + ')">Editar</button></td>';
-//         html += "</tr>";
-//     });
-
-//     document.querySelector('#tablaCitas').innerHTML = html;
-// }
-
-// document.onload = crearTablaHTML();
-
 //Evento click - Agregar cita
 
 function agregarCita(evento) {
