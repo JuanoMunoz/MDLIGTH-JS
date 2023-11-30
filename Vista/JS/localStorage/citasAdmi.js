@@ -1,6 +1,6 @@
 let listaCitas = JSON.parse(localStorage.getItem('citas')) || [];
 
-const getToast = () => Swal.mixin({ toast: true, position: "top-end", showConfirmButton: false, timer: 2000, timerProgressBar: true, didOpen: (toast) => { toast.onmouseenter = Swal.stopTimer; toast.onmouseleave = Swal.resumeTimer;}});
+const getToast = () => Swal.mixin({ toast: true, position: "top-end", showConfirmButton: false, timer: 2000, timerProgressBar: true, didOpen: (toast) => { toast.onmouseenter = Swal.stopTimer; toast.onmouseleave = Swal.resumeTimer; } });
 
 function validarFormulario() {
     const Toast = getToast();
@@ -66,7 +66,7 @@ function alerta() {
 
 //Evento click - Agregar cita
 
-function agregarCita(evento){
+function agregarCita(evento) {
     evento.preventDefault();
 
     const Toast = getToast();
@@ -154,6 +154,8 @@ function agregarCita(evento){
                 }
             }
         }
+        alerta();
+        modalAgregar.close();
 
         function listarTodasLasCitas() {
             return listaCitas;
@@ -165,43 +167,120 @@ function deleteData(id) {
     // const index = listaCitas.findIndex(cita => cita.id_cita == id);
     // listaCitas.splice(index, 1);
 
+    const Toast = getToast();
+
     const nuevoStorage = listaCitas.filter(cita => cita.id_cita != id);
     listaCitas = [...nuevoStorage];
     localStorage.setItem('citas', JSON.stringify(listaCitas));
-    modalEliminar.close();
-    alerta();
+    
+    Toast.fire({
+        icon: "success",
+        title: "¡Cita eliminada!"
+    });
+    setTimeout(function () {
+        alerta();
+        modalEliminar.close();
+    }, 2001);
+    
 }
 
 function editData(id) {
 
-    const actualizacion = {
-        id_cita: id,
-        nombrePrenda: document.getElementById('nombrePrendaEdit').value,
-        objetivo: document.getElementById('objetivoEdit').value,
-        fecha: document.getElementById('fechaEdit').value,
-        imagen: document.getElementById('imagenEdit').value,
-        talla: document.getElementById('tallaEdit').value,
-        metodoPago: document.getElementById('metodoPagoEdit').value
-    }
+    const Toast = getToast();
 
-    const index = listaCitas.findIndex(ct => ct.id_cita == id);
-    listaCitas[index] = actualizacion;
-    localStorage.setItem('citas', JSON.stringify(listaCitas));
-    modalEditar.close();
-    alerta();
+    // let id_cita = listaCitas.length != 0 ? listaCitas.findLast((cita) => id_cita = cita.id_cita) : id_cita = 0;
+    let id_cita = listaCitas.length > 0 ? listaCitas[listaCitas.length - 1].id_cita : 0;
+
+        let fechaForm = new Date(document.getElementById("fechaEdit").value);
+        let fecha = fechaForm.getTime();
+        let fechaActual = new Date();
+        let fecha2meses = new Date(fechaActual);
+        fecha2meses.setMonth(fecha2meses.getMonth() + 2);
+        let limiteFecha = fecha2meses.getTime();
+
+        if (fecha > limiteFecha) {
+            Toast.fire({
+                icon: "error",
+                title: "Cita cancelada. \n¡Solo puedes solicitar citas dentro de un rango de tiempo de 2 meses!"
+            })
+        } else {
+            if (fecha < fechaActual.getTime()) {
+                Toast.fire({
+                    icon: "error",
+                    title: "Cita cancelada. \n¡La fecha y hora que indicaste ya pasaron!"
+                });
+            } else {
+                let citasExist = listarTodasLasCitas();
+                let minima = new Date(fecha - 2 * 60 * 60 * 1000);
+                let maxima = new Date(fecha + 2 * 60 * 60 * 1000);
+
+                let conflicto = citasExist.some(cita => cita.fecha > minima.getTime() && cita.fecha < maxima.getTime());
+                if (conflicto) {
+                    Toast.fire({
+                        icon: "error",
+                        title: "Cita cancelada. \n¡La hora para la que tratas de registrar tu cita se encuentra en el intervalo de tiempo de una cita que ya fue agendada, intenta con otra hora!"
+                    });
+                } else {
+                    let dia_semana = fechaForm.getDay();
+                    switch (dia_semana) {
+                        case 0:
+                        case 6:
+                            Toast.fire({
+                                icon: "error",
+                                title: "Cita cancelada. \n¡Solo se atiende de lunes a viernes!"
+                            });
+                            break;
+                        default:
+                            let hora = fechaForm.getHours();
+                            if (hora >= 8 && hora <= 17) {
+                                let dias = new Date(fechaActual);
+                                dias.setDate(dias.getDate() + 3);
+                                if (fecha < dias.getTime()) {
+                                    Toast.fire({
+                                        icon: "error",
+                                        title: "Cita cancelada. \n¡Debes pedir tu cita con mínimo 3 días de anticipación!"
+                                    });
+                                } else {
+                                    const actualizacion = {
+                                        id_cita: id,
+                                        nombrePrenda: document.getElementById('nombrePrendaEdit').value,
+                                        objetivo: document.getElementById('objetivoEdit').value,
+                                        fecha: document.getElementById('fechaEdit').value,
+                                        imagen: document.getElementById('imagenEdit').value,
+                                        talla: document.getElementById('tallaEdit').value,
+                                        metodoPago: document.getElementById('metodoPagoEdit').value
+                                    }
+
+                                    const index = listaCitas.findIndex(ct => ct.id_cita == id);
+                                    listaCitas[index] = actualizacion;
+                                    localStorage.setItem('citas', JSON.stringify(listaCitas));
+                                    Toast.fire({
+                                        icon: "success",
+                                        title: "¡Se han modificado los datos!"
+                                    });
+                                    setTimeout(function () {
+                                        alerta()
+                                    }, 2001);
+                                }
+                            } else {
+                                Toast.fire({
+                                    icon: "error",
+                                    title: "Cita cancelada. \n¡Nuestro horario de atención es de 8 a.m. hasta las 5 p.m!"
+                                });                                
+                            }
+                    }
+
+                }
+            }
+        }
+        modalEditar.close();
+        alerta();
+
+        function listarTodasLasCitas() {
+            return listaCitas;
+        }
+    
+
+
 }
 
-
-
-{/* <script>modalEditar.showModal();</script> */}
-
-
-
-// let listaCitas = JSON.parse(localStorage.getItem('citas')) || [];
-//                         listaCitas.forEach(cita => {
-//                             if (cita.id_cita == id_cita) {
-//                                 modal.innerHTML += `
-//                                 <button id="btnEditarCita" onclick="editData(${cita.id_cita})">Editar cita</button>
-//                                 `
-//                             }
-//                         })
