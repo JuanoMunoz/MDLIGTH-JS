@@ -73,14 +73,14 @@
                         <a href="" class="menu__link"><i class="fa-solid fa-cart-shopping"></i></a>
                     </li>
     
-                <li class="menu_item menu_item--show">
-                    <a href="" class="menu_link"><i class="fa-regular fa-user"></i><img src="../MEDIA/ICONOS/1-arrow.svg" class="menu_arrow"></a>
+                <li class="menu__item menu__item--show">
+                    <a href="" class="menu__link"><i class="fa-regular fa-user"></i><img src="../MEDIA/ICONOS/1-arrow.svg" class="menu__arrow"></a>
                     <ul class="menu__nesting">
                     <li class="menu__inside">
-                            <a href="" class="menu_link menu_link--inside">Perfil <i class="fa-solid fa-user"></i></a>
+                            <a href="" class="menu__link menu__link--inside">Perfil <i class="fa-solid fa-user"></i></a>
                     </li>
                         <li class="menu__inside">
-                            <a href="../InicioSesion.html" class="menu_link menu_link--inside">Cerrar Sesion <i class="fa-solid fa-right-from-bracket"></i></a>
+                            <a href="../InicioSesion.html" class="menu__link menu__link--inside">Cerrar Sesion <i class="fa-solid fa-right-from-bracket"></i></a>
                     </li>
                     </ul>
                 </li>
@@ -100,7 +100,6 @@
             <div class="datos">
                 <input type="hidden" name="id_cita" id="id_cita">
                 <section class="left">
-                    <input type="text" name="nombrePrenda" id="nombrePrenda" placeholder="Nombre de la prenda">
                     <textarea name="" class="objetivo" id="objetivo" cols="30" rows="10" placeholder="Objetivo"></textarea>
                 </section>
                 <section class="right">
@@ -108,7 +107,6 @@
                         <input type="datetime-local" id="fecha">
                         <!-- <input type="time" id="hora"> -->
                     </div>
-                    <input type="text" id="imagen" placeholder="Ingrese la url de la imagen">
                     <!-- <button class="button_referencia">Referencia fotografica<input class="input_file" type="file" id="imagen" accept="image/*"></button> -->
                     <select name="select" id="talla">
                         <option value="escogerTalla" disabled selected>Talla:</option>
@@ -116,22 +114,32 @@
                         <option value="m">M</option>
                         <option value="l">L</option>
                     </select>
-                    <select name="select" id="metodoPago">
-                        <option value="escogerMetodoPago" disabled selected>Método de pago:</option>
-                        <option value="transferencia">Transferencia</option>
-                        <option value="efectivo">Efectivo</option>
-                    </select>
                 </section>
             </div>
             <button class="button_agendar" id="agendarCitaCliente" onclick="agregarCita()">Agendar Cita</button>
-            <!-- <button class="button_agendar" id="editarCitaCliente" >Editar Cita</button> -->
+            <button class="button_agendar" id="editarCitaCliente" >Editar Cita</button>
         </section>
         <section class="section_img">
             <img src="../MEDIA/IMG/calendar.jpg" alt="">
         </section>
         
     </div><br><br>
-    
+    <table id="tablaCitas" border="1">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Objetivo</th>
+            <th>Fecha</th>
+            <th>Imagen</th>
+            <th>Talla</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+      </table>
 
     <footer>
         <div class="footer__network">

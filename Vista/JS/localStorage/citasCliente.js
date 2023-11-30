@@ -12,45 +12,61 @@ function validarFormulario() {
             toast.onmouseleave = Swal.resumeTimer;
         }
     });
+
     let nombrePrenda = document.getElementById("nombrePrenda").value;
     let objetivo = document.getElementById("objetivo").value;
     let fecha = document.getElementById("fecha").value;
-    // let imagen = document.getElementById("imagen").value;
+    let imagen = document.getElementById("imagen").value;
     let talla = document.getElementById("talla").value;
     let metodoPago = document.getElementById("metodoPago").value;
 
-    if (nombrePrenda = "" || objetivo == "" || fecha == "" || talla == "" || metodoPago == "") {
+    if (nombrePrenda = "" || objetivo == "" || fecha == "" || imagen == "" || talla == "" || metodoPago == "") {
         Toast.fire({
             icon: "error",
             title: "¡Asegurate de llenar todos los campos!"
         });
+    } 
+
+    //Imagen
+    const ultimosTres = imagen.slice(-4);
+    const ultimosCuatro = imagen.slice(-4);
+    let extPermitidas = /(.jpg|.JPG|.png|.PNG|.jpeg|.JPEG|.jfif|.JFIF)$/i;
+
+    if (!extPermitidas.exec(ultimosCuatro) || !extPermitidas.exec(ultimosTres)) {
+        Toast.fire({
+            icon: "error",
+            title: "¡La imagen del producto no cumple con las validaciones!\n (Solo JPG y PNG)"
+        });
         return false;
-    } else {
-        return true;
     }
 }
-
-function crearTablaHTML() {
-    let html = "";
-
-    listaCitas.forEach(function (item, index) {
-        html += "<tr>";
-        html += "<td>" + item.id_cita + "</td>";
-        html += "<td>" + item.nombrePrenda + "</td>";
-        html += "<td>" + item.objetivo + "</td>";
-        html += "<td>" + item.fecha + "</td>";
-        // html += "<td>" + item.imagen + "</td>";
-        html += "<td>" + item.talla + "</td>";
-        html += "<td>" + item.metodoPago + "</td>";
-        html += '<td><button onclick="deleteData(' + (index) + ')">Eliminar</button></td>';
-        html += '<td><button onclick="editData(' + (index) + ')">Editar</button></td>';
-        html += "</tr>";
-    });
-
-    document.querySelector('#tablaCitas').innerHTML = html;
+function alerta() {
+    setTimeout(function () {
+        window.location.href = "citasCliente.html";
+    }, 2001);
 }
 
-document.onload = crearTablaHTML();
+// function crearTablaHTML() {
+//     let html = "";
+
+//     listaCitas.forEach(function (item, index) {
+//         html += "<tr>";
+//         html += "<td>" + item.id_cita + "</td>";
+//         html += "<td>" + item.nombrePrenda + "</td>";
+//         html += "<td>" + item.objetivo + "</td>";
+//         html += "<td>" + item.fecha + "</td>";
+//         // html += "<td>" + item.imagen + "</td>";
+//         html += "<td>" + item.talla + "</td>";
+//         html += "<td>" + item.metodoPago + "</td>";
+//         html += '<td><button onclick="deleteData(' + (index) + ')">Eliminar</button></td>';
+//         html += '<td><button onclick="editData(' + (index) + ')">Editar</button></td>';
+//         html += "</tr>";
+//     });
+
+//     document.querySelector('#tablaCitas').innerHTML = html;
+// }
+
+// document.onload = crearTablaHTML();
 
 //Evento click - Agregar cita
 function agregarCita() {
@@ -83,20 +99,12 @@ function agregarCita() {
                     icon: "error",
                     title: "Cita cancelada. \n¡Solo puedes solicitar citas dentro de un rango de tiempo de 2 meses!"
                 });
-                // let icon = "error";
-                // let titulo = "Cita cancelada";
-                // let mensaje = "¡Solo puedes solicitar citas dentro de un rango de tiempo de 2 meses!";
-                // alert(titulo + " " + mensaje);
             } else {
                 if (fecha < fechaActual.getTime()) {
                     Toast.fire({
                         icon: "error",
                         title: "Cita cancelada. \n¡La fecha y hora que indicaste ya pasaron!"
                     });
-                    // let icon = "error";
-                    // let titulo = "Cita cancelada";
-                    // let mensaje = "¡La fecha y hora que indicaste ya pasaron!";
-                    // alert(titulo + " " + mensaje);
                 } else {
                     let citasExist = listarTodasLasCitas();
                     let minima = new Date(fecha - 2 * 60 * 60 * 1000);
@@ -109,10 +117,6 @@ function agregarCita() {
                             icon: "error",
                             title: "Cita cancelada. \n¡La hora para la que tratas de registrar tu cita se encuentra en el intervalo de tiempo de una cita que ya fue agendada, intenta con otra hora!"
                         });
-                        // let icon = "error";
-                        // let titulo = "Cita cancelada";
-                        // let mensaje = "¡La hora para la que tratas de registrar tu cita se encuentra en el intervalo de tiempo de una cita que ya fue agendada, intenta con otra hora!";
-                        // alert(titulo + " " + mensaje);
                     } else {
                         let dia_semana = fechaForm.getDay();
                         switch (dia_semana) {
@@ -122,10 +126,6 @@ function agregarCita() {
                                     icon: "error",
                                     title: "Cita cancelada. \n¡Solo se atiende de lunes a viernes!"
                                 });
-                                // let icon = "error";
-                                // let titulo = "Cita cancelada";
-                                // let mensaje = "¡Solo se atiende de lunes a viernes!";
-                                // alert(titulo + " " + mensaje);
                                 break;
                             default:
                                 let hora = fechaForm.getHours();
@@ -138,17 +138,13 @@ function agregarCita() {
                                             icon: "error",
                                             title: "Cita cancelada. \n¡Debes pedir tu cita con mínimo 3 días de anticipación!"
                                         });
-                                        // let icono = "error";
-                                        // let titulos = "Cita cancelada";
-                                        // let mensajes = "¡Debes pedir tu cita con mínimo 3 días de anticipación!";
-                                        // alert(titulos + " " + mensajes);
                                     } else {
                                         let nuevaCita = {
                                             id_cita: id_cita + 1,
                                             nombrePrenda: document.getElementById("nombrePrenda").value,
                                             objetivo: document.getElementById("objetivo").value,
                                             fecha: document.getElementById("fecha").value,
-                                            // imagen: document.getElementById("imagen").value,
+                                            imagen: document.getElementById("imagen").value,
                                             talla: document.getElementById("talla").value,
                                             metodoPago: document.getElementById("metodoPago").value,
                                         };
@@ -158,18 +154,13 @@ function agregarCita() {
                                             icon: "success",
                                             title: "¡Nueva cita registrada!"
                                         });
-                                        window.location.href = "../../CLIENT/citasCliente.html";
-                                        // window.location.href = '../../ADMIN/citasCliente.html';
+                                        alerta();
                                     }
                                 } else {
                                     Toast.fire({
                                         icon: "error",
                                         title: "Cita cancelada. \n¡Nuestro horario de atención es de 8 a.m. hasta las 5 p.m!"
                                     });
-                                    // let icono = "error";
-                                    // let titulos = "Cita cancelada";
-                                    // let mensajes = "¡Nuestro horario de atención es de 8 a.m. hasta las 5 p.m!";
-                                    // alert(titulos + " " + mensajes);
                                 }
                         }
 
@@ -191,37 +182,37 @@ function deleteData(index) {
 }
 
 function editData(index) {
-    document.getElementById('agendarCitaCliente').style.display = 'none';
-    document.getElementById('editarCitaCliente').style.display = 'block';
+    // document.getElementById('agendarCitaCliente').style.display = 'none';
+    // document.getElementById('editarCitaCliente').style.display = 'block';
 
-    document.getElementById("nombrePrenda").value = listaCitas[index].nombrePrenda;
-    document.getElementById("objetivo").value = listaCitas[index].objetivo;
-    document.getElementById("fecha").value = listaCitas[index].fecha;
+    // document.getElementById("nombrePrenda").value = listaCitas[index].nombrePrenda;
+    // document.getElementById("objetivo").value = listaCitas[index].objetivo;
+    // document.getElementById("fecha").value = listaCitas[index].fecha;
     // document.getElementById("imagen").value = listaCitas[index].imagen;
-    document.getElementById("talla").value = listaCitas[index].talla;
-    document.getElementById("metodoPago").value = listaCitas[index].metodoPago;
+    // document.getElementById("talla").value = listaCitas[index].talla;
+    // document.getElementById("metodoPago").value = listaCitas[index].metodoPago;
 
     document.querySelector('#editarCitaCliente').onclick = function () {
         if (validarFormulario() == true) {
             listaCitas[index].nombrePrenda = document.getElementById("nombrePrenda").value;
             listaCitas[index].objetivo = document.getElementById("objetivo").value;
             listaCitas[index].fecha = document.getElementById("fecha").value;
-            // listaCitas[index].imagen = document.getElementById("imagen").value;
+            listaCitas[index].imagen = document.getElementById("imagen").value;
             listaCitas[index].talla = document.getElementById("talla").value;
             listaCitas[index].metodoPago = document.getElementById("metodoPago").value;
 
             localStorage.setItem('citas', JSON.stringify(listaCitas));
-            crearTablaHTML();
+            // crearTablaHTML();
 
-            document.getElementById("nombrePrenda").value = "";
-            document.getElementById("objetivo").value = "";
-            document.getElementById("fecha").value = "";
+            // document.getElementById("nombrePrenda").value = "";
+            // document.getElementById("objetivo").value = "";
+            // document.getElementById("fecha").value = "";
             // document.getElementById("imagen").value = "";
-            document.getElementById("talla").value = "";
-            document.getElementById("metodoPago").value = "";
+            // document.getElementById("talla").value = "";
+            // document.getElementById("metodoPago").value = "";
 
-            document.getElementById('agendarCitaCliente').style.display = 'block';
-            document.getElementById('editarCitaCliente').style.display = 'none';
+            // document.getElementById('agendarCitaCliente').style.display = 'block';
+            // document.getElementById('editarCitaCliente').style.display = 'none';
 
         }
     };
