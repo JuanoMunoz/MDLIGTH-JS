@@ -13,6 +13,7 @@
     padding: 20px;
     width: 430px;
     border: none;
+    text-align: center;
 }
 
 .title-modal-agregar{
@@ -45,7 +46,28 @@ input{
 }
 
 .btn-modal{
-    margin-left: 25px;
+    position: absolute;
+    top: -16px;
+    left: -12px;
+    border-radius: 50%;
+    height: 50px;
+}
+
+#btn-cerrar-modal-eliminar{
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    border-radius: 50%;
+    height: 50px;
+}
+
+.alertaimg{
+    width: 50px;
+    margin-bottom: 10px;
+}
+
+.btn-editar-modal{
+    margin-left: 75px;
 }
 
 .btn-agregar{
