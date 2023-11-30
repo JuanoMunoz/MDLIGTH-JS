@@ -114,10 +114,10 @@
                                             <td>${cita.nombrePrenda}</td>
                                             <td>${cita.objetivo}</td>
                                             <td>${cita.fecha}</td>
-                                            <td>${cita.imagen}</td>
+                                            <td><img src="${cita.imagen}" alt="" style="width: 40px;"></td>
                                             <td>${cita.talla}</td>
                                             <td>${cita.metodoPago}</td>
-                                            <td><img id="btn-abrir-modal-editar" class="table_img addFunctionButtonEdit" src="../../MEDIA/IMG/editar.png" alt="" accessKey=${JSON.stringify(cita)}></td>
+                                            <td><img id="btn-abrir-modal-editar" class="table_img addFunctionButtonEdit" src="../../MEDIA/IMG/editar.png" alt="" accessKey=${cita.id_cita}></td>
                                             <td><img id="btn-abrir-modal-eliminar" class="table_img addFunctionButtonDelete" src="../../MEDIA/IMG/basura.png" alt="" accessKey=${cita.id_cita}></td>
                                         </tr>
                                     `;
@@ -223,10 +223,12 @@
                 <button class="btn-modal" id="btn-cerrar-modal-editar">Volver</button>
                 <button class="btn-modal" id="btn-editar-modal-cita">Editar cita</button>
                 <script>
-                    function editar(objetoCita) {
+                    function editar(cita) {
                         const btn = document.getElementById('btn-editar-modal-cita');
-                        const cita = JSON.parse(objetoCita);
                         
+                        
+                        console.log(listaCitas);
+                        const index = listaCitas.findIndex(ct => ct.id_cita == cita);
                         const nombrePrendaEdit = document.getElementById('nombrePrendaEdit');
                         const objetivoEdit = document.getElementById('objetivoEdit');
                         const fechaEdit = document.getElementById('fechaEdit');
@@ -234,16 +236,16 @@
                         const tallaEdit = document.getElementById('tallaEdit');
                         const metodoPagoEdit = document.getElementById('metodoPagoEdit');
                         
-                        nombrePrendaEdit.value = cita.nombrePrenda;
-                        objetivoEdit.value = cita.objetivo
-                        fechaEdit.value = cita.fecha
-                        imagenEdit.value = cita.imagen
-                        tallaEdit.value = cita.talla
-                        metodoPagoEdit.value = cita.metodoPago
+                        nombrePrendaEdit.value = listaCitas[index].nombrePrenda;
+                        objetivoEdit.value = listaCitas[index].objetivo;
+                        fechaEdit.value = listaCitas[index].fecha;
+                        imagenEdit.value = listaCitas[index].imagen;
+                        tallaEdit.value = listaCitas[index].talla;
+                        metodoPagoEdit.value = listaCitas[index].metodoPago;
                         modalEditar.showModal();
                         
 
-                        btn.addEventListener("click", () => editData(cita.id_cita))
+                        btn.addEventListener("click", () => editData(cita))
                         
 
 
