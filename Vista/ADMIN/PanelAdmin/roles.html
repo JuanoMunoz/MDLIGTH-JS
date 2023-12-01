@@ -15,9 +15,9 @@
     <link rel="stylesheet" href="../../CSS/loader.css">
     <link rel="stylesheet" href="../../CSS/sidbar.css">
     <link rel="stylesheet" href="../../CSS/panel.css">
-    <link rel="shortcut icon" href="../../media/IMG/icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../media/IMG/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../CSS/Registro.css">
-
+    <link rel="stylesheet" href="../../CSS/modalUsuario.css">
 
 
     <!-- AOS -->
@@ -25,6 +25,7 @@
 
     <!--SWEETALERT-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css">
+
 
     <title>MODISTERIA D.L || PANEL CONTROL</title>
 </head>
@@ -92,12 +93,13 @@
                 <table id="Tabla" class="table table__roles">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Id</th>
                             <th>Nombre</th>
-                            <th colspan="2">Acciones</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead>
-                    <tbody id="rol-table">
+                    <tbody id="rolTable">
 
 
                     </tbody>
@@ -110,7 +112,62 @@
                 </div>
             </div>
 
+            <dialog class="modal-Rol" id="modal-editar">
 
+                <script>
+                    function abrirModalEditar(id) {
+                        let listaRoles = JSON.parse(localStorage.getItem('Roles')) || [];
+                        let rol = listaRoles.find(r => r.id == id);
+                        let modalEditar = document.getElementById('modal-editar')
+
+                        modalEditar.innerHTML = `
+                                                    <h3 >EDITAR Rol</h3>
+                                                    <form class="formulario" id="form">
+                                                        <div>
+                                                            <input type="hidden" name="id" id="id_editar" value="${rol.id}">
+                                                            <label for="">Nombre</label>
+                                                            <input type="text" name="nombre" id="nombre_editar" value="${rol.nombre}">
+                                                        </div>
+                                                    </form>
+                                                    <button class="btn-modal" id="btn-cerrar-modal-editar" onclick="cerrarModalEditar()"><i class="fa-solid fa-x"></i></button>
+                                                    <button class="" id="btnEditarUser" onclick="editarR(${rol.id})">Editar Rol</button>
+                                                `;
+                        modalEditar.show()
+                    }
+                </script>
+            </dialog>
+            <!-- Modal add inicio -->
+            <dialog style="text-align: center;" class="modal" id="modal-agregar">
+                <h3 class="">AGREGAR ROL</h3>
+                <form class="formulario" id="form">
+                    <input type="hidden" id="id">
+                    <div>
+                        <label for="">Nombre</label>
+                        <input type="text" name="nombre" id="nombre">
+                    </div>
+
+                    <button class="btn-modal" id="btn-cerrar-modal-agregar"><i class="fa-solid fa-x"></i></button>
+                    <button id="btnAddRol" type="submit" class="">Registrar Rol</button>
+                </form>
+            </dialog>
+            <!-- Modal add fin -->
+            <!-- Modal delete  -->
+            <dialog class="modal-eliminar-Rol" id="modal-eliminar">
+                <script>
+                    function ModalEliminar(id) {
+                        let listaRol = JSON.parse(localStorage.getItem('Roles')) || [];
+                        let rol = listaRol.find(r => r.id == id);
+                        let modalEditar = document.getElementById('modal-eliminar')
+                        modalEditar.innerHTML = `
+                                                            <img src="../../MEDIA/IMG/alerta.png" alt="" class="alertaimg">
+                                                            <h3>¿Estás seguro que deseas eliminar a ${rol.nombre}?</h3><br>
+                                                            <button onclick="eliminar(${rol.id})">Eliminar Rol</button>
+                                                            <button id="btn-cerrar-modal-eliminar" onclick="cerrarModalEliminar()"><i class="fa-solid fa-x"></i></button>`
+                        modalEditar.show()
+                    }
+                </script>
+            </dialog>
+            <!-- Modal delete end -->
             <!--Body -->
         </div>
         <div id="sidebar-container">
@@ -156,6 +213,9 @@
     <!-- JS -->
     <script src="../../JS/sidbar.js"></script>
     <script src="../../JS/tablas.js"></script>
+    <script src="../../JS/localStorage/roles.js"></script>
+    <script src="../../JS/modalRol.js"></script>
+
 
     <!-- AOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -169,7 +229,6 @@
     <!--LOADER-->
     <script src="../../JS/loader.js"></script>
 
-    <script src="../../JS/localStorage/roles.js"></script>
 </body>
 
 </html>
