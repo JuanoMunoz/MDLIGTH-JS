@@ -12,8 +12,10 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../../CSS/citasAdmi.css" />
     <link rel="stylesheet" href="../../CSS/Sesion.css">
+    <link rel="stylesheet" href="../../CSS/panel.css">
     <link rel="stylesheet" href="../../CSS/loader.css">
     <link rel="shortcut icon" href="../../media/IMG/icon.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>MODISTERIA D.L || MIS CITAS</title>
 </head>
 
@@ -61,7 +63,7 @@
 
     <!-- Body -->
     <div class="body">
-        <section class="section_calendary">
+        <!-- <section class="section_calendary">
             <div class="container">
                 <div class="left">
                     <div class="calendar">
@@ -115,47 +117,77 @@
                             <button class="add-event-btn">Add Event</button>
                         </div>
                     </div>
-                    <!-- </div>
+                     </div>
         <button class="add-event">
             <i class="fas fa-plus"></i>
-        </button> -->
+        </button> 
                 </div>
-        </section>
-        
+        </section> -->
+
         <section class="section_dates">
             <h1>Mis Citas</h1>
             <div class="faq-container">
-                <div class="row">
-                    <details>
-                        <summary>Cita 1 - Pepito Díaz</summary>
-                        <p>Detalle Recibo <br>
-                            Id_Detalle: <span>01</span> <br>
-                            Fecha: <span>03/05/2023</span> <br>Hora: <span>15:00</span><br>
-                            <label for="">Medidas</label>
-                            <input type="text"> <br>
-                            <label for="">Método de pago</label>
-                            <select name="" id="">
-                                <option value="">Transferencia</option>
-                                <option value="">Efectivo</option>
-                            </select> <br>
-                            <label for="">¿Aplica Domilicio?</label>
-                            <select name="" id="select_direccion">
-                                <option value="" disabled focus>Sí/No</option>
-                                <option value="opcion1">SÍ</option>
-                                <option value="opcion2">No</option>
-                            </select> <br>
-                            <label class="direccion" id="label_direccion" for="">Dirección</label>
-                            <input class="direccion" id="input_direccion" type="text">
-                        </p>
-                    </details>
+                <div id="detalles">
+                    <script>
+                        function verDetalles() {
+                            let div = document.getElementById('detalles');
+                            
+                            let listaCitas = JSON.parse(localStorage.getItem('citas')) || [];
+                            listaCitas.forEach(function (detalle) {
+                                console.log(detalle);
+                                div.innerHTML += `
+                                    <details>
+                                        <summary>Cita ${detalle.id_cita}</summary>
+                                        <p>Detalle Recibo <br>
+                                            Fecha y hora: <span>${detalle.fecha}</span> <br>
+                                            <label for="">Método de pago: </label> 
+                                            <span>${detalle.metodoPago}</span> <br>
+                                            <label for="">Medidas</label>
+                                            <input type="text" id="medidas"> <br>
+                                            
+                                            <label for="">¿Aplica Domilicio?</label>
+                                            <select name="" id="domicilio">
+                                                <option value="" disabled focus>Sí/No</option>
+                                                <option value="Si">SÍ</option>
+                                                <option value="No">No</option>
+                                            </select> <br>
+                                            <label>Dirección</label>
+                                            <input id="direccion" type="text"><br>
+                                            
+                                            <button class="btn-agregar" id="agregarDetalles" onclick="agregarDetalle()">Agregar Detalles</button><br>
+                                            <button class="btn-agregar addFunctionButtonEditDetail" id="editarDetalles" accessKey=${detalle.id_detalleRecibo}>Editar Detalles</button><br>
+                                        </p>
+                                    </details>
+                                `;
+                            });
+                            const detallesEdit = document.querySelectorAll('.addFunctionButtonEditDetail');
+                            detallesEdit.forEach(bt => bt.addEventListener("click", () => editarDetalles(bt.accessKey)))
+                        }
+                        verDetalles();
 
+                        function editarDetalles(detalles){
+                            const btnDetalle = document.getElementById('editarDetalles');
+                            const index = listaDetalle.findIndex(d => d.id_detalleRecibo == detalles);
+                            const medidas = document.getElementById("medidas").value;
+                            const domicilio = document.getElementById("domicilio").value;
+                            const direccion = document.getElementById("direccion").value || "";
+
+                            let listaDetalle = JSON.parse(localStorage.getItem('detalleRecibo')) || [];
+                            medidas.value = listaDetalle[index].medidas;
+                            domicilio.value = listaDetalle[index].domicilio;
+                            direccion.value = listaDetalle[index].direccion;
+
+                            btn.addEventListener('click', () => editarDetalle(detalles))
+                        }
+                    </script>
+                    
                 </div>
 
             </div>
         </section>
         <a href="../../CLIENT/citasCliente.html">Agendar Cita</a>
     </div>
-    
+
 
     <footer>
         <div class="footer__network">
@@ -183,9 +215,11 @@
     </footer>
 
 
-    <script src="../../JS/calendario.js"></script>
-    <script src="../../JS/citas_direccion.js"></script>
+    <!-- <script src="../../JS/calendario.js"></script> -->
+    <!-- <script src="../../JS/citas_direccion.js"></script> -->
     <script src="../../JS/loader.js"></script>
+    <script src="../../JS/localStorage/citasAdmi.js"></script>
+    <script src="../../JS/localStorage/detalleRecibo.js"></script>
 </body>
 
 </html>

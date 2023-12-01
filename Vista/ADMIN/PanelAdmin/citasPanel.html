@@ -103,6 +103,7 @@
                         <script>
                             function mostrar() {
                                 let table = document.getElementById('table-citas');
+                                console.log(table);
                                 table.innerHTML = ``;
                                 let listaCitas = JSON.parse(localStorage.getItem('citas')) || [];
                                 listaCitas.forEach(function (cita) {
@@ -221,9 +222,6 @@
                 <script>
                     function editar(cita) {
                         const btn = document.getElementById('btn-editar-modal-cita');
-
-
-                        console.log(listaCitas);
                         const index = listaCitas.findIndex(ct => ct.id_cita == cita);
                         const nombrePrendaEdit = document.getElementById('nombrePrendaEdit');
                         const objetivoEdit = document.getElementById('objetivoEdit');
@@ -242,10 +240,6 @@
 
 
                         btn.addEventListener("click", () => editData(cita))
-
-
-
-
                     }
                 </script>
             </dialog>
