@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="../../CSS/panel.css">
     <link rel="shortcut icon" href="../../media/IMG/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../CSS/Registro.css">
+    <link rel="stylesheet" href="../../CSS/modalPermisos.css">
+
 
 
     <!-- AOS -->
@@ -83,46 +85,37 @@
             <!-- Body -->
             <div class="container">
                 <h1>PERMISOS</h1> <br>
+                <button class="btn-agregar" id="btn-abrir-modal-agregar">Agregar</button>
                 <table id="Tabla" class="table table__permisos">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Nombre</th>
                             <th>Descripción</th>
-                            <th colspan="3">Acciones</th>
+                            <th>Estado</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead>
-                    <tbody>
-
-                        <tr>
-                            <td> 401 </td>
-                            <td>ADMIN</td>
-                            <td>Administrar Citas, Administrar Usuarios, Administrar Roles, Administrar Permisos</td>
-
-                            <td><a href=""><img class="table_img" src="../../MEDIA/IMG/mas.png" alt=""></a></td>
-                            <td><a href=""><img class="table_img" src="../../MEDIA/IMG/editar.png" alt=""></a></td>
-                            <td><a href=""><img class="table_img" src="../../MEDIA/IMG/basura.png" alt=""></a></td>
-                        </tr>
-
-                        <tr>
-                            <td> 401 </td>
-                            <td>ADMIN</td>
-                            <td>Administrar Citas, Administrar Usuarios, Administrar Roles, Administrar Permisos</td>
-
-                            <td><a href=""><img class="table_img" src="../../MEDIA/IMG/mas.png" alt=""></a></td>
-                            <td><a href=""><img class="table_img" src="../../MEDIA/IMG/editar.png" alt=""></a></td>
-                            <td><a href=""><img class="table_img" src="../../MEDIA/IMG/basura.png" alt=""></a></td>
-                        </tr>
-
-                        <tr>
-                            <td> 401 </td>
-                            <td>ADMIN</td>
-                            <td>Administrar Citas, Administrar Usuarios, Administrar Roles, Administrar Permisos</td>
-
-                            <td><a href=""><img class="table_img" src="../../MEDIA/IMG/mas.png" alt=""></a></td>
-                            <td><a href=""><img class="table_img" src="../../MEDIA/IMG/editar.png" alt=""></a></td>
-                            <td><a href=""><img class="table_img" src="../../MEDIA/IMG/basura.png" alt=""></a></td>
-                        </tr>
+                    <tbody id="table-permisos">
+                        <script>
+                            function mostrar() {
+                                let table = document.getElementById('table-permisos');
+                                table.innerHTML = ``;
+                                let listaPermisos = JSON.parse(localStorage.getItem('permisos')) || [];
+                                listaPermisos.forEach(function (permiso) {
+                                    table.innerHTML += `
+                                        <tr>
+                                            <td>${permiso.nombre}</td>
+                                            <td>${permiso.descripcion}</td>
+                                            <td>Aún no hay estados</td>
+                                            <td class="btn-abrir-modal-editar" onclick="abrirModalEditar(${permiso.id})"><img class="table_img" src="../../MEDIA/IMG/editar.png" alt=""></td>
+                                            <td class="btn-abrir-modal-eliminar" onclick="ModalEliminar(${permiso.id})"><img class="table_img" src="../../MEDIA/IMG/basura.png" alt=""></td>
+                                        </tr>
+                                    `;
+                                });
+                            }
+                            mostrar();
+                        </script>
                     </tbody>
                 </table>
 
@@ -132,6 +125,64 @@
                     <button id="nextButton">Siguiente</button>
                 </div>
             </div>
+            <dialog class="modal" id="modal-agregar">
+                <h3 class="title-modal-agregar">AGREGAR PERMISO</h3>
+                <form class="formulario" id="form">
+                    <input type="hidden" id="id">
+                    <div>
+                        <label for="">Nombre</label>
+                        <input type="text" name="nombre" id="nombre">
+                    </div>
+                    <div> <br>
+                        <label for="">Descripción</label>
+                        <input type="text" name="descripcion" id="descripcion">
+                    </div>
+                </form>
+                <button class="btn-modal" id="btn-cerrar-modal-agregar"><i class="fa-solid fa-x"></i></button>
+                <button id="btnAddPermiso" class="btnAgregar">Registrar permiso</button>
+            </dialog>
+
+            <dialog class="modal-agregar" id="modal-editar">
+
+                <script>
+                    function abrirModalEditar(id) {
+                        let listaPermisos = JSON.parse(localStorage.getItem('permisos')) || [];
+                        let permiso = listaPermisos.find(u => u.id == id);
+                        let modalEditar = document.getElementById('modal-editar')
+
+                        modalEditar.innerHTML = `
+                            <h3 class="title-modal-editar">EDITAR PERMISO</h3>
+                            <form class="formulario" id="form">
+                                <div>
+                                    <input type="hidden" name="id" id="id_editar" value="${permiso.id}">
+                                    <label for="">Nombre</label>
+                                    <input type="text" name="nombre" id="nombre_editar" value="${permiso.nombre}">
+                                </div>
+                                <div> <br>
+                                    <label for="">Descripción</label>
+                                    <input type="text" name="apellido" id="descripcion_editar" value="${permiso.descripcion}">
+                                </div>
+                            </form>
+                            <button class="btn-modal" id="btn-cerrar-modal-editar" onclick="cerrarModalEditar()"><i class="fa-solid fa-x"></i></button>
+                            <button class="btn-editar-modal" id="btnEditarPermiso" onclick="editarU(${permiso.id})">Editar permiso</button>
+                        `;
+                    }
+                </script>
+            </dialog>
+            <dialog class="modal-eliminar" id="modal-eliminar">
+                <script>
+                    function ModalEliminar(id) {
+                        let listaPermisos = JSON.parse(localStorage.getItem('permisos')) || [];
+                        let permiso = listaPermisos.find(p => p.id == id);
+                        let modalEditar = document.getElementById('modal-eliminar')
+                        modalEditar.innerHTML = `
+                         <img src="../../MEDIA/IMG/alerta.png" alt="" class="alertaimg">
+                         <h3>¿Estás seguro que deseas eliminar el permiso de "${permiso.nombre}"?</h3><br>
+                         <button onclick="eliminar(${permiso.id})">Eliminar permiso</button>
+                         <button id="btn-cerrar-modal-eliminar" onclick="cerrarModalEliminar()"><i class="fa-solid fa-x"></i></button>`
+                    }
+                </script>
+            </dialog>
 
 
             <!-- /Body -->
@@ -181,6 +232,8 @@
     <!-- JS -->
     <script src="../../JS/sidbar.js"></script>
     <script src="../../JS/tablas.js"></script>
+    <script src="../../JS/modalPermisos.js"></script>
+    <script src="../../JS/localStorage/permisos.js"></script>
 
     <!-- AOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
