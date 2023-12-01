@@ -40,6 +40,7 @@ btnAgregar.addEventListener('click', function añadirProducto(e) {
         })
         document.getElementById('formP').reset();
     }
+
 });
 
 //Validaciones

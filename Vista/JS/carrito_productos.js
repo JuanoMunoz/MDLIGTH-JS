@@ -1,133 +1,157 @@
-const contenedorProductos = document.querySelector("#filaMostrador");
-const descripcion = document.querySelector("#descripcion");
-const botonesCategorias = document.querySelectorAll(".boton-categoria");
-// const tituloPrincipal = document.querySelector(".boton-categoria") 1.20 - 23
-let botonesAgregar = document.querySelectorAll(".producto-agregar");
-const numerito = document.querySelector("#numerito");
+document.addEventListener("DOMContentLoaded", function () {
+    const numerito = document.querySelector("#numerito");
+    const carritoContenedor = document.getElementById("carritoContenedor");
+    const botonesCategoria = document.querySelectorAll(".boton-categoria");
 
-const productosArray = [
-    {
-        id: "1001",
-        titulo: "Vestido Otoño",
-        imagen: "./MEDIA/IMG/Productos/vestido_otoño.jpg",
-        categoria: {
-            nombre: "Vestidos",
-            id: "vestidos"
-        },
-        precio: 120000,
-        descripcion: "descripción del modelo 01"
-    },
-    {
-        id: "1002",
-        titulo: "Chaqueta de cuero",
-        imagen: "./MEDIA/IMG/Productos/chaqueta_cuero.jpg",
-        categoria: {
-            nombre: "Chaquetas",
-            id: "chaquetas"
-        },
-        precio: 60000,
-        descripcion: "descripción del modelo 02"
-    }
-];
+    let listaProductos = JSON.parse(localStorage.getItem('productos')) || [];
+    let productosCarrito = JSON.parse(localStorage.getItem('productosCarrito')) || [];
 
-function productosCargados(productosElegidos) {
+    function mostrarProductos() {
+        let mostrador = document.getElementById("filaMostrador");
+        mostrador.innerHTML = "";
 
-    contenedorProductos.innerHTML = "";
-
-    productosElegidos.forEach(producto => {
-        const div = document.createElement("div");
-        // div.classList.add("item");
-        div.innerHTML = `
-        <div class="item" onclick="cargar(this)">
-        <div class="contenedor-foto">
-            <img src="${producto.imagen}" alt="${producto.titulo}">
-            <p class="descripcion">${producto.titulo}</p>
-            <span class="precio">${producto.precio}</span>
-        </div>
-        </div>`;
-
-        div.addEventListener("click", function() {
-            mostrarDescripcion(producto);
+        listaProductos.forEach(function (producto) {
+            mostrador.innerHTML += `
+            <div class="item ${producto.categoria}">
+                <div class="contenedor-foto">
+                    <img src="${producto.imagen}" alt="">
+                    <p class="descripcion">${producto.nombreProducto}</p>
+                    <input type="hidden" value="${producto.idProducto}" id="idProducto">
+                    <p class="descripcionProducto">${producto.descripcion}</p>
+                    <span class="precio">$${producto.precio}</span>
+                    <div class="fila">
+                        <div class="size">
+                            <select name="talla" class="tallaSelect" data-producto-id="${producto.idProducto}">
+                                <option value="">Talla</option>
+                                <option value="XS">XS</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="2XL">2XL</option>
+                            </select>
+                        </div>
+                        <button class="producto-agregar" data-producto-id="${producto.idProducto}"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                </div>
+            </div>
+            `;
         });
 
-        contenedorProductos.append(div);
-        
-    })
+        actualizarTallas();
+    }
 
-    actualizarBotonesAgregar();
-}
+    function actualizarTallas() {
+        const tallasSelect = document.querySelectorAll(".tallaSelect");
 
-function mostrarDescripcion(producto){
-    descripcion.innerHTML = `<img src="${producto.imagen}" alt="${producto.titulo}" id="img">
-    <h2 id="modelo">${producto.titulo}</h2>
-    <p id="descripcion">${producto.descripcion}</p>
+        tallasSelect.forEach(select => {
+            select.addEventListener("change", function (e) {
+                const idProducto = e.currentTarget.getAttribute("data-producto-id");
+                const producto = listaProductos.find(producto => producto.idProducto === parseInt(idProducto));
 
-    <span class="precio" id="precio">${producto.precio}</span>
-    <div class="fila">
-        <div class="size">
-            <label for="">Talla</label>
-            <select name="" id="">
-                <option value="">S</option>
-                <option value="">M</option>
-                <option value="">L</option>
-                <option value="">XL</option>
-            </select>
-        </div>
-        <div class="quantity">
-            <label for="">Cantidad</label>
-            <input type="number" id="" value="1" min="1" max="100" step="1">
-        </div>
-        <button class="producto-agregar" id="${producto.id}">Agregar al Carrito</button>
-    </div>`;
-}
+                if (producto) {
+                    producto.talla = e.currentTarget.value;
+                } else {
+                    console.log("Producto no encontrado");
+                }
+            });
+        });
+    }
 
-productosCargados(productosArray);
+    function agregarAlCarrito(e) {
+        const idProducto = e.currentTarget.getAttribute("data-producto-id");
+        const tallaSelect = document.querySelector(`.tallaSelect[data-producto-id="${idProducto}"]`);
+        const tallaSeleccionada = tallaSelect.value;
 
-botonesCategorias.forEach(boton => {
-    boton.addEventListener("click", (e) => {
+        const productoSeleccionado = listaProductos.find(producto => producto.idProducto === parseInt(idProducto) && producto.talla === tallaSeleccionada);
 
-        botonesCategorias.forEach(boton => boton.classList.remove("active-botton"));
-        e.currentTarget.classList.add("active-botton");
-
-        if (e.currentTarget.id != "todos"){
-            const productosBoton = productosArray.filter(producto => producto.categoria.id === e.currentTarget.id);
-            productosCargados(productosBoton);
+        if (productoSeleccionado) {
+            agregarProductoAlCarrito(productoSeleccionado);
+            actualizarNumerito();
+            mostrarCarrito();
         } else {
-            productosCargados(productosArray)
+            console.log("Producto no encontrado");
         }
-    })
-});
+    }
 
-function actualizarBotonesAgregar(){
-    botonesAgregar = document.querySelectorAll(".producto-Agregar");
+    function agregarProductoAlCarrito(producto) {
+        const tallaSelect = document.querySelector(`.tallaSelect[data-producto-id="${producto.idProducto}"]`);
+        const tallaSeleccionada = tallaSelect.value;
+
+        const productoEnCarrito = {
+            idProducto: producto.idProducto,
+            talla: tallaSeleccionada,
+            cantidad: 1,
+            nombreProducto: producto.nombreProducto,
+            descripcion: producto.descripcion,
+            precio: producto.precio,
+            imagen: producto.imagen,
+            categoria: producto.categoria
+        };
+
+        const index = productosCarrito.findIndex(item => item.idProducto === productoEnCarrito.idProducto && item.talla === productoEnCarrito.talla);
+
+        if (index !== -1) {
+            productosCarrito[index].cantidad++;
+        } else {
+            productosCarrito.push(productoEnCarrito);
+        }
+
+        localStorage.setItem('productosCarrito', JSON.stringify(productosCarrito));
+    }
+
+    function actualizarNumerito() {
+        let nuevoNumero = productosCarrito.reduce((acc, producto) => acc + producto.cantidad, 0);
+        numerito.innerHTML = nuevoNumero;
+    }
+
+    function mostrarCarrito() {
+        carritoContenedor.innerHTML = "";
+
+        productosCarrito.forEach(function (producto) {
+            carritoContenedor.innerHTML += `
+            <div class="item-carrito">
+                <img src="${producto.imagen}" alt="">
+                <div class="info-carrito">
+                    <p class="nombre-carrito">${producto.nombreProducto}</p>
+                    <p class="talla-carrito">Talla: ${producto.talla}</p>
+                    <p class="precio-carrito">$${producto.precio}</p>
+                    <p class="cantidad-carrito">Cantidad: ${producto.cantidad}</p>
+                </div>
+            </div>
+            `;
+        });
+    }
+
+    // Función para filtrar productos por categoría
+    // Función para filtrar productos por categoría
+function filtrarProductos(categoria) {
+    const items = document.querySelectorAll('.item');
+
+    items.forEach(item => {
+        if (categoria === 'Todos' || item.classList.contains(categoria)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+
+    // Llamada a la función de mostrar productos al cargar la página
+    mostrarProductos();
+
+    // Agrega el evento de clic a cada botón de categoría
+    botonesCategoria.forEach(boton => {
+        boton.addEventListener("click", function () {
+            const categoria = boton.id;
+            filtrarProductos(categoria);
+        });
+    });
+
+    const botonesAgregar = document.querySelectorAll(".producto-agregar");
 
     botonesAgregar.forEach(boton => {
         boton.addEventListener("click", agregarAlCarrito);
     });
-}
-
-const productosEnCarrito = [];
-
-function agregarAlCarrito(e) {
-    const idBoton = e.currentTarget.id;
-    const productoAgregado = productosArray.find(producto => producto.id === idBoton);
-
-    if(productosEnCarrito.some(producto => producto.id === idBoton)) {
-        const index = productosEnCarrito.findIndex(producto => producto.id === idBoton)
-        productosEnCarrito[index].cantidad++;
-    } else {
-        productoAgregado.cantidad = 1;
-        productosEnCarrito.push(productoAgregado);
-    }
-
-    actualizarNumerito();
-}
-
-function actualizarNumerito(){
-    let nuevoNumerito = productosEnCarrito.reduce((acc,producto) => acc + producto.cantidad, 0);
-    numerito.innerText = nuevoNumerito;
-}
-
-
-
-
+});
