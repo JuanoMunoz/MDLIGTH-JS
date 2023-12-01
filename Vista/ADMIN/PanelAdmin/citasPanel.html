@@ -190,7 +190,7 @@
                     </div>
                     <div> <br>
                         <label for="">Objetivo</label>
-                        <textarea name="" id="objetivoEdit" cols="30" rows="10" class="descripcionE"></textarea>
+                        <textarea name="" id="objetivoEdit" class="descripcionE"></textarea>
                     </div>
                     <div> <br>
                         <label for="">Fecha</label>
@@ -217,7 +217,7 @@
                     </div>
                 </form>
                 <button class="btn-modal" id="btn-cerrar-modal-editar"><i class="fa-solid fa-x"></i></button>
-                <button class="btn-modal" id="btn-editar-modal-cita">Editar cita</button>
+                <button class="btn-editar-modal" id="btn-editar-modal-cita">Editar cita</button>
                 <script>
                     function editar(cita) {
                         const btn = document.getElementById('btn-editar-modal-cita');
@@ -264,6 +264,7 @@
                         listaCitas.forEach(cita => {
                             if (cita.id_cita == id_cita) {
                                 modal.innerHTML += `
+                                <img src="../../MEDIA/IMG/alerta.png" alt="" class="alertaimg">
                                 <h3>¿Estás seguro que deseas eliminar esta cita?</h3><br>
                                 <button onclick="deleteData(${cita.id_cita})">Eliminar cita</button>
                                 `
