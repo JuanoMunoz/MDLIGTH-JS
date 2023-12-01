@@ -438,6 +438,14 @@ video{
     transition: 0.5s linear 0.1s;
 }
 
+.btn-abrir-modal-editar{
+    cursor: pointer;
+}
+
+.btn-abrir-modal-eliminar{
+    cursor: pointer;
+}
+
 /* AGREGAR */
 
 /* ROLES */
@@ -503,4 +511,9 @@ footer{
 
 .footer__logo img{
     width: 30px;
+}
+
+.descripcionP{
+    max-width: 250px;
+    word-wrap: break-word;
 }

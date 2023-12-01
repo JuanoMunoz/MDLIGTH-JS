@@ -50,14 +50,14 @@
 
                 <ul class="menu__links">
                     <li class="menu__item">
-                        <a href="../ADMIN/citasAdmi.html" class="menu__link">CITAS ADMIN</a>
+                        <a href="../ADMIN/PanelAdmin/citasAdmi.html" class="menu__link">CITAS ADMIN</a>
                     </li>
                     <li class="menu__item">
                         <a href="" class="menu__link active">CITAS</a>
                     </li>
 
                     <li class="menu__item">
-                        <a href="../Catalogo.html" class="menu__link">CATÁLOGO</a>
+                        <a href="Catalogo.html" class="menu__link">CATÁLOGO</a>
                     </li>
 
                     <li class="menu__item">
@@ -106,9 +106,8 @@
                 <section class="right">
                     <div>
                         <input type="datetime-local" id="fecha">
-                        <!-- <input type="time" id="hora"> -->
                     </div>
-                    <!-- <button class="button_referencia">Referencia fotografica<input class="input_file" type="file" id="imagen" accept="image/*"></button> -->
+                    <input type="text" id="imagen" placeholder="Ingrese la url de la imagen">
                     <select name="select" id="talla">
                         <option value="escogerTalla" disabled selected>Talla:</option>
                         <option value="s">S</option>
@@ -122,32 +121,14 @@
                     </select>
                 </section>
             </div>
-            <button class="button_agendar" id="agendarCitaCliente" onclick="agregarCita()">Agendar Cita</button>
-            <button class="button_agendar" id="editarCitaCliente" >Editar Cita</button>
+            <button class="button_agendar" id="agendarCitaCliente" onclick="agregarCita(event)">Agendar Cita</button>
         </section>
         <section class="section_img">
             <img src="../MEDIA/IMG/calendar.jpg" alt="">
         </section>
         
     </div><br><br>
-    <table id="tablaCitas" border="1">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre prenda</th>
-            <th>Objetivo</th>
-            <th>Fecha</th>
-            <th>Imagen</th>
-            <th>Talla</th>
-            <th>Método de pago</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
-          </tr>
-        </thead>
-        <tbody>
-          
-        </tbody>
-      </table>
+    
 
     <footer>
         <div class="footer__network">

@@ -120,7 +120,6 @@ function alerta() {
     }, 2001);
 }
 
-
 function eliminar(id_u) {
     const Toast = Swal.mixin({
         toast: true,
@@ -143,4 +142,36 @@ function eliminar(id_u) {
         title: "¡Usuario eliminado!"
     });
     alerta();
+}
+
+
+function editarU(id) {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
+    let listaUsuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+    if (listaUsuarios.length !== 0) {
+        let usuario = listaUsuarios.find(u => u.id == id);
+        if (usuario) {
+            usuario.nombre = document.getElementById('nombre_editar').value;
+            usuario.apellido = document.getElementById('apellido_editar').value;
+            usuario.celular = document.getElementById('celular_editar').value;
+            usuario.email = document.getElementById('email_editar').value;
+            localStorage.setItem('usuarios', JSON.stringify(listaUsuarios));
+            Toast.fire({
+                icon: "success",
+                title: "¡Información de usuario editada!"
+            });
+            alerta()
+
+        }
+    }
 }

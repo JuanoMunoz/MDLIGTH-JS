@@ -1,20 +1,12 @@
-.modal{
+.modal {
     margin-left: 650px;
     margin-top: 100px;
     padding: 10px;
     width: 300px;
     border: none;
 }
-.modal-Rol{
-    margin-left: 500px;
-    margin-top: -250px;
-    padding: 10px;
-    width: 300px;
-    border: none;
-    text-align: center;
-}
 
-.modal-eliminar{
+.modal-eliminar {
     padding: 30px;
     margin-left: 600px;
     margin-top: 250px;
@@ -23,35 +15,26 @@
     border: none;
     text-align: center;
 }
-.modal-eliminar-Rol{
-    padding: 30px;
-    margin-left: 500px;
-    margin-top: -250px;
-    padding: 20px;
-    width: 430px;
-    border: none;
-    text-align: center;
-}
 
-.title-modal-agregar{
+.title-modal-agregar {
     margin-top: 10px;
     margin-left: 60px;
 }
 
-.title-modal-editar{
+.title-modal-editar {
     margin-top: 10px;
     margin-left: 70px;
 }
 
 
-.formulario{
+.formulario {
     display: flex;
     flex-direction: column;
     padding: 30px;
 }
 
-input{
-    background:none;
+input {
+    background: none;
     color: #000;
     font-size: 18px;
     /* padding: 10px 10px 10px 5px; */
@@ -62,7 +45,7 @@ input{
     width: 215px;
 }
 
-.btn-modal{
+.btn-modal {
     position: absolute;
     top: -16px;
     left: -12px;
@@ -70,7 +53,7 @@ input{
     height: 50px;
 }
 
-#btn-cerrar-modal-eliminar{
+#btn-cerrar-modal-eliminar {
     position: absolute;
     top: -12px;
     left: -12px;
@@ -78,25 +61,25 @@ input{
     height: 50px;
 }
 
-.alertaimg{
+.alertaimg {
     width: 50px;
     margin-bottom: 10px;
 }
 
-.btn-editar-modal{
+.btn-editar-modal {
     margin-left: 75px;
 }
 
-.btn-agregar{
+.btn-agregar {
     margin-left: -900px;
     margin-top: -20px;
     margin-bottom: -10px;
 }
 
-.table_img{
+.table_img {
     margin-left: 35px;
 }
 
-.btnAgregar{
+.btnAgregar {
     margin-left: 65px;
 }

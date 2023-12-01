@@ -85,7 +85,7 @@
 
             <div class="container">
                 <h1>USUARIOS</h1> <br>
-                <button class="btn-agregar" id="btn-abrir-modal-agregar">Agregar</a></button>
+                <button class="btn-agregar" id="btn-abrir-modal-agregar">Agregar</button>
                 <table id="Tabla" class="table table__usuarios">
                     <thead>
                         <tr>
@@ -112,8 +112,8 @@
                                             <td>${usuario.celular}</td>
                                             <td>${usuario.email}</td>
                                             <td>Aún no hay roles</td>
-                                            <td id="btn-abrir-modal-editar"><img class="table_img" src="../../MEDIA/IMG/editar.png" alt=""></td>
-                                            <td id="btn-abrir-modal-eliminar"><img class="table_img" src="../../MEDIA/IMG/basura.png" alt="" onclick="eliminar(${usuario.id})"></td>
+                                            <td class="btn-abrir-modal-editar" onclick="abrirModalEditar(${usuario.id})"><img class="table_img" src="../../MEDIA/IMG/editar.png" alt=""></td>
+                                            <td class="btn-abrir-modal-eliminar" onclick="ModalEliminar(${usuario.id})"><img class="table_img" src="../../MEDIA/IMG/basura.png" alt=""></td>
                                         </tr>
                                     `;
                                 });
@@ -155,52 +155,58 @@
                         <input type="text" name="password" id="password">
                     </div>
                 </form>
-                <button class="btn-modal" id="btn-cerrar-modal-agregar">Volver</button>
-                <button id="btnAddUser">Registrar usuario</button>
+                <button class="btn-modal" id="btn-cerrar-modal-agregar"><i class="fa-solid fa-x"></i></button>
+                <button id="btnAddUser" class="btnAgregar">Registrar usuario</button>
             </dialog>
 
             <dialog class="modal" id="modal-editar">
-                <h3 class="title-modal-editar">EDITAR USUARIO</h3>
-                <form class="formulario" id="form">
-                    <div>
-                        <input type="hidden" name="id" id="id">
-                        <label for="">Nombre</label>
-                        <input type="text" name="nombre" id="nombre">
-                    </div>
-                    <div> <br>
-                        <label for="">Apellido</label>
-                        <input type="text" name="apellido" id="apellido">
-                    </div>
-                    <div> <br>
-                        <label for="">Celular</label>
-                        <input type="text" name="celular" id="celular">
-                    </div>
-                    <div> <br>
-                        <label for="">Email</label>
-                        <input type="text" name="email" id="email" disabled>
-                    </div>
-                </form>
-                <button class="btn-modal" id="btn-cerrar-modal-editar">Volver</button>
-                <button id="btnAddUser">Editar usuario</button>
+
+                <script>
+                    function abrirModalEditar(id) {
+                        let listaUsuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+                        let usuario = listaUsuarios.find(u => u.id == id);
+                        let modalEditar = document.getElementById('modal-editar')
+
+                        modalEditar.innerHTML = `
+                            <h3 class="title-modal-editar">EDITAR USUARIO</h3>
+                            <form class="formulario" id="form">
+                                <div>
+                                    <input type="hidden" name="id" id="id_editar" value="${usuario.id}">
+                                    <label for="">Nombre</label>
+                                    <input type="text" name="nombre" id="nombre_editar" value="${usuario.nombre}">
+                                </div>
+                                <div> <br>
+                                    <label for="">Apellido</label>
+                                    <input type="text" name="apellido" id="apellido_editar" value="${usuario.apellido}">
+                                </div>
+                                <div> <br>
+                                    <label for="">Celular</label>
+                                    <input type="text" name="celular" id="celular_editar" value="${usuario.celular}">
+                                </div>
+                                <div> <br>
+                                    <label for="">Email</label>
+                                    <input type="text" name="email" id="email_editar" disabled value="${usuario.email}">
+                                </div>
+                            </form>
+                            <button class="btn-modal" id="btn-cerrar-modal-editar" onclick="cerrarModalEditar()"><i class="fa-solid fa-x"></i></button>
+                            <button class="btn-editar-modal" id="btnEditarUser" onclick="editarU(${usuario.id})">Editar usuario</button>
+                        `;
+                    }
+                </script>
             </dialog>
             <dialog class="modal-eliminar" id="modal-eliminar">
                 <script>
-                    function borrar(id) {
-                        let modal = document.getElementById('modal-eliminar')
-                        modal.innerHTML = ``;
-                        let listaUsuarios = JSON.parse(localStorage.getItem('usuarios')) || []
-                        listaUsuarios.forEach(usuario => {
-                            if (usuario.id == id) {
-                                modal.innerHTML += `
-                                <h3>¿Estás seguro que deseas eliminar este usuario?</h3><br>
-                                <button onclick="eliminar(usuario.id)">Eliminar usuario</button>
-                                <button id="btn-cerrar-modal-eliminar">Volver</button>
-                                `
-                            }
-                        });
+                    function ModalEliminar(id) {
+                        let listaUsuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+                        let usuario = listaUsuarios.find(u => u.id == id);
+                        let modalEditar = document.getElementById('modal-eliminar')
+                        modalEditar.innerHTML = `
+                        <img src="../../MEDIA/IMG/alerta.png" alt="" class="alertaimg">
+                        <h3>¿Estás seguro que deseas eliminar a ${usuario.nombre}?</h3><br>
+                        <button onclick="eliminar(${usuario.id})">Eliminar usuario</button>
+                        <button id="btn-cerrar-modal-eliminar" onclick="cerrarModalEliminar()"><i class="fa-solid fa-x"></i></button>`
                     }
                 </script>
-
             </dialog>
         </div>
         <div id="sidebar-container">

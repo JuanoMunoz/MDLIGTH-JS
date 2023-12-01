@@ -83,7 +83,7 @@
     </nav>
 
     <div class="btnAgregar">
-        <a href="../ADMIN/agregarProducto.html"><i class="fa-solid fa-plus"></i></a>
+        <a href="../ADMIN/PanelAdmin/agregarProducto.html"><i class="fa-solid fa-plus"></i></a>
     </div>
 
     <!--LOADER-->
@@ -124,6 +124,7 @@
                             class="fa-solid fa-sliders"></i>&nbsp;Filtros</span></label>
                 <input type="checkbox" id="touch">
 
+<<<<<<< HEAD
                 <ul class="slide">
                     <button id="Todos" class="boton-categoria" onclick="filtrarProductos('Todos')">Todos</button>
                     <button id="Gala" class="boton-categoria" onclick="filtrarProductos('Gala')">Gala</button>
@@ -131,6 +132,22 @@
                     <button id="Uniformes" class="boton-categoria" onclick="filtrarProductos('Uniformes')">Uniformes</button>
                     <button id="Formales" class="boton-categoria" onclick="filtrarProductos('Formales')">Formales</button>
                     <button id="Informales" class="boton-categoria" onclick="filtrarProductos('Informales')">informales</button>
+=======
+                <ul class="slide" id="slide">
+                    <button id="todos" class="boton-categoria">Todos</button>
+                    <script>
+                        function mostrarCategorias(){
+                            let table = document.getElementById('slide');
+                            let listaCategorias = JSON.parse(localStorage.getItem('categorias')) || [];
+                            listaCategorias.forEach(function (categoria) {
+                                table.innerHTML += `
+                                    <button id="${categoria.nombreCategoria}" class="boton-categoria">${categoria.nombreCategoria}</button>
+                                `;  
+                            });
+
+                        }
+                    </script>
+>>>>>>> ea8742c279c388f0fd40876366617b58272c2c5a
                 </ul>
 
             </nav>
@@ -186,12 +203,19 @@
 
     <!--JS-->
     <!-- <script src="JS/carrito_productos.js"></script> -->
+<<<<<<< HEAD
     <script src="../JS/carrito_productos.js"></script>
     <!-- <script>
         mostrarProductos(listaProductos);
     </script> -->
     <script src="../JS/localStorage/catalogoL.js"></script>
     
+=======
+    <script>
+        mostrarProductos();
+        mostrarCategorias()
+    </script>
+>>>>>>> ea8742c279c388f0fd40876366617b58272c2c5a
 
     <!-- AOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="../../CSS/panel.css">
     <link rel="shortcut icon" href="../../media/IMG/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../CSS/Registro.css">
+    <link rel="stylesheet" href="../../CSS/modalProducto.css">
+    <link rel="stylesheet" href="../../CSS/modalUsuario.css">
+
 
 
     <!-- AOS -->
@@ -83,33 +86,44 @@
             <!-- Body -->
             <div class="container">
                 <h1>PRODUCTOS</h1> <br>
+                <a href="agregarProducto.html" class="vinculo"><button class="btn-agregar">Agregar</button></a>
                 <table id="Tabla" class="table table__permisos tabla__productos">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Nombre</th>
-                            <th>Descripción</th>
+                            <th class="descripcionP">Descripción</th>
                             <th>Precio</th>
                             <th>Categoría</th>
                             <th>Imagen</th>
-                            <th colspan="3">Acciones</th>
+                            <th colspan="2">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tablaProductos">
 
-                        <tr>
-                            <td> 1043 </td>
-                            <td>Buzo Negro Lana</td>
-                            <td>Descripción del modelo</td>
-                            <td>10.000</td>
-                            <td>Informales</td>
-                            <td><img src="../../MEDIA/IMG/Productos/buzo negro.jpg" alt="" style="width: 40px;"></td>
+                        <script>
+                            function mostrarProductosT() {
+                                let tabla = document.getElementById("tablaProductos");
+                                tabla.innerHTML = ``;
+        
+                                let listaProductos = JSON.parse(localStorage.getItem('productos')) || [];
+                                listaProductos.forEach(function (producto) {
+                                    tabla.innerHTML+=`
+                                        <tr>
+                                            <td>${producto.nombreProducto}</td>
+                                            <td class="descripcionP">${producto.descripcion}.</td>
+                                            <td>${producto.precio}</td>
+                                            <td>${producto.categoria}</td>
+                                            <td><img src="${producto.imagen}" alt="" style="width: 40px;"></td>
+                
+                                            <td class="btn-abrir-modal-editar" onclick="abrirModalEditar(${producto.idProducto})"><img class="table_img" src="../../MEDIA/IMG/editar.png" alt=""></td>
+                                            <td class="btn-abrir-modal-eliminar" onclick="ModalEliminar(${producto.idProducto})"><img class="table_img" src="../../MEDIA/IMG/basura.png" alt=""></td>
+                                        </tr>
+                                    `;
 
-                            <td><a href=""><img class="table_img" src="../../MEDIA/IMG/mas.png" alt=""></a></td>
-                            <td><a href=""><img class="table_img" src="../../MEDIA/IMG/editar.png" alt=""></a></td>
-                            <td><a href=""><img class="table_img" src="../../MEDIA/IMG/basura.png" alt=""></a></td>
-                        </tr>
+                                });
 
+                            }
+                        </script>
                     </tbody>
                 </table>
 
@@ -120,12 +134,67 @@
                 </div>
             </div>
 
+            <dialog class="modal" id="modal-editar">
+            
+                <script>
+                    function abrirModalEditar(id) {
+                        let listaProductos = JSON.parse(localStorage.getItem('productos')) || [];
+                        let producto = listaProductos.find(producto => producto.idProducto == id);
+                        let modalEditar = document.getElementById('modal-editar')
+
+                        let listaCategorias =
+
+                        modalEditar.innerHTML = `
+                            <h3 class="title-modal-editar">EDITAR PRODUCTO</h3>
+                            <form class="formulario" id="form">
+                                <div>
+                                    <input type="hidden" name="id" id="idProductoEditar" value="${producto.idProducto}">
+                                    <label for="">Nombre Producto</label>
+                                    <input type="text" name="nombre" id="productoEditar" value="${producto.nombreProducto}">
+                                </div>
+                                <div> <br>
+                                    <label for="">Descripcion</label>
+                                    <textarea name="apellido" id="descripcionEditar" class="descripcionE">${producto.descripcion}</textarea>
+                                </div>
+                                <div> <br>
+                                    <label for="">Precio</label>
+                                    <input type="number" name="celular" id="precioEditar" value="${producto.precio}">
+                                </div> <br>
+
+                                <div> <br>
+                                    <label for="">URL imagen</label>
+                                    <input type="text" id="fotoEditar" value="${producto.imagen}">
+                                </div>
+                            </form>
+                            <button class="btn-modal" id="btn-cerrar-modal-editar" onclick="cerrarModalEditar()"><i class="fa-solid fa-x"></i></button>
+                            <button class="btn-editar-modal"id="btnEditarUser" onclick="editarProducto(${producto.idProducto})">Editar producto</button>
+                    `;
+                    }
+                </script>
+            </dialog>
+
+            <dialog class="modal-eliminar" id="modal-eliminar">
+                <script>
+                    function ModalEliminar(idProducto) {
+                        let listaProductos = JSON.parse(localStorage.getItem('productos')) || [];
+                        let producto = listaProductos.find(producto => producto.idProducto == idProducto);
+                        let ModalEliminar = document.getElementById('modal-eliminar')
+                        ModalEliminar.innerHTML = `
+                        <img src="../../MEDIA/IMG/alerta.png" alt="" class="alertaimg">
+                        <h3>¿Estás seguro que deseas eliminar ${producto.nombreProducto}?</h3><br>
+                        <button onclick="eliminarProducto(${producto.idProducto})">Eliminar producto</button>
+                        <button id="btn-cerrar-modal-eliminar" onclick="cerrarModalEliminar()"><i class="fa-solid fa-x"></i></button>`
+                    }
+                </script>
+            </dialog>
+
 
             <!-- /Body -->
         </div>
         <div id="sidebar-container">
 
         </div>
+
         <script>
             fetch('static/sidebar.html')
                 .then(response => response.text())
@@ -168,6 +237,12 @@
     <!-- JS -->
     <script src="../../JS/sidbar.js"></script>
     <script src="../../JS/tablas.js"></script>
+    <script>
+        mostrarProductosT();
+    </script>
+    <script src="../../JS/localStorage/catalogoL.js"></script>
+    <script src="../../JS/modalProductos.js"></script>
+
 
     <!-- AOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

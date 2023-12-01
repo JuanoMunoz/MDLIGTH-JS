@@ -1,0 +1,1 @@
+let listaDetalle = JSON.parse(localStorage.getItem('detalleRecibo')) || [];

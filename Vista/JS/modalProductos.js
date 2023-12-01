@@ -1,16 +1,3 @@
-// Modal agregar
-const btnAbrirModalAgregar = document.querySelector("#btn-abrir-modal-agregar");
-const btnCerrarModalAgregar = document.querySelector('#btn-cerrar-modal-agregar');
-const modalAgregar = document.querySelector("#modal-agregar");
-
-btnAbrirModalAgregar.addEventListener("click", () => {
-    modalAgregar.showModal();
-});
-
-btnCerrarModalAgregar.addEventListener("click", () => {
-    modalAgregar.close();
-});
-
 // Modal editar
 const btnAbrirModalesEditar = document.querySelectorAll(".btn-abrir-modal-editar");
 const btnCerrarModalEditar = document.querySelector('#btn-cerrar-modal-editar');
@@ -38,5 +25,5 @@ btnAbrirModalesEliminar.forEach(btn => {
 });
 
 function cerrarModalEliminar() {
-    document.getElementById("modal-eliminar").close()
+    document.getElementById("modal-eliminar").close();
 }
