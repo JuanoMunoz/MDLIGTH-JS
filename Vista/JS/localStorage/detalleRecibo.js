@@ -2,11 +2,11 @@ let listaDetalle = JSON.parse(localStorage.getItem('detalleRecibo')) || [];
 
 const toast = () => Swal.mixin({ toast: true, position: "top-end", showConfirmButton: false, timer: 2000, timerProgressBar: true, didOpen: (toast) => { toast.onmouseenter = Swal.stopTimer; toast.onmouseleave = Swal.resumeTimer; } });
 
-function validarFormularioDetalles() {
+function validarFormularioDetalles(id) {
     const Toast = getToast();
 
-    let medidas = document.getElementById("medidas").value;
-    let domicilio = document.getElementById("domicilio").value;
+    let medidas = document.getElementById("medidas"+id).value;
+    let domicilio = document.getElementById("domicilio"+id).value;
 
     if (medidas == "" || domicilio == "") {
         Toast.fire({
@@ -25,77 +25,58 @@ function alerta() {
     }, 2001);
 }
 
-function agregarDetalle(){
-
-    console.log('Entre');
+function agregarDetalle(idCita) {
     const Toast = toast();
     let id_detalleRecibo = listaDetalle.length > 0 ? listaDetalle[listaDetalle.length - 1].id_detalleRecibo : 0;
 
-    if (validarFormularioDetalles()) {
+    if (validarFormularioDetalles(idCita)) {
 
-        let domicilio = document.getElementById("domicilio").value;       
+        const id_detalleRecibo = idCita;
+        const medidas = document.getElementById("medidas"+idCita).value;
+        const domicilio = document.getElementById("domicilio"+idCita).value;
+        const direccion = document.getElementById("direccion"+idCita).value;
 
-        if (domicilio == "Si") {
-            let direccion = document.getElementById("direccion").value;
-            if (direccion == "") {
-                Toast.fire({
-                    icon: "error",
-                    title: "¡Asegurate de diligenciar tu dirección para realizar el domicilio!"
-                });
-            } else {
-                let nuevoDetalle = {
-                    id_detalleRecibo: id_detalleRecibo + 1,
-                    medidas: document.getElementById("medidas").value,
-                    domicilio: document.getElementById("domicilio").value,
-                    direccion: document.getElementById("direccion").value
-                };
-                listaDetalle.push(nuevoDetalle);
-                localStorage.setItem('detalleRecibo', JSON.stringify(listaDetalle));
-                Toast.fire({
-                    icon: "success",
-                    title: "¡Nuevo detalle de recibo registrado!"
-                });
-                llenarCampos(nuevoDetalle);
-            }
-        } else {
-            let nuevoDetalle = {
-                id_detalleRecibo: id_detalleRecibo + 1,
-                medidas: document.getElementById("medidas").value,
-                domicilio: document.getElementById("domicilio").value,
-                direccion: document.getElementById("direccion").value || ""
-            };
-            listaDetalle.push(nuevoDetalle);
-            localStorage.setItem('detalleRecibo', JSON.stringify(listaDetalle));
+        if (domicilio == 1 && direccion == "") {
             Toast.fire({
-                icon: "success",
-                title: "¡Nuevo detalle de recibo registrado!"
+                icon: "error",
+                title: "¡Asegurate de diligenciar tu dirección para realizar el domicilio!"
             });
-            llenarCampos(nuevoDetalle);
+            return;
         }
-        alerta();
+
+        listaDetalle.push({ id_detalleRecibo, medidas, domicilio, direccion });
+        localStorage.setItem('detalleRecibo', JSON.stringify(listaDetalle));
+        Toast.fire({
+            icon: "success",
+            title: "¡Nuevo detalle de recibo registrado!"
+        });
     }
 };
 
-function llenarCampos(detalle) {
-    document.getElementById("medidas").value = detalle.medidas;
-    document.getElementById("domicilio").value = detalle.domicilio;
-    document.getElementById("direccion").value = detalle.direccion || "";
-  
-    localStorage.setItem('detalleRecibo', JSON.stringify(listaDetalle));
-  }
-
+function detalleExistente(id){
+    
+    if (listaDetalle != null && listaDetalle.length){
+        const find = listaDetalle.find(dt => dt.id_detalleRecibo == id);
+        return find;
+    }
+    
+}
 
 function editarDetalle(id) {
     const Toast = toast();
 
+    if (listaDetalle == null) return;
+
+    const index = listaDetalle.findIndex(dt => dt.id_detalleRecibo == id);
+
     const actualizacion = {
-        id_detalleRecibo: id,
-        medidas: document.getElementById("medidas").value,
-        domicilio: document.getElementById("domicilio").value,
-        direccion: document.getElementById("direccion").value || ""
+        //Copia del objeto lista detalle
+        ...listaDetalle[index],
+        medidas: document.getElementById("medidas"+id).value,
+        domicilio: document.getElementById("domicilio"+id).value,
+        direccion: document.getElementById("direccion"+id).value
     }
 
-    const index = listaDetalle.findIndex(d => d.id_detalleRecibo == id);
     listaDetalle[index] = actualizacion;
 
     localStorage.setItem('detalleRecibo', JSON.stringify(listaDetalle));

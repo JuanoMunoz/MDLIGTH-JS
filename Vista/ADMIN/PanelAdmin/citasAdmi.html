@@ -63,7 +63,7 @@
 
     <!-- Body -->
     <div class="body">
-        <!-- <section class="section_calendary">
+        <section class="section_calendary">
             <div class="container">
                 <div class="left">
                     <div class="calendar">
@@ -89,6 +89,7 @@
                             </div>
                             <button class="today-btn">Today</button>
                         </div>
+                        <button onclick="verDetalles()">Consultar citas</button>
                     </div>
                 </div>
                 <div class="right">
@@ -118,11 +119,11 @@
                         </div>
                     </div>
                      </div>
-        <button class="add-event">
+        <!-- <button class="add-event">
             <i class="fas fa-plus"></i>
-        </button> 
+        </button>  -->
                 </div>
-        </section> -->
+        </section>
 
         <section class="section_dates">
             <h1>Mis Citas</h1>
@@ -131,10 +132,10 @@
                     <script>
                         function verDetalles() {
                             let div = document.getElementById('detalles');
-                            
-                            let listaCitas = JSON.parse(localStorage.getItem('citas')) || [];
-                            listaCitas.forEach(function (detalle) {
-                                console.log(detalle);
+                            div.innerHTML = ``;
+                            const citasDia = obtenerCitasDelDia();
+                            citasDia.forEach(function (detalle) {
+                                const encontrado = detalleExistente(detalle.id_cita);
                                 div.innerHTML += `
                                     <details>
                                         <summary>Cita ${detalle.id_cita}</summary>
@@ -143,49 +144,36 @@
                                             <label for="">Método de pago: </label> 
                                             <span>${detalle.metodoPago}</span> <br>
                                             <label for="">Medidas</label>
-                                            <input type="text" id="medidas"> <br>
+                                            <input type="text" id="medidas${detalle.id_cita}" value="${encontrado ? encontrado.medidas : ""}"> <br>
                                             
                                             <label for="">¿Aplica Domilicio?</label>
-                                            <select name="" id="domicilio">
-                                                <option value="" disabled focus>Sí/No</option>
-                                                <option value="Si">SÍ</option>
-                                                <option value="No">No</option>
+                                            <select name="" id="domicilio${detalle.id_cita}" >
+                                                <option value="2" disabled focus selected>Sí/No</option>
+                                                <option value="1" ${encontrado?.domicilio == 1 && "selected"}>SÍ</option>
+                                                <option value="0" ${encontrado?.domicilio == 0 && "selected"}>No</option>
                                             </select> <br>
                                             <label>Dirección</label>
-                                            <input id="direccion" type="text"><br>
+                                            <input id="direccion${detalle.id_cita}" type="text" value="${encontrado ? encontrado.direccion : ""}"><br>
                                             
-                                            <button class="btn-agregar" id="agregarDetalles" onclick="agregarDetalle()">Agregar Detalles</button><br>
-                                            <button class="btn-agregar addFunctionButtonEditDetail" id="editarDetalles" accessKey=${detalle.id_detalleRecibo}>Editar Detalles</button><br>
+                                            <button class="btn-agregar" id="agregarDetalles" onclick=${encontrado ? `editarDetalle(${detalle.id_cita})` : `agregarDetalle(${detalle.id_cita})`}>${encontrado ? "Editar Factura" : "Agregar Detalles"}</button><br>
                                         </p>
                                     </details>
                                 `;
                             });
-                            const detallesEdit = document.querySelectorAll('.addFunctionButtonEditDetail');
-                            detallesEdit.forEach(bt => bt.addEventListener("click", () => editarDetalles(bt.accessKey)))
-                        }
-                        verDetalles();
-
-                        function editarDetalles(detalles){
-                            const btnDetalle = document.getElementById('editarDetalles');
-                            const index = listaDetalle.findIndex(d => d.id_detalleRecibo == detalles);
-                            const medidas = document.getElementById("medidas").value;
-                            const domicilio = document.getElementById("domicilio").value;
-                            const direccion = document.getElementById("direccion").value || "";
-
-                            let listaDetalle = JSON.parse(localStorage.getItem('detalleRecibo')) || [];
-                            medidas.value = listaDetalle[index].medidas;
-                            domicilio.value = listaDetalle[index].domicilio;
-                            direccion.value = listaDetalle[index].direccion;
-
-                            btn.addEventListener('click', () => editarDetalle(detalles))
                         }
                     </script>
-                    
+
                 </div>
 
             </div>
         </section>
+
         <a href="../../CLIENT/citasCliente.html">Agendar Cita</a>
+
+        </div><br>
+
+        
+
     </div>
 
 
@@ -215,11 +203,12 @@
     </footer>
 
 
-    <!-- <script src="../../JS/calendario.js"></script> -->
-    <!-- <script src="../../JS/citas_direccion.js"></script> -->
+    <script src="../../JS/calendario.js"></script>
+    <script src="../../JS/citas_direccion.js"></script>
     <script src="../../JS/loader.js"></script>
     <script src="../../JS/localStorage/citasAdmi.js"></script>
     <script src="../../JS/localStorage/detalleRecibo.js"></script>
+    <script src="../../JS/modalCitas.js"></script>
 </body>
 
 </html>
