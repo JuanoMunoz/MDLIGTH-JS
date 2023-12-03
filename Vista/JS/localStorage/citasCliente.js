@@ -6,13 +6,14 @@ function validarFormulario() {
     const Toast = getToast();
 
     let nombrePrenda = document.getElementById("nombrePrenda").value;
+    let cantidadPrenda = document.getElementById("cantidadPrenda").value;
     let objetivo = document.getElementById("objetivo").value;
     let fecha = document.getElementById("fecha").value;
     let imagen = document.getElementById("imagen").value;
     let talla = document.getElementById("talla").value;
     let metodoPago = document.getElementById("metodoPago").value;
 
-    if (nombrePrenda = "" || objetivo == "" || fecha == "" || imagen == "" || talla == "" || metodoPago == "") {
+    if (nombrePrenda = "" || cantidadPrenda == "" || objetivo == "" || fecha == "" || imagen == "" || talla == "" || metodoPago == "") {
         Toast.fire({
             icon: "error",
             title: "¡Asegurate de llenar todos los campos!"
@@ -105,6 +106,7 @@ function agregarCita(evento) {
                                     let nuevaCita = {
                                         id_cita: id_cita + 1,
                                         nombrePrenda: document.getElementById("nombrePrenda").value,
+                                        cantidadPrenda: document.getElementById("cantidadPrenda").value,
                                         objetivo: document.getElementById("objetivo").value,
                                         fecha: document.getElementById("fecha").value,
                                         imagen: document.getElementById("imagen").value,

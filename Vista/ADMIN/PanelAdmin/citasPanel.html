@@ -90,6 +90,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombre Prenda</th>
+                            <th>Cantidad</th>
                             <th>Objetivo</th>
                             <th>Fecha</th>
                             <th>Imagen</th>
@@ -97,13 +98,13 @@
                             <th>Método de pago</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
+                            <th>Cotizar</th>
                         </tr>
                     </thead>
                     <tbody id="table-citas">
                         <script>
                             function mostrar() {
                                 let table = document.getElementById('table-citas');
-                                console.log(table);
                                 table.innerHTML = ``;
                                 let listaCitas = JSON.parse(localStorage.getItem('citas')) || [];
                                 listaCitas.forEach(function (cita) {
@@ -111,6 +112,7 @@
                                         <tr>
                                             <td>${cita.id_cita}</td>
                                             <td>${cita.nombrePrenda}</td>
+                                            <td>${cita.cantidadPrenda}</td>
                                             <td>${cita.objetivo}</td>
                                             <td>${cita.fecha}</td>
                                             <td><img src="${cita.imagen}" alt="" style="width: 40px;"></td>
@@ -118,6 +120,7 @@
                                             <td>${cita.metodoPago}</td>
                                             <td><img id="btn-abrir-modal-editar" class="table_img addFunctionButtonEdit" src="../../MEDIA/IMG/editar.png" alt="" accessKey=${cita.id_cita}></td>
                                             <td><img id="btn-abrir-modal-eliminar" class="table_img addFunctionButtonDelete" src="../../MEDIA/IMG/basura.png" alt="" accessKey=${cita.id_cita}></td>
+                                            <td><img id="btn-abrir-modal-cotizar" class="table_img addFunctionButtonQuote" src="../../MEDIA/IMG/cotizar.png" alt="" accessKey=${cita.id_cita}></td>
                                         </tr>
                                     `;
                                 });
@@ -126,6 +129,8 @@
                                 citasDelete.forEach(img => img.addEventListener("click", () => borrar(img.accessKey)))
                                 const citasEdit = document.querySelectorAll('.addFunctionButtonEdit');
                                 citasEdit.forEach(img => img.addEventListener("click", () => editar(img.accessKey)))
+                                const citasQuote = document.querySelectorAll('.addFunctionButtonQuote');
+                                citasQuote.forEach(img => img.addEventListener("click", () => cotizar(img.accessKey)))
                             }
                             mostrar();
                         </script>
@@ -147,6 +152,10 @@
                         <label for="">Nombre Prenda</label>
                         <input type="text" name="nombrePrenda" id="nombrePrenda">
                     </div>
+                    <div>
+                        <label for="">Cantidad Prenda</label>
+                        <input type="number" name="cantidadPrenda" id="cantidadPrenda">
+                    </div>
                     <div> <br>
                         <label for="">Objetivo</label>
                         <textarea name="" id="objetivo"  class="descripcionE"></textarea>
@@ -161,18 +170,18 @@
                     </div>
                     <div> <br>
                         <select name="select" id="talla">
-                            <option value="escogerTalla" disabled selected>Talla:</option>
-                            <option value="s">S</option>
-                            <option value="m">M</option>
-                            <option value="l">L</option>
+                            <option value="" disabled selected>Talla:</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
                         </select>
                     </div>
 
                     <div> <br>
                         <select name="select" id="metodoPago">
-                            <option value="escogerMetodoPago" disabled selected>Método de pago:</option>
-                            <option value="transferencia">Transferencia</option>
-                            <option value="efectivo">Efectivo</option>
+                            <option value="" disabled selected>Método de pago:</option>
+                            <option value="Transferencia">Transferencia</option>
+                            <option value="Efectivo">Efectivo</option>
                         </select>
                     </div>
                 </form>
@@ -189,6 +198,10 @@
                         <label for="">Nombre Prenda</label>
                         <input type="text" name="nombrePrenda" id="nombrePrendaEdit">
                     </div>
+                    <div>
+                        <label for="">Cantidad Prenda</label>
+                        <input type="number" name="cantidadPrenda" id="cantidadPrendaEdit">
+                    </div>
                     <div> <br>
                         <label for="">Objetivo</label>
                         <textarea name="" id="objetivoEdit" class="descripcionE"></textarea>
@@ -203,17 +216,17 @@
                     </div>
                     <div> <br>
                         <select name="select" id="tallaEdit">
-                            <option value="escogerTalla" disabled selected>Talla:</option>
-                            <option value="s">S</option>
-                            <option value="m">M</option>
-                            <option value="l">L</option>
+                            <option value="" disabled selected>Talla:</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
                         </select>
                     </div>
                     <div> <br>
                         <select name="select" id="metodoPagoEdit">
-                            <option value="escogerMetodoPago" disabled selected>Método de pago:</option>
-                            <option value="transferencia">Transferencia</option>
-                            <option value="efectivo">Efectivo</option>
+                            <option value="" disabled selected>Método de pago:</option>
+                            <option value="Transferencia">Transferencia</option>
+                            <option value="Efectivo">Efectivo</option>
                         </select>
                     </div>
                 </form>
@@ -224,6 +237,7 @@
                         const btn = document.getElementById('btn-editar-modal-cita');
                         const index = listaCitas.findIndex(ct => ct.id_cita == cita);
                         const nombrePrendaEdit = document.getElementById('nombrePrendaEdit');
+                        const cantidadPrendaEdit = document.getElementById('cantidadPrendaEdit');
                         const objetivoEdit = document.getElementById('objetivoEdit');
                         const fechaEdit = document.getElementById('fechaEdit');
                         const imagenEdit = document.getElementById('imagenEdit');
@@ -231,6 +245,7 @@
                         const metodoPagoEdit = document.getElementById('metodoPagoEdit');
 
                         nombrePrendaEdit.value = listaCitas[index].nombrePrenda;
+                        cantidadPrendaEdit.value = listaCitas[index].cantidadPrenda;
                         objetivoEdit.value = listaCitas[index].objetivo;
                         fechaEdit.value = listaCitas[index].fecha;
                         imagenEdit.value = listaCitas[index].imagen;
@@ -267,6 +282,64 @@
                     }
                 </script>
             </dialog>
+
+            <dialog class="modal-editar" id="modal-cotizar">
+
+                <h3 class="title-modal-editar">COTIZAR ADELANTO</h3>
+                <form class="formulario" id="form">
+                    <input type="hidden" id="id_cita">
+                    <div>
+                        <label for="">Cantidad Prenda</label>
+                        <input type="number" name="cantidadPrenda" id="cantidadPrendaQuote" disabled>
+                    </div>
+                    <div> <br>
+                        <label for="">Valor de 1 metro de tela</label>
+                        <input type="number" name="precioTela" id="precioTelaQuote" placeholder="9000" disabled>
+                    </div>
+                    <div> <br>
+                        <label for="">Valor de materiales adicionales</label>
+                        <input type="number" name="precioMateriales" id="precioMaterialesQuote" placeholder="10000" disabled>
+                    </div>
+                    <div> <br>
+                        <select name="select" id="tallaQuote">
+                            <option value="" disabled selected>Talla:</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                        </select>
+                    </div>
+                
+                    <button class="btn-modal" id="btn-cerrar-modal-cotizar"><i class="fa-solid fa-x"></i></button>
+                    <button class="btn-cotizar-modal" id="btn-cotizar-modal-cita">Cotizar adelanto</button>
+                    
+                    <div> <br>
+                        <label for="">Resultado</label>
+                        <input type="text" name="resultadoCotizar" id="resultadoCotizar">
+                    </div>
+
+                    <!-- <button class="btn-cotizar-modal" id="btn-modificar-cotizar-modal-cita" onclick="modificarAdelanto()">Modificar adelanto</button> -->
+                </form>
+                <script>
+                    function cotizar(cita) {
+                        let listaCitas = JSON.parse(localStorage.getItem('citas')) || [];
+                        const btn = document.getElementById('btn-cotizar-modal-cita');
+                        const index = listaCitas.findIndex(cotizar => cotizar.id_cita == cita);
+                        const cantidadPrendaQuote = document.getElementById('cantidadPrendaQuote');
+                        const precioTelaQuote = 9000;
+                        const precioMaterialesQuote = 10000;
+                        const tallaQuote = document.getElementById('tallaQuote');
+                        const verResultadoQuote = document.getElementById("resultadoCotizar");
+
+                        cantidadPrendaQuote.value = listaCitas[index].cantidadPrenda;
+                        tallaQuote.value = listaCitas[index].talla;
+                        modalCotizar.showModal();
+
+
+                        btn.addEventListener("click", () => quoteData(cita))
+                    }
+                </script>
+            </dialog>
+<p></p>
 
         </div>
         <div id="sidebar-container">

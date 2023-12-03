@@ -51,6 +51,7 @@ function agregarDetalle(idCita) {
             title: "¡Nuevo detalle de recibo registrado!"
         });
     }
+    alerta();
 };
 
 function detalleExistente(id){
@@ -85,4 +86,5 @@ function editarDetalle(id) {
         icon: "success",
         title: "¡Detalle de recibo editado con éxito!"
     });
+    alerta();
 }

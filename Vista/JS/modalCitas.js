@@ -30,7 +30,7 @@ const modalEditar = document.querySelector("#modal-editar");
 
 //Modal eliminar
 
-const btnAbrirModalEliminar = document.querySelector("#btn-abrir-modal-eliminar");
+// const btnAbrirModalEliminar = document.querySelector("#btn-abrir-modal-eliminar");
 const btnCerrarModalEliminar = document.querySelector('#btn-cerrar-modal-eliminar');
 const modalEliminar = document.querySelector("#modal-eliminar");
 
@@ -40,4 +40,17 @@ const modalEliminar = document.querySelector("#modal-eliminar");
 
 btnCerrarModalEliminar.addEventListener("click", ()=>{
     modalEliminar.close();
+})
+//Modal cotizar
+
+// const btnAbrirModalCotizar = document.querySelector("#btn-abrir-modal-cotizar");
+const btnCerrarModalCotizar = document.querySelector('#btn-cerrar-modal-cotizar');
+const modalCotizar = document.querySelector("#modal-cotizar");
+
+// btnAbrirModalEliminar.addEventListener("click", ()=>{
+//     modalEliminar.showModal();
+// })
+
+btnCerrarModalCotizar.addEventListener("click", ()=>{
+    modalCotizar.close();
 })
