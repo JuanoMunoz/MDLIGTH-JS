@@ -88,14 +88,13 @@
             </script>
             <!-- Body -->
             <div class="container">
-                <h1>ROLES</h1><br>
+                <h1>Ventas</h1><br>
                 <button class="btn-agregar" id="btn-abrir-modal-agregar">Agregar</button>
                 <table id="Tabla" class="table table__roles">
                     <thead>
                         <tr>
                             <th>Id</th>
                             <th>Nombre</th>
-                            <th>Permisos</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
                         </tr>
@@ -129,25 +128,10 @@
                                                             <label for="">Nombre</label>
                                                             <input type="text" name="nombre" id="nombre_editar" value="${rol.nombre}">
                                                         </div>
-                                                    </form >
+                                                    </form>
                                                     <button class="btn-modal" id="btn-cerrar-modal-editar" onclick="cerrarModalEditar()"><i class="fa-solid fa-x"></i></button>
                                                     <button class="" id="btnEditarUser" onclick="editarR(${rol.id})">Editar Rol</button>
                                                 `;
-                        modalEditar.show()
-                    }
-                </script>
-            </dialog>
-            <dialog class="modal-Rol" id="modal-permisos">
-                <script>
-                    function abrirModalPermisos(id) {
-                        let listaRoles = JSON.parse(localStorage.getItem('Roles')) || [];
-                        let rol = listaRoles.find(r => r.id == id);
-                        let modalEditar = document.getElementById('modal-permisos')
-                        modalEditar.innerHTML = '<h3>Permisos por Rol</h3>'
-                        rol.permisos.forEach(permiso => {
-                            modalEditar.innerHTML += `<div div > ${permiso}</div > `
-                        })
-                        modalEditar.innerHTML += `<button button class="btn-modal" id = "btn-cerrar-modal-editar" onclick = "cerrarModalPermiso()" > <i class="fa-solid fa-x"></i></button >`
                         modalEditar.show()
                     }
                 </script>
@@ -161,21 +145,6 @@
                         <label for="">Nombre</label>
                         <input type="text" name="nombre" id="nombre">
                     </div>
-                    <h3>Permisos</h3>
-                    <script>
-                        let listaPermisos = JSON.parse(localStorage.getItem("permisos")) ?? []
-                        if (listaPermisos.length > 0) {
-
-                            listaPermisos.forEach(permiso => {
-                                let div = document.createElement("div");
-                                div.innerHTML = ` <label label > <input type="checkbox" name="permisos" value="${permiso.nombre}"> ${permiso.nombre}</label>
-                        `
-                                document.getElementById("form").appendChild(div);
-
-                            })
-                        }
-                    </script>
-
 
                     <button class="btn-modal" id="btn-cerrar-modal-agregar"><i class="fa-solid fa-x"></i></button>
                     <button id="btnAddRol" type="submit" class="">Registrar Rol</button>
@@ -190,7 +159,7 @@
                         let rol = listaRol.find(r => r.id == id);
                         let modalEditar = document.getElementById('modal-eliminar')
                         modalEditar.innerHTML = `
-                            <img src = "../../MEDIA/IMG/alerta.png" alt = "" class="alertaimg"/>
+                                                            <img src="../../MEDIA/IMG/alerta.png" alt="" class="alertaimg">
                                                             <h3>¿Estás seguro que deseas eliminar a ${rol.nombre}?</h3><br>
                                                             <button onclick="eliminar(${rol.id})">Eliminar Rol</button>
                                                             <button id="btn-cerrar-modal-eliminar" onclick="cerrarModalEliminar()"><i class="fa-solid fa-x"></i></button>`

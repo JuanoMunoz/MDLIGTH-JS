@@ -3,21 +3,24 @@ let form = document.getElementById("form");
 
 form.addEventListener('submit', e => {
     e.preventDefault()
-    let formNombre = document.getElementById("nombre").value
+    let formNombre = document.getElementById("nombre").value;
+    const permisosSeleccionados = Array.from(document.querySelectorAll('input[name="permisos"]:checked'))
+        .map(checkbox => checkbox.value);
     formNombre == "" ? alertaPersonalizada("error", "Nombre vacío")
         : formNombre.length < 4 || formNombre.length > 20
             ? alertaPersonalizada("error", "Mínimo 4 y máximo 20 carácteres")
-            : addRol(formNombre);
+            : permisosSeleccionados.length <= 0 ? alertaPersonalizada("error", "Debes seleccionar mínimo un (1) permiso") : addRol(formNombre, permisosSeleccionados);
 })
 
 //Función añadir rol, valida el ls y devuelve como json el array de roles lleno de objetos rol (o no), además, Con el nombre podemos agregar un nuevo rol
-function addRol(nombre) {
+function addRol(nombre, permisos) {
     let listaRoles = JSON.parse(localStorage.getItem("Roles")) ?? [];
     let id;
     (listaRoles.length != 0) ? id = listaRoles.length + 1 : id = 1;
     let nuevoRol = {
         id: id,
         nombre: nombre,
+        permisos: permisos
     }
     listaRoles.push(nuevoRol);
     localStorage.setItem("Roles", JSON.stringify(listaRoles));
@@ -69,9 +72,16 @@ function editarR(id) {
     if (listaRol.length !== 0) {
         let rol = listaRol.find(r => r.id == id);
         if (rol) {
-            rol.nombre = document.getElementById('nombre_editar').value;
-            localStorage.setItem('Roles', JSON.stringify(listaRol));
-            alertaPersonalizada("success", "¡Rol editado con éxito!", true, 1000)
+            let nombreForm = document.getElementById('nombre_editar').value
+            nombreForm.length == 0 ? alertaPersonalizada("error", "Nombre vacío") : nombreForm.length < 4 || nombreForm.length > 20
+                ? alertaPersonalizada("error", "Mínimo 4 y máximo 20 carácteres")
+                : edit(rol, nombreForm)
+            function edit(rol, nombreForm) {
+                rol.nombre = nombreForm
+                localStorage.setItem('Roles', JSON.stringify(listaRol));
+                alertaPersonalizada("success", "¡Rol editado con éxito!", true, 1000)
+            }
+
 
         }
     }
@@ -99,6 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <td>${rol.nombre}</td>
  
 
+                                            <td class="btn-abrir-modal-editar" onclick="abrirModalPermisos(${rol.id})"><img class="table_img" src="../../MEDIA/IMG/doc.png" alt=""></td>
                                             <td class="btn-abrir-modal-editar" onclick="abrirModalEditar(${rol.id})"><img class="table_img" src="../../MEDIA/IMG/editar.png" alt=""></td>
                                             <td class="btn-abrir-modal-eliminar" onclick="ModalEliminar(${rol.id})"><img class="table_img" src="../../MEDIA/IMG/basura.png" alt=""></td>
         </tr>

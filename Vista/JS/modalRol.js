@@ -16,6 +16,9 @@ btnCerrarModalAgregar.addEventListener("click", () => {
 function cerrarModalEditar() {
     document.getElementById('modal-editar').close();
 }
+function cerrarModalPermiso() {
+    document.getElementById('modal-permisos').close();
+}
 
 // Modal eliminar
 

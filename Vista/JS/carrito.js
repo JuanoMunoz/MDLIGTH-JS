@@ -120,3 +120,8 @@ function actualizarTotal() {
 
 
 cargarProductosCarrito();
+
+
+function pasarVenta() {
+    window.href.location = "ventas.js"
+}
