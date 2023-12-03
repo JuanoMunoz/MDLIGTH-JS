@@ -12,8 +12,10 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../../CSS/citasAdmi.css" />
     <link rel="stylesheet" href="../../CSS/Sesion.css">
+    <link rel="stylesheet" href="../../CSS/panel.css">
     <link rel="stylesheet" href="../../CSS/loader.css">
     <link rel="shortcut icon" href="../../media/IMG/icon.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>MODISTERIA D.L || MIS CITAS</title>
 </head>
 
@@ -87,6 +89,7 @@
                             </div>
                             <button class="today-btn">Today</button>
                         </div>
+                        <button onclick="verDetalles()">Consultar citas</button>
                     </div>
                 </div>
                 <div class="right">
@@ -115,47 +118,64 @@
                             <button class="add-event-btn">Add Event</button>
                         </div>
                     </div>
-                    <!-- </div>
-        <button class="add-event">
+                     </div>
+        <!-- <button class="add-event">
             <i class="fas fa-plus"></i>
-        </button> -->
+        </button>  -->
                 </div>
         </section>
-        
+
         <section class="section_dates">
             <h1>Mis Citas</h1>
             <div class="faq-container">
-                <div class="row">
-                    <details>
-                        <summary>Cita 1 - Pepito Díaz</summary>
-                        <p>Detalle Recibo <br>
-                            Id_Detalle: <span>01</span> <br>
-                            Fecha: <span>03/05/2023</span> <br>Hora: <span>15:00</span><br>
-                            <label for="">Medidas</label>
-                            <input type="text"> <br>
-                            <label for="">Método de pago</label>
-                            <select name="" id="">
-                                <option value="">Transferencia</option>
-                                <option value="">Efectivo</option>
-                            </select> <br>
-                            <label for="">¿Aplica Domilicio?</label>
-                            <select name="" id="select_direccion">
-                                <option value="" disabled focus>Sí/No</option>
-                                <option value="opcion1">SÍ</option>
-                                <option value="opcion2">No</option>
-                            </select> <br>
-                            <label class="direccion" id="label_direccion" for="">Dirección</label>
-                            <input class="direccion" id="input_direccion" type="text">
-                        </p>
-                    </details>
+                <div id="detalles">
+                    <script>
+                        function verDetalles() {
+                            let div = document.getElementById('detalles');
+                            div.innerHTML = ``;
+                            const citasDia = obtenerCitasDelDia();
+                            citasDia.forEach(function (detalle) {
+                                const encontrado = detalleExistente(detalle.id_cita);
+                                div.innerHTML += `
+                                    <details>
+                                        <summary>Cita ${detalle.id_cita}</summary>
+                                        <p>Detalle Recibo <br>
+                                            Fecha y hora: <span>${detalle.fecha}</span> <br>
+                                            <label for="">Método de pago: </label> 
+                                            <span>${detalle.metodoPago}</span> <br>
+                                            <label for="">Medidas</label>
+                                            <input type="text" id="medidas${detalle.id_cita}" value="${encontrado ? encontrado.medidas : ""}"> <br>
+                                            
+                                            <label for="">¿Aplica Domilicio?</label>
+                                            <select name="" id="domicilio${detalle.id_cita}" >
+                                                <option value="2" disabled focus selected>Sí/No</option>
+                                                <option value="1" ${encontrado?.domicilio == 1 && "selected"}>SÍ</option>
+                                                <option value="0" ${encontrado?.domicilio == 0 && "selected"}>No</option>
+                                            </select> <br>
+                                            <label>Dirección</label>
+                                            <input id="direccion${detalle.id_cita}" type="text" value="${encontrado ? encontrado.direccion : ""}"><br>
+                                            
+                                            <button class="btn-agregar" id="agregarDetalles" onclick=${encontrado ? `editarDetalle(${detalle.id_cita})` : `agregarDetalle(${detalle.id_cita})`}>${encontrado ? "Editar Factura" : "Agregar Detalles"}</button><br>
+                                        </p>
+                                    </details>
+                                `;
+                            });
+                        }
+                    </script>
 
                 </div>
 
             </div>
         </section>
+
         <a href="../../CLIENT/citasCliente.html">Agendar Cita</a>
+
+        </div><br>
+
+        
+
     </div>
-    
+
 
     <footer>
         <div class="footer__network">
@@ -186,6 +206,9 @@
     <script src="../../JS/calendario.js"></script>
     <script src="../../JS/citas_direccion.js"></script>
     <script src="../../JS/loader.js"></script>
+    <script src="../../JS/localStorage/citasAdmi.js"></script>
+    <script src="../../JS/localStorage/detalleRecibo.js"></script>
+    <script src="../../JS/modalCitas.js"></script>
 </body>
 
 </html>
