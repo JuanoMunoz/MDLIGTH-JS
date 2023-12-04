@@ -263,8 +263,16 @@ function editData(id) {
 }
 
 function quoteData(id) {
+
     const Toast = getToast();
+    
     let listaCotizacion = JSON.parse(localStorage.getItem('cotizar')) || [];
+    let index = listaCotizacion.findIndex(cotizacion => cotizacion.id_cotizacion == id);
+
+    if (index >= 0) {
+        //Poner toats con un mensaje de que ya existe la cotizacion 
+        return;
+    }
 
     const cantidadPrendaQuote = parseInt(document.getElementById('cantidadPrendaQuote').value);
     const precioTelaQuote = 9000;
@@ -299,12 +307,30 @@ function quoteData(id) {
     
     listaCotizacion.push(nuevaCotizacion);
     localStorage.setItem('cotizar', JSON.stringify(listaCotizacion));
-    
+
     Toast.fire({
         icon: "success",
         title: "¡Nueva cotización registrada!"
     });
     setTimeout(function () {
         alerta()
-    }, 2001);
+    }, 2001);    
+
+}
+
+function modificarAdelanto(id){
+    
+    let listaCotizacion = JSON.parse(localStorage.getItem('cotizar')) || [];
+    let index = listaCotizacion.findIndex(cotizacion => cotizacion.id_cotizacion == id);
+    let newValue = Number(document.getElementById('resultadoCotizar').value);
+    console.log(newValue);
+
+    let updateCotizacion = {
+        ...listaCotizacion[index],
+        verResultadoQuote: newValue
+    } 
+    console.log(updateCotizacion);
+
+    listaCotizacion[index] = updateCotizacion;
+    localStorage.setItem('cotizar', JSON.stringify(listaCotizacion));
 }
