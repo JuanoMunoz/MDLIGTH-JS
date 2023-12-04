@@ -84,17 +84,17 @@
                     .catch(error => console.error('Error al cargar el navbar'))
                 function modal() {
                     Swal.fire({
-                        title: 'Cerrar?',
-                        text: "¿Estas seguro de cerrar Sesion?!",
+                        title: '¿Cerrar?',
+                        text: "¿Estás seguro de cerrar sesión?",
                         icon: 'info',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
-                        confirmButtonText: 'Si, cerrar!',
+                        confirmButtonText: '¡Sí, cerrar!',
                         background: '#121212',
                         color: "whitesmoke",
                         iconColor: '#D9ADEE',
-                        cancelButtonText: 'cancelar'
+                        cancelButtonText: 'Cancelar'
                     }).then((result) => {
                         if (result.isConfirmed) {
                             sessionStorage.removeItem("usuarioId");

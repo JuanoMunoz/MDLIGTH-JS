@@ -8,8 +8,8 @@
 
     <!--Font Awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!--CSS-->
     <link rel="stylesheet" href="../CSS/Registro.css">
@@ -46,17 +46,17 @@
 
         function modal() {
             Swal.fire({
-                title: 'Cerrar?',
-                text: "¿Estas seguro de cerrar Sesion?!",
+                title: '¿Cerrar?',
+                text: "¿Estás seguro de cerrar sesión?",
                 icon: 'info',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, cerrar!',
+                confirmButtonText: '¡Sí, cerrar!',
                 background: '#121212',
                 color: "whitesmoke",
                 iconColor: '#D9ADEE',
-                cancelButtonText: 'cancelar'
+                cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
                     sessionStorage.removeItem("usuarioId");
@@ -69,7 +69,7 @@
     Mostrando info
     <main id="main-content">
         <button
-                onclick="document.getElementById('modal-venta').hasAttribute('open') ?document.getElementById('modal-venta').close():document.getElementById('modal-venta').show()">Abrir
+            onclick="document.getElementById('modal-venta').hasAttribute('open') ?document.getElementById('modal-venta').close():document.getElementById('modal-venta').show()">Abrir
             modal</button>
     </main>
     <dialog id="modal-venta">

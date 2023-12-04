@@ -44,17 +44,17 @@
 
         function modal() {
             Swal.fire({
-                title: 'Cerrar?',
-                text: "¿Estas seguro de cerrar Sesion?!",
+                title: '¿Cerrar?',
+                text: "¿Estás seguro de cerrar sesión?!",
                 icon: 'info',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, cerrar!',
+                confirmButtonText: '¡Sí, cerrar!',
                 background: '#121212',
                 color: "whitesmoke",
                 iconColor: '#D9ADEE',
-                cancelButtonText: 'cancelar'
+                cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
                     sessionStorage.removeItem("usuarioId");
@@ -114,7 +114,7 @@
                     <button id="Formales" class="boton-categoria"
                             onclick="filtrarProductos('Formales')">Formales</button>
                     <button id="Informales" class="boton-categoria"
-                            onclick="filtrarProductos('Informales')">informales</button>
+                            onclick="filtrarProductos('Informales')">Informales</button>
 
                     <ul class="slide" id="slide">
                         <button id="todos" class="boton-categoria">Todos</button>

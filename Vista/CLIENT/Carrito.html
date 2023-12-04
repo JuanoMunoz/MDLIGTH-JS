@@ -8,8 +8,8 @@
 
     <!--Font Awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!--CSS-->
     <link rel="stylesheet" href="../CSS/Registro.css">
@@ -45,17 +45,17 @@
 
         function modal() {
             Swal.fire({
-                title: 'Cerrar?',
-                text: "¿Estas seguro de cerrar Sesion?!",
+                title: '¿Cerrar?',
+                text: "¿Estás seguro de cerrar sesión?",
                 icon: 'info',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, cerrar!',
+                confirmButtonText: '¡Sí, cerrar!',
                 background: '#121212',
                 color: "whitesmoke",
                 iconColor: '#D9ADEE',
-                cancelButtonText: 'cancelar',
+                cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
                     sessionStorage.removeItem("usuarioId");
@@ -133,7 +133,7 @@
                         <p id="total">$3000</p>
                     </div>
                     <button id="carrito-acciones-comprar" onclick="pasarVenta()"
-                            class="carrito-acciones-comprar">Comprar ahora</button>
+                        class="carrito-acciones-comprar">Comprar ahora</button>
                 </div>
             </div>
             <p id="carrito-comprado" class="carrito-comprado disabled">Muchas gracias por tu compra.</p>
