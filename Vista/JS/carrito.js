@@ -9,6 +9,12 @@ const modal = document.getElementById("modal");
 const modalConfirmar = document.getElementById("modal-confirmar");
 const modalCancelar = document.getElementById("modal-cancelar");
 
+const btnVaciarCarrito = document.querySelector("#carrito-acciones-vaciar");
+const btnComprarAhora = document.querySelector("#carrito-acciones-comprar");
+
+btnVaciarCarrito.addEventListener("click", vaciarCarrito);
+btnComprarAhora.addEventListener("click", comprarAhora);
+
 function cargarProductosCarrito() {
     if (productosCarrito && productosCarrito.length > 0) {
         contenedorCarritoVacio.classList.add("disabled");
@@ -80,6 +86,41 @@ function mostrarModalEliminar(confirmarEliminar) {
     });
 }
 
+function vaciarCarrito() {
+    contenedorCarritoVacio.classList.remove("disabled");
+    contenedorCarritoProductos.classList.add("disabled");
+    contenedorCarritoAcciones.classList.add("disabled");
+    contenedorCarritoComprado.classList.add("disabled");
+
+    productosCarrito.length = 0;
+    localStorage.removeItem("productosCarrito");
+
+    cargarProductosCarrito();
+}
+
+function comprarAhora() {
+    if (productosCarrito && productosCarrito.length > 0) {
+        contenedorCarritoVacio.classList.add("disabled");
+        contenedorCarritoProductos.classList.add("disabled");
+        contenedorCarritoAcciones.classList.add("disabled");
+        contenedorCarritoComprado.classList.remove("disabled");
+
+        productosCarrito.length = 0;
+        localStorage.removeItem("productosCarrito");
+
+        cargarProductosCarrito();
+    } else {
+        contenedorCarritoVacio.classList.remove("disabled");
+        contenedorCarritoProductos.classList.add("disabled");
+        contenedorCarritoAcciones.classList.add("disabled");
+        contenedorCarritoComprado.classList.add("disabled");
+
+        alert("El carrito está vacío. Agrega productos antes de comprar.");
+    }
+}
+
+
+
 function eliminarDelCarrito(producto) {
     const confirmarEliminar = confirmacion => {
         if (confirmacion) {
@@ -108,7 +149,7 @@ function eliminarDelCarrito(producto) {
 
 function actualizarTotal() {
     const totalCalculado = productosCarrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0);
-    const totalElement = document.querySelector("#total");  // Cambiado a #total
+    const totalElement = document.querySelector("#total");
 
     if (totalElement) {
         totalElement.innerText = `$${totalCalculado}`;
@@ -117,11 +158,4 @@ function actualizarTotal() {
     }
 }
 
-
-
 cargarProductosCarrito();
-
-
-function pasarVenta() {
-    window.href.location = "ventas.js"
-}
