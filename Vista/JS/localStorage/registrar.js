@@ -1,7 +1,7 @@
 let btnRegister = document.getElementById('registro');
 btnRegister.addEventListener('click', function registro(event) {
     event.preventDefault();
-    if (validacion()) {
+    if (validacion(event)) {
         let listaUsuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
         let id
         listaUsuarios.length != 0 ? listaUsuarios.findLast((usuario) => id = usuario.id) : id = 0
@@ -22,7 +22,7 @@ btnRegister.addEventListener('click', function registro(event) {
 });
 
 
-function validacion() {
+function validacion(event) {
     const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
