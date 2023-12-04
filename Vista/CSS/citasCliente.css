@@ -125,4 +125,7 @@ footer{
 .footer__logo img{
     width: 30px;
 }
-  
+
+.footer__network {
+    margin-top: 300px;
+}
