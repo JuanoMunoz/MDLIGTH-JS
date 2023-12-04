@@ -107,11 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
          <tr>
                 <td>${rol.id}</td>
                 <td>${rol.nombre}</td>
- 
-
-                                            <td class="btn-abrir-modal-editar" onclick="abrirModalPermisos(${rol.id})"><img class="table_img" src="../../MEDIA/IMG/doc.png" alt=""></td>
-                                            <td class="btn-abrir-modal-editar" onclick="abrirModalEditar(${rol.id})"><img class="table_img" src="../../MEDIA/IMG/editar.png" alt=""></td>
-                                            <td class="btn-abrir-modal-eliminar" onclick="ModalEliminar(${rol.id})"><img class="table_img" src="../../MEDIA/IMG/basura.png" alt=""></td>
+                <td class="btn-abrir-modal-editar" onclick="abrirModalPermisos(${rol.id})"><img class="table_img" src="../../MEDIA/IMG/doc.png" alt=""></td>
+                <td class="btn-abrir-modal-editar" onclick="abrirModalEditar(${rol.id})"><img class="table_img" src="../../MEDIA/IMG/editar.png" alt=""></td>
+                <td class="btn-abrir-modal-eliminar" onclick="ModalEliminar(${rol.id})"><img class="table_img" src="../../MEDIA/IMG/basura.png" alt=""></td>
         </tr>
                                     
             `

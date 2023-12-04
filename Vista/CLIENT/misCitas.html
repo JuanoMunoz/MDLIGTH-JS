@@ -12,11 +12,10 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!--CSS-->
-    <link rel="stylesheet" href="../CSS/citasAdmi.css" />
     <link rel="stylesheet" href="../CSS/Sesion.css">
     <link rel="stylesheet" href="../CSS/panel.css">
     <link rel="stylesheet" href="../CSS/loader.css">
-    <link rel="shortcut icon" href="../media/IMG/icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../Media/IMG/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="../CSS/Catalogo.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -120,8 +119,7 @@
     </div>
 
     <div class="container">
-        <h1>CITAS</h1> <br>
-        <button class="btn-agregar" id="btn-abrir-modal-agregar">Agregar Cita</a></button><br>
+        <h1>MIS CITAS</h1> <br>
         <table id="Tabla" class="table table__citas">
             <thead>
                 <tr>
@@ -155,9 +153,9 @@
                                     <td><img src="${cita.imagen}" alt="" style="width: 40px;"></td>
                                     <td>${cita.talla}</td>
                                     <td>${cita.metodoPago}</td>
-                                    <td><img id="btn-abrir-modal-editar" class="table_img addFunctionButtonEdit" src="../../MEDIA/IMG/editar.png" alt="" accessKey=${cita.id_cita}></td>
-                                    <td><img id="btn-abrir-modal-eliminar" class="table_img addFunctionButtonDelete" src="../../MEDIA/IMG/basura.png" alt="" accessKey=${cita.id_cita}></td>
-                                    <td><img id="btn-abrir-modal-cotizar" class="table_img addFunctionButtonQuote" src="../../MEDIA/IMG/cotizar.png" alt="" accessKey=${cita.id_cita}></td>
+                                    <td><img id="btn-abrir-modal-editar" class="table_img addFunctionButtonEdit" src="../MEDIA/IMG/editar.png" alt="" accessKey=${cita.id_cita}></td>
+                                    <td><img id="btn-abrir-modal-eliminar" class="table_img addFunctionButtonDelete" src="../MEDIA/IMG/basura.png" alt="" accessKey=${cita.id_cita}></td>
+                                    <td><img id="btn-abrir-modal-cotizar" class="table_img addFunctionButtonQuote" src="../MEDIA/IMG/cotizar.png" alt="" accessKey=${cita.id_cita}></td>
                                 </tr>
                             `;
                         });
@@ -182,7 +180,7 @@
     </div>
 
     <!--JS-->
-    <script src="../../JS/tablas.js"></script>
+    <script src="../JS/tablas.js"></script>
 
 
     <!-- AOS -->
