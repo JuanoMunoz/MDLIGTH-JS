@@ -320,6 +320,8 @@ function quoteData(id) {
 
 function modificarAdelanto(id){
     
+    const Toast = getToast();
+
     let listaCotizacion = JSON.parse(localStorage.getItem('cotizar')) || [];
     let index = listaCotizacion.findIndex(cotizacion => cotizacion.id_cotizacion == id);
     let newValue = Number(document.getElementById('resultadoCotizar').value);
@@ -333,4 +335,12 @@ function modificarAdelanto(id){
 
     listaCotizacion[index] = updateCotizacion;
     localStorage.setItem('cotizar', JSON.stringify(listaCotizacion));
+
+    Toast.fire({
+        icon: "success",
+        title: "¡Cotización actualizada!"
+    });
+    setTimeout(function () {
+        alerta()
+    }, 2001);
 }
