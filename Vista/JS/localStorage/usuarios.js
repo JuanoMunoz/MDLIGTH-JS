@@ -175,3 +175,13 @@ function editarU(id) {
         }
     }
 }
+document.addEventListener("DOMContentLoaded", () => {
+    let listaUser = JSON.parse(localStorage.getItem("usuarios")) ?? []
+    let usuarioId = sessionStorage.getItem("usuarioId")
+    let usuario = listaUser.find(usuario => usuario.id == usuarioId)
+    if (typeof usuario != "undefined") {
+        if (usuario.rol != "Admin") window.location.href = "noAutorizado.html";
+    } else {
+        window.location.href = "noAutorizado.html"
+    }
+})

@@ -1,72 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
+<nav class="menu">
+    <section class="menu__container">
+        <a href="bienvenido.html">
+            <h4><img src="../MEDIA/IMG/icon.png" class="img"> MODISTERIA D.L</h4>
+        </a>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu desplegable</title>
-    <!--Font Awesome-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/'-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./1.css">
-</head>
 
-<body>
-    <nav class="menu">
-        <section class="menu__container">
-            <h4><img src="./icon.png" class="img"> MODISTERIA D.L</h2>
+        <ul class="menu__links">
+            <li class="menu__item">
+                <a href="../CLIENT/citasCliente.html" class="menu__link">CITAS</a>
+            </li>
 
-                <ul class="menu__links">
-                    <li class="menu__item">
-                        <a href="" class="menu__link">CITAS</a>
+            <li class="menu__item">
+                <a href="catalogo.html" class="menu__link">CATÁLOGO</a>
+            </li>
+
+            <li class="menu__item">
+                <a href="" class="menu__link"><i class="fa-solid fa-magnifying-glass"></i></a>
+            </li>
+
+            <li class="menu__item">
+                <a href="Carrito.html" class="menu__link"><i class="fa-solid fa-cart-shopping"></i></a>
+            </li>
+
+            <li class="menu__item menu__item--show">
+                <a href="" class="menu__link"><i class="fa-regular fa-user"></i><img src="../MEDIA/ICONOS/1-arrow.svg"
+                         class="menu__arrow"></a>
+
+                <ul class="menu__nesting">
+                    <li class="menu__inside">
+                        <a href="side" class="menu__link menu__link--inside">Perfil</a>
                     </li>
-
-                    <li class="menu__item">
-                        <a href="" class="menu__link">CATÁLOGO</a>
+                    <li class="menu__inside">
+                        <a href="" class="menu__link menu__link--inside">Tu Pedido</a>
                     </li>
-
-                    <li class="menu__item">
-                        <a href="" class="menu__link"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    <li>
+                        <a href="" class="menu__link menu__link--inside">Mis Citas</a>
                     </li>
-
-                    <li class="menu__item">
-                        <a href="" class="menu__link"><i class="fa-solid fa-cart-shopping"></i></a>
-                    </li>
-
-                    <li class="menu__item menu__item--show">
-                        <a href="" class="menu__link"><i class="fa-regular fa-user"></i><img src="./1-arrow.svg"
-                                class="menu__arrow"></a>
-
-                        <ul class="menu__nesting">
-                            <li class="menu__inside">
-                                <a href="" class="menu__link menu__link--inside">Perfil</a>
-                            </li>
-                            <li class="menu__inside">
-                                <a href="" class="menu__link menu__link--inside">Tu Pedido</a>
-                            </li>
-                            <li>
-                                <a href="" class="menu__link menu__link--inside">Mis Citas</a>
-                            </li>
-                            <li class="menu__inside">
-                                <a href="" class="menu__link menu__link--inside">Cerrar Sesion</a>
-                            </li>
-
-
-                        </ul>
+                    <li class="menu__inside">
+                        <button style="cursor: pointer;" class="menu__link menu__link--inside" onclick="modal()">
+                            Cerrar Sesion <i class=" fa-solid fa-right-from-bracket"></i>
+                        </button>
                     </li>
 
 
                 </ul>
-        </section>
+            </li>
 
 
-    </nav>
+        </ul>
+    </section>
 
-
-    <script src="./1.js"></script>
-
-</body>
-
-</html>
+</nav>

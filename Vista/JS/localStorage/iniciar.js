@@ -28,7 +28,7 @@ btnIniciar.addEventListener('click', function iniciar(evento) {
 
             Toast.fire({
                 icon: "success",
-                title: "Usuario encontrado \n¡Rediriengo!"
+                title: "Usuario encontrado \n¡Redirigiendo!"
             });
             setTimeout(function () {
                 window.location.href = "Bienvenido.html";

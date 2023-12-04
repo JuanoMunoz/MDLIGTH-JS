@@ -27,58 +27,45 @@
 </head>
 
 <body>
+
     <!--NAV-->
-    <nav class="menu">
-        <section class="menu__container">
-            <a href="../CLIENT/Bienvenido.html">
-                <h4><img src="../MEDIA/IMG/icon.png" class="img"> MODISTERIA D.L</h4>
-            </a>
+    <div id="navbar-container"></div>
+    <script>
+        let listaUser = JSON.parse(localStorage.getItem("usuarios")) ?? []
+        usuarioId = sessionStorage.getItem("usuarioId")
+        let user = listaUser.find(usuario => usuario.id == usuarioId)
+        let nav = user.rol == "Admin" ? "static/navbar.html" : "static/navBar_Cliente.html"
+        fetch(nav)
+            .then(response => response.text()
+            )
 
-            <ul class="menu__links">
-                <li class="menu__item">
-                    <a href="../ADMIN/PanelAdmin/citasAdmi.html" class="menu__link">CITAS ADMIN</a>
-                </li>
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data
+            })
+            .catch(error => console.error('Error al cargar el navbar'))
 
-                <li class="menu__item">
-                    <a href="../CLIENT/citasCliente.html" class="menu__link">CITAS</a>
-                </li>
+        function modal() {
+            Swal.fire({
+                title: 'Cerrar?',
+                text: "¿Estas seguro de cerrar Sesion?!",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, cerrar!',
+                background: '#121212',
+                color: "whitesmoke",
+                iconColor: '#D9ADEE',
+                cancelButtonText: 'cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    sessionStorage.removeItem("usuarioId");
+                    window.location.href = "InicioSesion.html";
+                }
+            })
 
-                <li class="menu__item">
-                    <a href="./Catalogo.html" class="menu__link">CATÁLOGO</a>
-                </li>
-
-                <li class="menu__item">
-                    <a href="../ADMIN/PanelAdmin/usuario.html" class="menu__link">PANEL DE CONTROL</a>
-                </li>
-
-                <li class="menu__item">
-                    <a href="" class="menu__link"><i class="fa-solid fa-magnifying-glass"></i></a>
-                </li>
-
-                <li class="menu__item">
-                    <a href="../CLIENT/Carrito.html" class="menu__link"><i class="fa-solid fa-cart-shopping"><span id="numerito">
-                                <!-- 0 --></span></i></a>
-                </li>
-
-                <li class="menu__item menu__item--show">
-                    <a href="" class="menu__link"><i class="fa-regular fa-user"></i><img
-                             src="../MEDIA/ICONOS/1-arrow.svg" class="menu__arrow"></a>
-                    <ul class="menu__nesting">
-                        <li class="menu__inside">
-                            <a href="Perfil.html" class="menu__link menu__link--inside">Perfil <i
-                                   class="fa-solid fa-user"></i></a>
-                        </li>
-                        <li class="menu__inside">
-                            <a href="InicioSesion.html" class="menu__link menu__link--inside">Cerrar Sesion <i
-                                   class="fa-solid fa-right-from-bracket"></i></a>
-                        </li>
-                    </ul>
-                </li>
-
-
-            </ul>
-        </section>
-    </nav>
+        }
+    </script>
     Mostrando info
     <main id="main-content">
         <button
@@ -90,6 +77,13 @@
     </dialog>
     <script src="../JS/localStorage/ventas.js"></script>
     <script src="../JS/modalUsuarios.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let usuarioId = sessionStorage.getItem("usuarioId")
+            if (usuarioId == null) window.location.href = "InicioSesion.html"
+
+        })
+    </script>
 
 </body>
 

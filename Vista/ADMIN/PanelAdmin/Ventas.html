@@ -79,12 +79,37 @@
             <!--NAV-->
             <div id="navbar-container"></div>
             <script>
-                fetch('static/navbar.html')
+                let listaUser = JSON.parse(localStorage.getItem("usuarios")) ?? []
+                usuarioId = sessionStorage.getItem("usuarioId")
+                let user = listaUser.find(usuario => usuario.id == usuarioId)
+                let nav = user.rol == "Admin" ? "static/navbar.html" : "../../CLIENT/static/navBar_Cliente.html"
+                fetch(nav)
                     .then(response => response.text())
                     .then(data => {
                         document.getElementById('navbar-container').innerHTML = data
                     })
                     .catch(error => console.error('Error al cargar el navbar'))
+                function modal() {
+                    Swal.fire({
+                        title: 'Cerrar?',
+                        text: "¿Estas seguro de cerrar Sesion?!",
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Si, cerrar!',
+                        background: '#121212',
+                        color: "whitesmoke",
+                        iconColor: '#D9ADEE',
+                        cancelButtonText: 'cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            sessionStorage.removeItem("usuarioId");
+                            window.location.href = "../../CLIENT/InicioSesion.html";
+                        }
+                    })
+
+                }
             </script>
             <!-- Body -->
             <div class="container">

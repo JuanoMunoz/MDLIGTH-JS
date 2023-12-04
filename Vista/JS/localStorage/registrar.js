@@ -11,7 +11,8 @@ btnRegister.addEventListener('click', function registro(event) {
             apellido: document.getElementById('apellido').value,
             celular: document.getElementById('celular').value,
             email: document.getElementById('email').value,
-            password: document.getElementById('password').value
+            password: document.getElementById('password').value,
+            rol: document.getElementById('email').value == "luzvidales@gmail.com" ? "Admin" : "Usuario"
         }
         listaUsuarios.push(nuevoUsuario);
         localStorage.setItem('usuarios', JSON.stringify(listaUsuarios));

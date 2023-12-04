@@ -74,12 +74,37 @@
 
             <div id="navbar-container"></div>
             <script>
-                fetch('static/navbar.html')
+                let listaUser = JSON.parse(localStorage.getItem("usuarios")) ?? []
+                usuarioId = sessionStorage.getItem("usuarioId")
+                let user = listaUser.find(usuario => usuario.id == usuarioId)
+                let nav = user.rol == "Admin" ? "static/navbar.html" : "../../CLIENT/static/navBar_Cliente.html"
+                fetch(nav)
                     .then(response => response.text())
                     .then(data => {
                         document.getElementById('navbar-container').innerHTML = data
                     })
                     .catch(error => console.error('Error al cargar el navbar'))
+                function modal() {
+                    Swal.fire({
+                        title: 'Cerrar?',
+                        text: "¿Estas seguro de cerrar Sesion?!",
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Si, cerrar!',
+                        background: '#121212',
+                        color: "whitesmoke",
+                        iconColor: '#D9ADEE',
+                        cancelButtonText: 'cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            sessionStorage.removeItem("usuarioId");
+                            window.location.href = "../../CLIENT/InicioSesion.html";
+                        }
+                    })
+
+                }
             </script>
 
             <div class="container">
@@ -158,7 +183,7 @@
                     </div>
                     <div> <br>
                         <label for="">Objetivo</label>
-                        <textarea name="" id="objetivo"  class="descripcionE"></textarea>
+                        <textarea name="" id="objetivo" class="descripcionE"></textarea>
                     </div>
                     <div> <br>
                         <label for="">Fecha</label>
@@ -298,7 +323,8 @@
                     </div>
                     <div> <br>
                         <label for="">Valor de materiales adicionales</label>
-                        <input type="number" name="precioMateriales" id="precioMaterialesQuote" placeholder="10000" disabled>
+                        <input type="number" name="precioMateriales" id="precioMaterialesQuote" placeholder="10000"
+                               disabled>
                     </div>
                     <div> <br>
                         <select name="select" id="tallaQuote">
@@ -308,39 +334,40 @@
                             <option value="L">L</option>
                         </select>
                     </div> <br>
-                
+
                     <button class="btn-modal" id="btn-cerrar-modal-cotizar"><i class="fa-solid fa-x"></i></button>
-                    
-                    
+
+
                     <label for="">Resultado</label>
                     <input type="number" name="resultadoCotizar" id="resultadoCotizar">
                     <div id="cotizacionExistente"> <br>
-                        <button class="btn-cotizar-modal" id="btn-cotizar-modal-cita" type="button">Cotizar adelanto</button>
+                        <button class="btn-cotizar-modal" id="btn-cotizar-modal-cita" type="button">Cotizar
+                            adelanto</button>
                     </div>
-                    
-                    
+
+
                 </form>
                 <script>
                     function cotizar(cita) {
                         const btn = document.getElementById('btn-cotizar-modal-cita');
-                        
+
                         const index = listaCitas.findIndex(cotizar => cotizar.id_cita == cita);
                         const cantidadPrendaQuote = document.getElementById('cantidadPrendaQuote');
                         const precioTelaQuote = 9000;
                         const precioMaterialesQuote = 10000;
                         const tallaQuote = document.getElementById('tallaQuote');
-                        
-                        
+
+
                         let listaCotizacion = JSON.parse(localStorage.getItem('cotizar')) || [];
                         let indexCotizacion = listaCotizacion.findIndex(cotizacion => cotizacion.id_cotizacion == cita);
                         let verResultadoQuote = document.getElementById("resultadoCotizar");
                         verResultadoQuote.value = indexCotizacion >= 0 ? listaCotizacion[indexCotizacion].verResultadoQuote : 0;
-                        
+
                         cantidadPrendaQuote.value = listaCitas[index].cantidadPrenda;
                         tallaQuote.value = listaCitas[index].talla;
-                        
-                        
-                        if (indexCotizacion >= 0){
+
+
+                        if (indexCotizacion >= 0) {
                             const cotizacionExistente = document.getElementById('cotizacionExistente');
                             cotizacionExistente.innerHTML = `
                                 <button class="btn-cotizar-modal" id="btn-modificar-cotizar-modal-cita" type="button">Modificar adelanto</button>
@@ -355,7 +382,7 @@
                     }
                 </script>
             </dialog>
-<p></p>
+            <p></p>
 
         </div>
         <div id="sidebar-container">

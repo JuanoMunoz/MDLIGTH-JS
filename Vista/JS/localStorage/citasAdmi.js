@@ -265,7 +265,7 @@ function editData(id) {
 function quoteData(id) {
 
     const Toast = getToast();
-    
+
     let listaCotizacion = JSON.parse(localStorage.getItem('cotizar')) || [];
     let index = listaCotizacion.findIndex(cotizacion => cotizacion.id_cotizacion == id);
 
@@ -279,7 +279,7 @@ function quoteData(id) {
     const precioMaterialesQuote = 10000;
     const tallaQuote = document.getElementById('tallaQuote').value;
     let verResultadoQuote = document.getElementById("resultadoCotizar");
-    
+
     let tallaCalculo;
     if (tallaQuote == "S") {
         tallaCalculo = 1.55;
@@ -304,7 +304,7 @@ function quoteData(id) {
         verResultadoQuote: resultado,
     }
 
-    
+
     listaCotizacion.push(nuevaCotizacion);
     localStorage.setItem('cotizar', JSON.stringify(listaCotizacion));
 
@@ -314,12 +314,12 @@ function quoteData(id) {
     });
     setTimeout(function () {
         alerta()
-    }, 2001);    
+    }, 2001);
 
 }
 
-function modificarAdelanto(id){
-    
+function modificarAdelanto(id) {
+
     const Toast = getToast();
 
     let listaCotizacion = JSON.parse(localStorage.getItem('cotizar')) || [];
@@ -330,7 +330,7 @@ function modificarAdelanto(id){
     let updateCotizacion = {
         ...listaCotizacion[index],
         verResultadoQuote: newValue
-    } 
+    }
     console.log(updateCotizacion);
 
     listaCotizacion[index] = updateCotizacion;
@@ -344,3 +344,14 @@ function modificarAdelanto(id){
         alerta()
     }, 2001);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    let listaUser = JSON.parse(localStorage.getItem("usuarios")) ?? []
+    let usuarioId = sessionStorage.getItem("usuarioId")
+    let usuario = listaUser.find(usuario => usuario.id == usuarioId)
+    if (typeof usuario != "undefined") {
+        if (usuario.rol != "Admin") window.location.href = "noAutorizado.html";
+    } else {
+        window.location.href = "noAutorizado.html"
+    }
+})
