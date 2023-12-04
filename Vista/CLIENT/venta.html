@@ -4,80 +4,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
+    <title>MODISTERIA D.L || CÁTALOGO</title>
 
-        #recibo {
-            width: 50%;
-            margin: 50px auto;
-            border: 2px solid #333;
-            border-radius: 15px 15px 0 0;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        h1 {
-            text-align: center;
-        }
+    <!--CSS-->
+    <link rel="stylesheet" href="../CSS/Registro.css">
+    <link rel="stylesheet" href="../CSS/loader.css">
+    <link rel="shortcut icon" href="media/IMG/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../CSS/Catalogo.css">
+    <link rel="stylesheet" href="../CSS/Carrito.css">
+    <link rel="stylesheet" href="../CSS/modalUsuario.css">
 
-        #venta {
-            text-align: center;
-        }
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-        #domicilio-form {
-            display: none;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        #domicilio-input {
-            padding: 8px;
-            margin-bottom: 10px;
-        }
-
-        #aceptar-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
+    <!--SWEETALERT-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css">
 </head>
 
 <body>
+    <!--NAV-->
+    <nav class="menu">
+        <section class="menu__container">
+            <a href="Index.html">
+                <h4><img src="../MEDIA/IMG/icon.png" class="img"> MODISTERIA D.L</h4>
+            </a>
 
-    <div id="recibo">
-        <h1>Recibo</h1>
+            <ul class="menu__links">
+                <li class="menu__item">
+                    <a href="../ADMIN/PanelAdmin/citasAdmi.html" class="menu__link">CITAS ADMIN</a>
+                </li>
 
-        <div id="venta">
-            <h1>Venta</h1>
-            <button id="domicilio-btn" onclick="mostrarForm()">Domicilio</button>
-        </div>
+                <li class="menu__item">
+                    <a href="../CLIENT/citasCliente.html" class="menu__link">CITAS</a>
+                </li>
 
-        <div id="domicilio-form">
-            <input type="text" id="domicilio-input" placeholder="Ingrese la dirección">
-            <button id="aceptar-btn" onclick="aceptarVenta()">Aceptar Venta</button>
-        </div>
+                <li class="menu__item">
+                    <a href="./Catalogo.html" class="menu__link">CATÁLOGO</a>
+                </li>
 
-    </div>
+                <li class="menu__item">
+                    <a href="../ADMIN/PanelAdmin/usuario.html" class="menu__link">PANEL DE CONTROL</a>
+                </li>
 
-    <script>
-        function mostrarForm() {
-            document.getElementById("domicilio-form").style.display = "block";
-        }
+                <li class="menu__item">
+                    <a href="" class="menu__link"><i class="fa-solid fa-magnifying-glass"></i></a>
+                </li>
 
-        function aceptarVenta() {
-            alert("Venta aceptada. Dirección: " + document.getElementById("domicilio-input").value);
-        }
-    </script>
+                <li class="menu__item">
+                    <a href="" class="menu__link"><i class="fa-solid fa-cart-shopping"><span id="numerito">
+                                <!-- 0 --></span></i></a>
+                </li>
+
+                <li class="menu__item menu__item--show">
+                    <a href="" class="menu__link"><i class="fa-regular fa-user"></i><img
+                             src="../MEDIA/ICONOS/1-arrow.svg" class="menu__arrow"></a>
+                    <ul class="menu__nesting">
+                        <li class="menu__inside">
+                            <a href="Perfil.html" class="menu__link menu__link--inside">Perfil <i
+                                   class="fa-solid fa-user"></i></a>
+                        </li>
+                        <li class="menu__inside">
+                            <a href="" class="menu__link menu__link--inside">Mis Citas <i
+                                   class="fa-regular fa-calendar-days"></i></a>
+                        </li>
+                        <li class="menu__inside">
+                            <a href="InicioSesion.html" class="menu__link menu__link--inside">Cerrar Sesion <i
+                                   class="fa-solid fa-right-from-bracket"></i></a>
+                        </li>
+                    </ul>
+                </li>
+
+
+            </ul>
+        </section>
+    </nav>
+    Mostrando info
+    <main id="main-content">
+        <button
+                onclick="document.getElementById('modal-venta').hasAttribute('open') ?document.getElementById('modal-venta').close():document.getElementById('modal-venta').show()">Abrir
+            modal</button>
+    </main>
+    <dialog id="modal-venta">
+        open modal
+    </dialog>
+    <script src="../JS/localStorage/ventas.js"></script>
+    <script src="../JS/modalUsuarios.js"></script>
 
 </body>
 

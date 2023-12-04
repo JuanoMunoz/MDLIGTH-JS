@@ -18,10 +18,14 @@ btnIniciar.addEventListener('click', function iniciar(evento) {
         let pass = document.getElementById("password").value;
         let listaUsuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
 
-        let encontrado = listaUsuarios.some(function (usuario) {
+        let encontradoUsuario = listaUsuarios.find(function (usuario) {
             return usuario.email === email && usuario.password === pass;
         });
-        if (encontrado) {
+
+        if (encontradoUsuario) {
+            // Guardar el ID en sessionStorage
+            sessionStorage.setItem('usuarioId', encontradoUsuario.id);
+
             Toast.fire({
                 icon: "success",
                 title: "Usuario encontrado \n¡Rediriengo!"
@@ -36,6 +40,7 @@ btnIniciar.addEventListener('click', function iniciar(evento) {
             });
         }
     }
+
 });
 
 function validacion() {
